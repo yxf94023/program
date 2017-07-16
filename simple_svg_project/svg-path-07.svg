@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+	<title>PATH路径</title>
+	<svg x="0" y="0" width="200" height="200" viewBox="0 0 200 200">
+		<g style="stroke: black; fill: none;">
+			<path d="M 10 10 L 100 10"/>
+			
+			<path d="M 10, 20 L 100, 20 L 100, 50 Z"/>
+			
+			<path d="M 40, 60 L 10,60 L 40, 42.68 Z M 60,60 L 90, 60 L 60, 42.68 Z"/>
+		</g>
+	</svg>
+	
+	<svg x="200" y="0" width="200" height="200" viewBox="0 0 200 200">
+		<path d="M 12 24 h 15 v 25 h -15 z"/>
+		<path d="M 12 24 H 15 V 25 H -15 z"/>
+		<path d="M 30 30 L 55 5 L 80 30 L 55 55 Z" style="fill: none; stroke: black;"/>
+	</svg>
+	
+	<svg x="400" y="0" width="400" height="300" viewBox="0 0 400 300">
+		<ellipse cx="154" cy="154" rx="150" ry="120" style="fill: #999;"/>
+		<ellipse cx="152" cy="152" rx="150" ry="120" style="fill: #cef;"/>
+		<path d="M 302 152 A 150 120, 0 1, 0, 2 152 A 75 60, 0, 1, 0, 152 152" style="fill: #fcc;"/>
+		<path d="M 152 152 A 75 60, 0 1, 1, 302 152" style="fill: #cef;"/>
+	</svg>
+	
+	<svg x="0" y="300" width="200" height="200" viewBox="0 0 200 200">
+		<path d="M 0 0, 60 0, 60 60, 0 60 z M 15 15, 45 15, 45 45, 15 45 z" style="fill: gray; fill-rule: nonezero; stroke: black;"/>
+		<path d="M 100 100, 160 100, 160 160, 100 160 z M 115 115, 145 115, 145 145, 115 145 z" style="fill: gray; fill-rule: evenodd; stroke: black;"/>
+		<path d="M 70 20 L 160 20 A 20 30 0 0 1 180 55 L 180 112" style="fill: none; stroke: black;"/>
+	</svg>
+	
+	<!-- marker元素 -->
+	<svg x="200" y="300" width="220" height="200" viewBox="0 0 220 200">
+		<defs>
+			<marker id="circle" markerWidth="10" markerHeight="10" refX="5" refY="5">
+				<circle cx="5" cy="5" r="4" style="fill: none; stroke: black;"/>
+			</marker>
+			<marker id="arrow" markerWidth="4" markerHeight="8" refX="0" refY="4" orient="auto">
+				<path d="M 0 0 4 4 0 8" style="fill: none; stroke: black;"/>
+			</marker>
+			<marker id="triangle" makerWidth="5" markerHeight="10" refX="5" refY="5" orient="auto">
+				<path d="M 0 0 5 5 0 10 Z" style="fill: black;"/>
+			</marker>
+		</defs>
+		<path d="M 70 20 L 160 20 A 20 30 0 0 1 180 55 L 180 112" style="fill: none; stroke: black; 
+			marker-start: url(#circle); marker-mid:url(#arrow); marker-end: url(#triangle)"/>
+	</svg>
+</svg>
