@@ -1,0 +1,112 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="800" height="1600" viewBox="0 0 800 1600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+	<title>文本</title>
+	<svg x="0" y="0" width="200" height="200" viewBox="0 0 200 200">
+		<path d="M 20 10, 20 120 M 10 30, 100 30 M 10 70, 100 70 M 10 110, 100 110" style="stroke: gray;"/>
+		<text x="20" y="30">simple text</text>
+		<text x="20" y="70" style="stroke: black;">Outlined</text>
+		<text x="20" y="110" style="stroke: black; stroke=width: 0.5; fill: none;">Outlined only</text>
+	</svg>
+	<svg x="200" y="0" width="300" height="200" viewBox="0 0 300 200">
+		<g style="font-size: 18pt">
+			<text x="20" y="20" style="font-weight: bold;">bold</text>
+			<text x="120" y="20" style="font-style: italic;">italic</text>
+			<text x="20" y="60" style="text-decoration: underline;">under</text>
+			<text x="120" y="60" style="text-decoration: overline;">over</text>
+			<text x="200" y="60" style="text-decoration: line-through;">through</text>
+			<text x="20" y="90" style="word-spacing: 10pt;">more word</text>
+			<text x="20" y="120" style="word-spacing: -3pt;"> less word space</text>
+			<text x="20" y="150" style="word-spacing: 5pt;">wide letter space</text>
+			<text x="20" y="180" style="letter-spacing: -6pt;">narrow letter space</text>
+		</g>
+	</svg>
+	
+	<!-- 文本对齐 -->
+	<svg x="0" y="200" width="400" height="300" viewBox="0 0 400 300">
+		<rect x="0" y="0" width="400" height="300" style="fill: none; stroke: blue;"/>
+		<g style="font-size: 14pt;">
+			<path d="M 100 10, 100 100" style="stroke: gray; fill: none;"/>
+			<text x="100" y="30" style="text-anchor: start;">Start</text>
+			<text x="100" y="60" style="text-anchor: middle;">Middle</text>
+			<text x="100" y="90" style="text-anchor: end;">End</text>
+			<text x="0" y="120" style="font-size: 12pt;">Switch among <tspan style="font-style: italic">italic</tspan>, normal, and <tspan style="font-weight: bold;">bold</tspan> text.</text>
+			<text x="10" y="140" style="font-size: 12pt;">F <tspan dy="4">a</tspan><tspan dx="4" dy="8">l</tspan><tspan dx="4" dy="12">l</tspan></text>
+			
+			<text x="10" y="190" style="font-size: 14px;"> It's <tspan dx="0 4 -3 5 -4 6" dy="0 -3 7 3 -2 -8" rotate="5 10 -5 -20 0 15">shaken</tspan>, not stirred.</text>
+			
+			<text x="10" y="220" style="font-size: 12pt;">
+				C<tspan style="baseline-shift: sub; font-size: 9pt;">12</tspan>
+				H<tspan style="baseline-shift: sub; font-size: 8pt;">22</tspan>
+				O<tspan style="baseline-shift: sub; font-size: 8pt;">11</tspan>(sugar)
+			</text>
+			
+			<text x="10" y="270" style="font-size: 12pt;">
+				6.02 x 10 <tspan baseline-shift="super">23</tspan>(Avogardro's number)
+			</text>
+		</g>
+	</svg>
+	
+	<!-- 设置文本长度 -->
+	<svg x="400" y="200" width="400" height="200" viewBox="0 0 400 200">
+		<rect x="0" y="0" width="400" height="200" style="fill: none; stroke: yellow;"/>
+		<g style="font-size: 14pt;">
+			<path d="M 20 10, 20 70 M 220 10, 220 70" style="stroke: gray;"/>
+			<text x="20" y="30" textLength="200" lengthAdjust="spacing">Two words</text>
+			<text x="20" y="60" textLength="200" lengthAdjust="spacingAndGlyphs">Two words</text>
+			<text x="20" y="90">Two words<tspan style="font-size: 10pt;">(normal length)</tspan></text>
+			<path d="M 20 100, 20 170 M 100 100, 100 170" style="stroke: gray;"/>
+			<text x="20" y="120" textLength="80" lengthAdjust="spacing">Two words</text>
+			<text x="20" y="160" textLength="80" lengthAdjust="spacingAndGlyphs">Two words</text>
+		</g>
+	</svg>
+	
+	<!-- 纵向文本 -->
+	<svg x="400" y="400" width="400" height="200" viewBox="0 0 400 200">
+		<rect x="0" y="0" width="400" height="200" style="fill: none; stroke: red;"/>
+		<text x="10" y="20" transform="rotate(90, 10, 20)">Rotated 90</text>
+		<text x="50" y="20" style="writing-mode: tb;">Writing Mode tb</text>
+		<text x="90" y="20" style="writing-mode: tb; glyph-orientation-vertical: 0;">Vertical zero</text>
+	</svg>
+	
+	<!-- 文本路径 -->
+	<svg x="0" y="500" width="400" height="200" viewBox="0 0 400 200">
+		<rect x="0" y="0" width="400" height="200" style="fill: none; stroke: red;"/>
+		<defs>
+		<path id="curvepath" d="M30 40 C 50 10, 70 10, 120 40 S 150 0, 200 40" style="stroke: gray; fill: none;"/>
+		<path id="round-corner" d="M250 30 L 300 30 A 30 30 0 0 1 330 60 L 330 110" style="stroke: gray; fill: none;"/>
+		<path id="sharp-corner" d="M30 110, 100 110, 100 160" style="stroke: gray; fill: none;"/>
+		<path id="discontinuous" d="M150 110 A40 30 0 1 0 230 110 M250 110, 270 140" style="stroke: gray; fill: none;"/>
+	
+		</defs>
+		
+		<g style="font-size: 10pt;">
+			<use xlink:href="#curvepath"/>
+			<text><textPath xlink:href="#curvepath">Following a cubic B curve.</textPath></text>
+			
+			<use xlink:href="#round-corner"/>
+			<text><textPath xlink:href="#round-corner">Going 'round the bend</textPath></text>
+			
+			<use xlink:href="#sharp-corner"/>
+			<text><textPath xlink:href="#sharp-corner">Making a quick trun</textPath></text>
+			
+			<use xlink:href="#discontinuous"/>
+			<text><textPath xlink:href="#discontinuous">Text along a broken path</textPath></text>
+		</g>
+	</svg>
+	<svg x="400" y="600" width="400" height="200" viewBox="0 0 400 200">
+		<rect x="0" y="0" width="400" height="200" style="fill: none; stroke: green;"/>
+		<defs>
+			<path id="short-corner" transform="translate(40, 40)" d="M0 0 L30 0 A30 30 0 0 1 60 30 L60 60" style="stroke: gray; fill: none;"/>
+			<path id="long-corner" transform="translate(140, 40)" d="M0 0L50 0 A 30 30 0 0 1 80 30 L80 80" style="stroke: gray; fill: none;"/>
+		</defs>
+		
+		<g style="">
+			<use xlink:href="#short-corner"/>
+			<text><textPath xlink:href="#short-corner"> This text is too long for the path.</textPath></text>
+			
+			<use xlink:href="#long-corner"/>
+			<text style="text-anchor: middle;"><textPath xlink:href="#long-corner" startOffset="50%">centered</textPath></text>
+		</g>
+	</svg>
+</svg>
