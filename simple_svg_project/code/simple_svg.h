@@ -31,9 +31,14 @@ enum svg_status{
  */
 typedef struct svg_position{
 	
-	unsigned int	x_value;	///< 左上角 x 坐标值
-	unsigned int	y_value;	///< 左上角 y 坐标值
-	unsigned int	xview_value;	///< 视图 x 坐标
+	unsigned int	x_viewport;	///< 左上角 x 坐标值
+	unsigned int	y_viewport;	///< 左上角 y 坐标值
+	unsigned int	width_viewport;		///< 宽度
+	unsigned int	height_viewport;	///< 高度
+	unsigned int	x_viewbox;	///< 视图 x 坐标
+	unsigned int	y_viewbox;	///< y 坐标
+	unsigned int	width_viewbox;	///<
+	unsigned int	height_viewbox;	///<
 }st_svg_position;
  
 /**
@@ -65,6 +70,6 @@ int destroy_svg_handler(st_svg_handler *handler);
 /**
  *\brief 绘制环形百分比图
  */
-int draw_circle_percentage(st_svg_handler *handler)
+int draw_circle_percentage(st_svg_handler *handler);
 
 #endif//__SIMPLE_SVG_H_2017_07_04__
