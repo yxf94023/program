@@ -221,6 +221,69 @@ int test_dup(int filedes)
 	return 0;
 }
 
+/**
+ *\brief 测试sync函数
+ *
+ *	<code>
+ *	int fsync(int filedes);<br/>
+ *	int fdatasync(int filedes);<br/>
+ *	<br/>
+ *	返回值：若成功则返回0， 若出错则返回-1<br/>
+ *	<br/>
+ *	void sync(void);
+ *	</code>
+ *
+ *<ul>
+ *<li>sync函数只将所有修改过的块缓冲区排入写队列，即返回，并不等待实际写磁盘的结束</li>
+ *<li>fsync函数只对指定的文件描述符filedes起作用，并且等待写磁盘操作结束后才返回</li>
+ *<li>fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除数据外，fsync还会同步更新文件的属性</li>
+ *</ul>
+ *\param[in] filedes 文件描述符
+ *\retval 0 成功
+ *\retval !0 失败 
+ */
+int test_sync(int filedes)
+{
+	return 0;
+}
+
+/**
+ *\brief 测试fcntl函数
+ *
+ *<code>
+ *	int fcntl(int filedes, int cmd, ...);
+ *
+ *	返回值：若成功则依赖于cmd， 若出错则返回-1
+ *</code>
+ *<br/>
+ *fcntl函数有5种功能：
+ *<ul>
+ *<li>复制一个现有的描述符（cmd=F_DUPFD）</li>
+ *<li>获得/设置文件描述符标记（cmd=F_GETFD或F_SETFD）</li>
+ *<li>获得/设置文件状态标记（cmd=F_GETFL或F_SETFL）</li>
+ *<li>获得/设置异步I/O所有权（cmd=F_GETOWN或F_SETOWN）</li>
+ *<li>获得/设置记录锁（cmd=F_GETLK、F_SETLK或F_SETLKW）</li>
+ *</ul>
+ *<table>
+ *<caption>cmd介绍</caption>
+ *<tr><th width="100">命令</th><th width="400">描述</th><th>备注</th></tr>
+ *<tr><td>F_DUPFD</td><td>复制文件描述符filedes，新的文件描述符作为返回值，它是尚未打开的个描述符中大于或等于第三个参数值中各值得最小值</td><td><ul><li>新描述符与filedes共享同一个文件表项</li><li>新描述符有自己的一套文件描述符标志，其FD_CLOEXEC文件描述符标志被清除</li></ul></td></tr>
+ *<tr><td>F_GETFD</td><td>返回filedes的文件描述符标志</td><td>当前只定义了一个文件描述符标志FD_CLOEXEC</td></tr>
+ *<tr><td>F_SETFD</td><td>对filedes设置文件描述符标志，新标志值按第三个参数设置</td><td></td></tr>
+ *<tr><td>F_GETFL</td><td>返回filedes的文件状态标志</td><td>文件状态标志，参见open函数的介绍</td></tr>
+ *<tr><td>F_SETFL</td><td>将文件状态标志设置为第三个参数的值</td><td>支持设置的几个标志如下：<ol><li>O_APPEND，每次写时追加</li><li>O_NONBLOCK，非阻塞模式</li><li>O_SYNC， 待写完成（数据和属性）</li><li>O_DSYNC，待写完成（仅数据）</li><li>O_RSYNC， 同步读写</li><li>O_FSYNC，待写完成（仅FreeBSD 和 Mac OS X）</li><li>O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li></ol></td></tr>
+ *<tr><td>F_GETOWN</td><td>取当前接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+ *<tr><td>F_SETOWN</td><td>设置接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+ *</table>
+ *\param[in] cmd 操作命令
+ *\retval 0 成功
+ *\retval !0 失败 
+ */
+int test_fcntl(int cmd)
+{
+	return 0;
+}
+
 int main(int argc, char **argv)
 {
 	return 0;
