@@ -1,5 +1,5 @@
 /**
- *\file c03_file.cc
+ *\file c04_dir.cc
  *\brief 练习文件和目录操作
  *\date 2017/08/12
  */
