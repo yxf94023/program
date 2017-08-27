@@ -5,7 +5,9 @@
  */
 #include <fcntl.h>
 #include <unistd.h>
+#include <utime.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 /**
  *\brief 测试stat函数
@@ -217,6 +219,238 @@ int test_chmod()
  *\retval !0 失败   
  */
 int test_chown()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试truncate函数
+ *
+ *<code>
+ *int truncate(const char *pathname, off_t length);<br/>
+ *int ftruncate(int filedes, off_t length);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1
+ *</code>
+ *<ul>
+ *<li>若该文件以前的长度大于length，则超过length以外的数据就不能访问</li>
+ *<li>若该文件以前的长度短语length，则效果与系统有关</li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败   
+ */
+int test_truncate()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试link函数
+ *
+ *<code>
+ *int link(const char *existingpath, const char *newpath);<br/>
+ *int ulink(const char *pathname);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1
+ *</code>
+ *<ul>
+ *<li>link，函数创建一个新目录项newpath，所以任何一个文件可以有多个目录项指向i节点</li>
+ *<li>link，若newpath已经存在，则返回出错</li>
+ *<li>link，只创建newpath中的最后一个分量，路径中的其他部分应当已经存在</li>
+ *<li>unlink，删除一个现有的目录项，并将由pathname所引用文件的链接计数减1</li>
+ *<li>unlink，如果还有指向该文件的其他链接，则仍可通过其他链接访问该文件的数据，只有当链接计数达到0时，该文件的内容才可被删除，另一个条件也会阻止删除文件的内容---只要有进程打开了该文件，其内容也不能删除。unlink的这种性质经常被程序用来确保即使是在该程序崩溃时，它所创建的临时文件也不会遗留下来。进程用open或creat创建一个文件，然后立即调用unlink。因为该文件仍旧是打开的，所以不会讲其内容删除，只有当进程关闭该文件或终止时，该文件的内容才会被删除。</li>
+ *<li>unlink，如果出错，则不对该文件做任何更改</li>
+ *<li>unlink，如果pathname是符号链接，那么unlink删除该符号链接，而不会删除由该链接所引用的文件</li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败  
+ */
+int test_link()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试rename函数
+ *
+ *<code>
+ *int rename(const char *oldname, const char *newname);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1
+ *</code>
+ *rename可以对文件或目录进行更名操作，根据oldname是指文件还是目录， 有几种情况需要说明
+ *<ol>
+ *<li>若oldname是文件，如果newname已存在，则它不能引用一个目录， 如果newname已存在，而且不是一个目录，则先将该目录项删除然后将oldname更名为newname。对包含oldname的目录以及包含newname的目录，调用进程必须具有写权限，因为将更改这两个目录</li>
+ *<li>若oldname是目录，如果newname已存在，则它必须引用一个目录，而且该目录应当是空目录。如果newname存在且为空目录，则先将其删除， 然后将oldname更名为newname。另外，当为一个目录更名时，newname不能包含oldname作为其路径前缀。</li>
+ *<li>若oldname或newname引用符号链接，则处理的石符号链接本身，而不是它所引用的文件</li>
+ *<li>若oldname和newname引用同一个文件，则函数不做任何更改而成功返回。</li>
+ *</ol>
+ *\retval 0 成功
+ *\retval !0 失败   
+ */
+int test_rename()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试symlink函数
+ *
+ *符号链接，是指一个文件的间接指针，它和硬链接不同，硬链接直接指向文件的i节点，引入符号链接的原因是为了避开硬链接的限制
+ *<ol>
+ *<li>硬链接通常要求链接和文件位于同一文件系统中</li>
+ *<li>只有超级用户才能创建指向目录的硬链接</li>
+ *</ol>
+ *对于符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可创建指向目录的符号链接。符号链接一般用于将一个文件或整个目录结构移到系统中的另一个位置。<br/>
+ *<br/>
+ *当使以名字应用文件的函数时，需要了解函数是否处理符号链接，也就是函数是否跟谁符号链接到达它所链接的文件。如果函数具有处理符号链接的功能，则其路径名参数引用由符号链接指向的文件。否则，路径名参数将引用链接本身，而不是链接指向的文件。
+ *<table>
+ *<caption></caption>
+ *<tr><th width="40">序号</th><th width="50">函数</th><th width="120">跟随符号链接</th><th>说明</th></tr>
+ *<tr><td>1</td><td>access</td><td>是</td><td></td></tr>
+ *<tr><td>2</td><td>chdir</td><td>是</td><td></td></tr>
+ *<tr><td>3</td><td>chmod</td><td>是</td><td></td></tr>
+ *<tr><td>4</td><td>chown</td><td>是<b>/否</b></td><td></td></tr>
+ *<tr><td>5</td><td>creat</td><td>是</td><td></td></tr>
+ *<tr><td>6</td><td>exec</td><td>是</td><td></td></tr>
+ *<tr><td>7</td><td>lchown</td><td><b>/否</b></td><td></td></tr>
+ *<tr><td>8</td><td>link</td><td>是</td><td></td></tr>
+ *<tr><td>9</td><td>lstat</td><td><b>/否</b></td><td></td></tr>
+ *<tr><td>10</td><td>open</td><td>是</td><td></td></tr>
+ *<tr><td>11</td><td>opendir</td><td>是</td><td></td></tr>
+ *<tr><td>12</td><td>pathconf</td><td>是</td><td></td></tr>
+ *<tr><td>13</td><td>readlink</td><td><b>/否</b></td><td></td></tr>
+ *<tr><td>14</td><td>remove</td><td><b>/否</b></td><td></td></tr>
+ *<tr><td>15</td><td>stat</td><td>是</td><td></td></tr>
+ *<tr><td>16</td><td>truncate</td><td>是</td><td></td></tr> 
+ *<tr><td>17</td><td>unlink</td><td><b>/否</b></td><td></td></tr>
+ *</table>
+ *
+ *<br/>
+ *
+ *<code>
+ *int symlink(const char *actualpath, const char *sympath);<br/>
+ *返回值：成功则返回0， 出错则返回-1<br/>
+ *ssize_t readlink(const char *restrict pathname, char *restrict buf, size_t bufsize);<br/>
+ *返回值：成功则返回读到的字节数， 出错则返回-1<br/>
+ *</code>
+ *\warning symlink函数创建一个指向actualpath的新目录项sympath，在创建此符号链接时，并不要求actualpath已经存在，并且，actualpath和sympath并不需要位于同一文件系统中。<br/>
+ *\warning readlink函数提供一种方法打开该链接本身，并读该链接中的名字。该函数组合了open、read和close的所有操作，如果函数成功执行，则它返回读入buf的字节数，在buf中返回的符号链接的内容不以null字符终止。<br/>
+ *\retval 0 成功
+ *\retval !0 失败    
+ */
+int test_symlink()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试utime函数
+ *
+ *<table>
+ *<caption>每个文件相关的三个时间值</caption>
+ *<tr><th width="20">序号</th><th width="40">字段</th><th>说明</th></tr>
+ *<tr><td>1</td><td>st_atime</td><td>文件数据的最后访问时间，可以用 ls -u 命令显示查看， read函数可以修改该值</td></tr>
+ *<tr><td>2</td><td>st_mtime</td><td>文件数据的最后修改时间，可以用 ls 命令显示查看，write函数可以修改该值</td></tr>
+ *<tr><td>3</td><td>st_ctime</td><td>i节点状态的最后更改时间，可以用 ls -c 命令显示查看， chmod、chown函数可以修改该值</td></tr>
+ *</table>
+ *<code>
+ *int utime(const char *pathname, const struct utimebuf *times);<br/>
+ *返回值：成功返回0， 出错则返回-1
+ *</code>
+ *一个文件的访问和修改时间可以用utime函数更改，
+ *此函数的操作以及执行它所要求的特权取决于times参数是否是NULL
+ *<ul>
+ *<li>如果times是一个空指针，则访问时间和修改时间两者都设置为当前时间。为了执行此操作必须满足下列两条件之一，进程的有效用户ID必须等于该文件的所有者ID，或者进程对该文件必须具有写权限</li>
+ *<li>如果times是非空指针， 则访问时间和修改时间被设置为times所指向结构中的值，此时，进程的有效用户ID必须等于该文件的所有者ID，或者进程必须是一个超级用户进程，对文件只具有写权限是不够的</li>
+ *<li>不能对更改状态时间st_ctime指定一个值，当调用utime函数时，此字段将自动更新</li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_utime()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试mkdir函数
+ *
+ *<code>
+ *int mkdir(const char *pathname, mode_t mode);<br/>
+ *int rmdir(const char *pathname);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1
+ *</code>
+ *<ul>
+ *<li>mkdir, 函数创建一个新的空目录， 所指定的文件访问权限mode由进程的文件模式创建屏蔽字修改</li>
+ *<li>mkdir, 常见的错误是指定与文件相同的mode（只指定读、写权限），但是，对于目录通常至少要设置1个执行权限位，以允许访问该目录中的文件名</li>
+ *<li>rmdir, 函数可以删除一个空目录</li>
+ *<li>rmdir, 如果调用此函数使目录的链接计数成为0，并且也没有其他进程打开此目录，则释放由此目录占用的空间；如果在链接计数达到0时，有一个或几个进程打开了此目录，则在此函数返回前删除最后一个链接，另外，在此目录中不能在创建新文件，但是在最后一个进程关闭它之前并不释放此目录</li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_mkdir()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试readdir函数
+ *
+ *<code>
+ *DIR *opendir(const char *pathname);<br/>
+ *返回值：成功返回指针，出错返回NULL<br/>
+ *struct dirent *readdir(DIR *dp);<br/>
+ *返回值：成功返回指针，在目录结尾或出错则返回NULL<br/>
+ *void rewinddir(DIR *dp);<br/>
+ *void closedir(DIR *dp);<br/>
+ *返回值：若成功则返回0，若出错则返回-1<br/>
+ *long telldir(DIR *dp);<br/>
+ *返回值：若成功则返回0，若出错则返回-1<br/>
+ *void seekdir(DIR *dp, long loc);
+ *</code>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_readdir()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试chdir函数
+ *
+ *<ul>
+ *<li>每个进程都有一个当前工作目录，此目录是搜索所有相对路径名的起点</li>
+ *<li>当前工作目录通常是在用户登录系统时，从口令文件（/etc/passwd）中获取的</li>
+ *<li>当前工作目录是进程的一个属性，起始目录则是登录名的一个属性</li>
+ *<li>进程通过调用chdir和fchdir函数可以更改当前工作目录，在这两个函数中，分别用pathname或打开文件描述符来指定新的当前工作目录</li>
+ *</ul>
+ *<code>
+ *int chdir(const char *pathname);<br/>
+ *int fchdir(int filedes);<br/>
+ *返回值：成功返回0， 出错返回-1
+ *</code>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_chdir()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试getcwd函数
+ *
+ *获取当前工作目录的绝对路径
+ *
+ *<code>
+ *char *getcwd(char *buf, size_t size);<br/>
+ *返回值：成功则返回buf，出错则返回NULL
+ *</code>
+ *
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_getcwd()
 {
 	return 0;
 }
