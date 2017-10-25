@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.12"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>unix_apue: E:/yxf_github_dir/program/unix_apue/code/c10_signal/c10_signal.cc 文件参考</title>
+<title>unix_apue: E:/github/program/unix_apue/code/c10_signal/c10_signal.cc 文件参考</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 制作者 Doxygen 1.8.12 -->
+<!-- 制作者 Doxygen 1.8.13 -->
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
@@ -65,10 +65,10 @@ $(function() {
 <div class="textblock"><p>练习信号 </p>
 <dl class="section date"><dt>日期</dt><dd>2017/10/07 </dd></dl>
 
-<p>在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 中定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 中定义.</p>
 </div><h2 class="groupheader">函数说明</h2>
 <a id="ab5ec5e49091ce341c7e329c7ec9644a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ec5e49091ce341c7e329c7ec9644a6">&sect;&nbsp;</a></span>test_signal()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ec5e49091ce341c7e329c7ec9644a6">&#9670;&nbsp;</a></span>test_signal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -99,85 +99,89 @@ $(function() {
 <table class="doxtable">
 <caption>UNIX系统信号列表</caption>
 <tr>
-<th width="40">序号</th><th width="60">名字</th><th>描述 </th></tr>
+<th width="40">序号</th><th width="60">名字</th><th>描述</th><th>默认动作 </th></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>1</td><td>SIGABRT</td><td>异常终止(abort)</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>2</td><td>SIGALRM</td><td>超时（alarm）</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>3</td><td>SIGBUS</td><td>硬件故障</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>4</td><td>SIGCANCEL</td><td>线程库内部使用</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>5</td><td>SIGCHLD</td><td>子进程状态改变</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>6</td><td>SIGCONT</td><td>使暂停进程继续</td><td>继续/忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>7</td><td>SIGEMT</td><td>硬件故障</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>8</td><td>SIGFPE</td><td>算术异常</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>9</td><td>SIGFREEZE</td><td>检查点冻结</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>10</td><td>SIGHUP</td><td>连接断开</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>11</td><td>SIGILL</td><td>非法硬件指令</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>12</td><td>SIGINFO</td><td>键盘状态请求</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>13</td><td>SIGINT</td><td>终端中断符</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>14</td><td>SIGIO</td><td>异步I/O</td><td>忽略/终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>15</td><td>SIGIOT</td><td>硬件故障</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>16</td><td>SIGKILL</td><td>终止</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>17</td><td>SIGLWP</td><td>线程库内部使用</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>18</td><td>SIGPIPE</td><td>写至无读进程的管道</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>19</td><td>SIGPOLL</td><td>可轮询事件（poll）</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>20</td><td>SIGPROF</td><td>梗概时间超时（setitimer）</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>21</td><td>SIGPWR</td><td>电源失效/重启动</td><td>终止/忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>22</td><td>SIGQUIT</td><td>终端退出符</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>23</td><td>SIGSEGV</td><td>无效内存引用</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>24</td><td>SIGSKFLT</td><td>协处理器栈故障</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>25</td><td>SIGSTOP</td><td>停止</td><td>暂停进程 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>26</td><td>SIGSYS</td><td>无效系统调用</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>27</td><td>SIGTERM</td><td>终止</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>28</td><td>SIGTHAW</td><td>检查点解冻</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>29</td><td>SIGTRAP</td><td>硬件故障</td><td>终止+core </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>30</td><td>SIGTSTP</td><td>终端停止符</td><td>暂停进程 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>31</td><td>SIGTTIN</td><td>后台读控制tty</td><td>暂停进程 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>32</td><td>SIGTTOU</td><td>后台写至控制tty</td><td>暂停进程 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>33</td><td>SIGURG</td><td>紧急情况（套接字）</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>34</td><td>SIGUSR1</td><td>用户定义的信号</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>35</td><td>SIGUSR2</td><td>用户定义的信号</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>36</td><td>SIGVTALRM</td><td>虚拟时间闹钟（setitimer）</td><td>终止 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>37</td><td>SIGWAITING</td><td>线程库内部使用</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>38</td><td>SIGWINCH</td><td>终端窗口大小改变</td><td>忽略 </td></tr>
 <tr>
-<td>1</td><td></td><td></td></tr>
+<td>39</td><td>SIGXCPU</td><td>超过CPU限制（setrlimit）</td><td>终止+core </td></tr>
+<tr>
+<td>40</td><td>SIGXFSZ</td><td>超过文件长度限制</td><td>终止+core </td></tr>
+<tr>
+<td>41</td><td>SIGXRES</td><td>超过资源控制</td><td>忽略 </td></tr>
 </table>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
@@ -187,7 +191,7 @@ $(function() {
   </dd>
 </dl>
 
-<p>在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00066">66</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00068">68</a> 行定义.</p>
 
 </div>
 </div>
@@ -196,7 +200,7 @@ $(function() {
 <hr class="footer"/><address class="footer"><small>
 制作者 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.12
+</a> 1.8.13
 </small></address>
 </body>
 </html>
