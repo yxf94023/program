@@ -57,7 +57,7 @@
  *\param[in] type  缓冲区类型
  *
  *\retval 0 	成功
- *\retval !		失败
+ *\retval !0	失败
  */
 int test_setbuf(int type)
 {
@@ -79,3 +79,155 @@ int test_fflush(FILE *fp)
 {
 	return 0;
 }
+
+/**
+ *\brief 测试gets函数
+ *
+ *char *fgets(char *restrict buf, int n, FILE *restrict fp);<br/>
+ *char *gets(char *buf);<br/>
+ *两个函数返回值：若成功则返回buf，若已到达文件结尾出错则返回NULL<br/>
+ *<br/>
+ *1.两个函数都是每次输入一行
+ *2.gets从标准输入读，fgets则从指定的流读
+ *3.fgets需指定缓冲区的长度n，函数一直读到下一个换行符为止，但是不超过n-1个字符，读入的字符被送入缓冲区，缓冲区总是以null字符结尾
+ *4.gets是一个不推荐使用的函数，函数不能指定缓冲区的长度，可能造成缓冲区溢出
+ *\retval 0 	成功
+ *\retval !0	失败
+ */
+int test_gets()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试puts函数
+ *
+ *int fputs(const char *restrict str, FILE *restrict fp);<br/>
+ *int puts(const char *str);<br/>
+ *返回值：若成功则返回非负值， 若出错则返回EOF<br/>
+ *<br/>
+ *
+ *1.函数fputs将一个以null符种植的字符串写到指定流，尾端的终止符null不写出，函数并不一定是每次输出一行，因为它并不要求在null字符前一定是换行符。
+ *2.puts将一个null符终止的字符串写到标准输出， 终止符不写出，但是， puts然后又将一个换行符写到标准输出
+ *
+ *\retval 0 	成功
+ *\retval !0	失败
+ */
+int test_puts()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试fread/fwrite函数
+ *
+ *size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);<br/>
+ *size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);<br/>
+ *两个函数的返回值：读或写的对象数
+ *<br/><br/>
+ *使用场景
+ *<ol>
+ *<li>读或写一个二进制数组</li>
+ *<li>读写一个结构体</li>
+ *</ol>
+ *注意事项
+ *<ol>
+ *<li>同一结构体，同一成员的的偏移量可能因编译器和系统而异</li>
+ *<li>用来存储多字节整数和浮点值得二进制格式在不同的机器体系结构间可能不同</li>
+ *</ol>
+ *
+ *\retval 0 	成功
+ *\retval !0	失败 
+ */
+int test_fread_fwrite()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试ftell函数
+ *
+ *long ftell(FILE *fp);<br/>
+ *返回值：成功返回当前文件位置指示， 若出错则返回-1L
+ *
+ *\retval 0 	成功
+ *\retval !0	失败
+ */
+int test_ftell()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试fseek函数
+ *
+ *int fseek(FILE *fp, long offset, int whence);<br/>
+ *返回值：若成功则返回0， 若出错则返回非0值
+ *
+ *whence的取值
+ *1.SEEK_SET 表示从文件的起始位置开始<br/>
+ *2.SEEK_CUR 表示从当前文件位置开始<br/>
+ *3.SEEK_END 表示从文件的尾端开始<br/>
+ *
+ *\retval 0 	成功
+ *\retval !0	失败 
+ */
+int test_fseek()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试fgetpos函数
+ *
+ *int fgetpos(FILE *restrict fp, fpos_t *restrict pos);<br/>
+ *itn fsetpos(FILE *fp, const fpos_t *pos);<br/>
+ *返回值：若成功则返回0， 若出错则返回非0值<br/>
+ *
+ *fgetspos将文件位置指示器的当前值存入由pos指向的对象中，在以后调用fsetpos时，可以使用此值将流重新定位到该位置。
+ *
+ *\retval 0 	成功
+ *\retval !0	失败 
+ */
+int test_fgetpos()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试tmpfile/tmpname函数
+ *
+ *char *tmpnam(char *ptr);<br/>
+ *char *tempnam(const char *directory, const char *prefix);<br/>
+ *返回值: 指向唯一路径名的指针<br/>
+ *FILE *tmpfile(void);<br/>
+ *返回值: 若成功则返回文件指针， 若出错则返回NULL<br/>
+ *int mkstemp(char *tmplate);<br/>
+ *返回值：若成功则返回文件描述符， 若出错则返回-1
+ *
+ *<ol>
+ *<li>tmpname产生一个与现有文件名不同的一个有效路径名字符串， 每次调用它时，都会产生一个不同的路径名，最多调用次数是TMP_MAX</li>
+ *<li>tmpname，若ptr是NULL，则所产生的路径名存放在一个静态区中，指向该静态区的指针作为函数值返回，下次再调用tmpname时，会重写该静态区， 若ptr不是NULL，则认为它指向长度至少是L_tmpnam个字符的数组，所产生的路径名存放在该数组中，ptr也作为函数值返回</li>
+ *<li>tmpfile，创建一个临时二进制文件（类型wb+），在关闭该文件或进程结束的时将自动删除这种文件。</li>
+ *<li>tempnam是tmpnam的一个变体，它允许调用者为所产生的路径名指定目录和前缀，对于目录有4种不同的选择，按照下列顺序判断其条件是否为真， 并且使用第一个为真的作为目录：
+ <ul>
+ <li>如果定义了环境变量TMPDIR，则用其作为目录</li>
+ <li>如果参数directory非NULL，则用其作为目录</li>
+ <li>将<stdio.h>中的字符串P_tmpdir作为目录</li>
+ <li>将本地目录（通常是/tmp）作为目录</li>
+ </ul>
+ </li>
+ *<li>tempnam，如果prefix非NULL， 则它应该是最多包含5个字符的字符串， 用其作为文件名的头几个字符，该函数调用malloc函数分配动态存储区， 用其存放所构造的路径名，当不再使用此路径时就可释放此存储区</li>
+ *<li>mkstemp，返回的文件描述符可用于读、写该文件，临时文件的名字是用template字符串参数选择的，该字符串是一个路径名， 其最后6个字符将会被不同的字符代换，以创建唯一路径名，若函数成功返回，它会修改template字符串以反映临时文件的名字</li>
+ *<li>与tempfile不同的是，mkstemp创建的临时文件不会自动被删除，如若想从文件系统名字空间中删该除文件，则我们需要自行unlink它</li>
+ *<li>tmpnam和tempnam的一个不足之处是，在返回唯一路径名和应用程序用该路径名创建文件之间有一个时间窗口。在该时间窗口期间，另一个进程可能创建一个同名文件。tempfile和mkstemp函数则不会产生此种问题， 可以使用它们代替tmpnam和tempnam</li>
+ *</ol>
+ *\retval 0 	成功
+ *\retval !0	失败 
+ */
+int test_tmpfile_tmpname()
+{
+	return 0;
+}
+
+

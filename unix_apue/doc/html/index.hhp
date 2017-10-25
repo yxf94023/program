@@ -14,8 +14,26 @@ main="unix_apue","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,
 
 [FILES]
 c03__file_8cc_source.html
+c04__dir_8cc_source.html
+c05__stdio_8cc_source.html
+c07__process__env_8cc_source.html
+c08__process__ctrl_8cc_source.html
+c09__process__relt_8cc_source.html
+c10__signal_8cc_source.html
 c03__file_8cc.html
+c04__dir_8cc.html
+c05__stdio_8cc.html
+c07__process__env_8cc.html
+c08__process__ctrl_8cc.html
+c09__process__relt_8cc.html
+c10__signal_8cc.html
 dir_2d4890816bd7d819fbeff46b6269cb2d.html
+dir_4c8e4344be699fca3cf41d2f943a611f.html
+dir_d07aa32d716e645878741ddc09f26d5f.html
+dir_cb3ab0e079a3435209a816fc5e6938ed.html
+dir_f0cb5942dd0816ee93f92f929c016bf6.html
+dir_76e2940608789e818961b9522d2d7d09.html
+dir_13b740ce9f598d8dc118816b6d2b8185.html
 dir_050edd66366d13764f98250ef6db77f6.html
 index.html
 files.html

@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>unix_apue: E:/ac_yxf_personal_dir/github_dir/program/unix_apue/code/c03_file_IO/c03_file.cc 文件参考</title>
+<title>unix_apue: E:/yxf_github_dir/program/unix_apue/code/c03_file_IO/c03_file.cc 文件参考</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- 制作者 Doxygen 1.8.13 -->
+<!-- 制作者 Doxygen 1.8.12 -->
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
@@ -52,6 +52,7 @@ $(function() {
 <p>练习文件相关操作  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div>
 <p><a href="c03__file_8cc_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
@@ -66,6 +67,24 @@ $(function() {
 <tr class="memitem:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#af6c1ae4d71166f9f1a8c1237de5c01ed">test_close</a> (int filedes)</td></tr>
 <tr class="memdesc:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试close函数  <a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">更多...</a><br /></td></tr>
 <tr class="separator:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a318e7a17dcb12a770b99417b986fbb44"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a318e7a17dcb12a770b99417b986fbb44">test_lseek</a> (int filedes)</td></tr>
+<tr class="memdesc:a318e7a17dcb12a770b99417b986fbb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试lseek函数  <a href="#a318e7a17dcb12a770b99417b986fbb44">更多...</a><br /></td></tr>
+<tr class="separator:a318e7a17dcb12a770b99417b986fbb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c776a60c67353956a33f86ee246ae87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a9c776a60c67353956a33f86ee246ae87">test_read</a> (int filedes, void *buf, size_t nbytes)</td></tr>
+<tr class="memdesc:a9c776a60c67353956a33f86ee246ae87"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试read函数  <a href="#a9c776a60c67353956a33f86ee246ae87">更多...</a><br /></td></tr>
+<tr class="separator:a9c776a60c67353956a33f86ee246ae87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace36d46d52032ec17bfc64e0e79c5a61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#ace36d46d52032ec17bfc64e0e79c5a61">test_write</a> (int filedes, const void *buf, size_t nbytes)</td></tr>
+<tr class="memdesc:ace36d46d52032ec17bfc64e0e79c5a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试write函数  <a href="#ace36d46d52032ec17bfc64e0e79c5a61">更多...</a><br /></td></tr>
+<tr class="separator:ace36d46d52032ec17bfc64e0e79c5a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68168cc124852307eb68dedaf4c8e6a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a68168cc124852307eb68dedaf4c8e6a1">test_dup</a> (int filedes)</td></tr>
+<tr class="memdesc:a68168cc124852307eb68dedaf4c8e6a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试dup/dup2函数  <a href="#a68168cc124852307eb68dedaf4c8e6a1">更多...</a><br /></td></tr>
+<tr class="separator:a68168cc124852307eb68dedaf4c8e6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335164212185562d3f617ca5ec7226a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a335164212185562d3f617ca5ec7226a0">test_sync</a> (int filedes)</td></tr>
+<tr class="memdesc:a335164212185562d3f617ca5ec7226a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sync函数  <a href="#a335164212185562d3f617ca5ec7226a0">更多...</a><br /></td></tr>
+<tr class="separator:a335164212185562d3f617ca5ec7226a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a> (int cmd)</td></tr>
+<tr class="memdesc:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试fcntl函数  <a href="#a28f5bcc3fe48ffcef24fa3838d9745c7">更多...</a><br /></td></tr>
+<tr class="separator:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -73,10 +92,10 @@ $(function() {
 <div class="textblock"><p>练习文件相关操作 </p>
 <dl class="section date"><dt>日期</dt><dd>2017/07/27 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 中定义.</p>
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 中定义.</p>
 </div><h2 class="groupheader">函数说明</h2>
 <a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&sect;&nbsp;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -101,12 +120,12 @@ $(function() {
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00095">95</a> 行定义.</p>
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00295">295</a> 行定义.</p>
 
 </div>
 </div>
 <a id="af6c1ae4d71166f9f1a8c1237de5c01ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">&#9670;&nbsp;</a></span>test_close()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">&sect;&nbsp;</a></span>test_close()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,12 +162,12 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00090">90</a> 行定义.</p>
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00091">91</a> 行定义.</p>
 
 </div>
 </div>
 <a id="a7f5e9bcc45130fef697ffe9fb571a059"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f5e9bcc45130fef697ffe9fb571a059">&#9670;&nbsp;</a></span>test_creat()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5e9bcc45130fef697ffe9fb571a059">&sect;&nbsp;</a></span>test_creat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,12 +218,277 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00068">68</a> 行定义.</p>
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00069">69</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a68168cc124852307eb68dedaf4c8e6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68168cc124852307eb68dedaf4c8e6a1">&sect;&nbsp;</a></span>test_dup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_dup </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>filedes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试dup/dup2函数 </p>
+<p>文件系统 </p><ol>
+<li>
+我们可以把一个磁盘分成一个或多个分区，每个分区可以包含一个文件系统 </li>
+<li>
+每个i节点中都有一个链接计数，其值表示该i节点的目录项数，当链接计数减少至0时，才可删除该文件。这种链接类型称之为硬链接 </li>
+<li>
+i-node节点包含了大多数与文件有关的信息：文件类型、文件访问权限位、文件长度和指向该文件所占用的数据块的指针等等。文件名和i节点编号则取自目录项中。 </li>
+<li>
+每个文件系统各自对它们的i节点进行编号，因此目录项中的i节点编号数指向同一文件系统中的相应i节点，不能使一个目录项指向另一个文件系统的i节点。这就是为什么ln命令不能跨文件系统的原因。 </li>
+<li>
+当在不更换文件系统情况下为一个文件更名，该文件的实际内容并未移动，只需构造一个指向现有i节点的新目录项，并删除与旧目录项的链接 </li>
+</ol>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>不同进程间共享打开的文件【内核数据结构】</caption>
+<tr>
+<th width="100">分类</th><th width="400">描述</th><th>备注 </th></tr>
+<tr>
+<td>进程表</td><td>每个进程在进程表中都有一个记录项，记录项中包含有一张打开的文件描述符表<br />
+每个文件描述符相关联的有：<ul>
+<li>
+文件描述符标志（close_on_exec）</li>
+<li>
+指向一个文件表项的指针</li>
+</ul>
+</td><td></td></tr>
+<tr>
+<td>文件表</td><td>内核为所有打开的文件维持一张文件表<br />
+每个文件表项包含：<ul>
+<li>
+文件状态标志（读、写、添加、同步和非阻塞等）</li>
+<li>
+当前文件偏移量</li>
+<li>
+指向该文件v节点表项指针</li>
+</ul>
+</td><td></td></tr>
+<tr>
+<td>v-node节点</td><td rowspan="2">每个打开的文件（或设备）都有一个v节点（v-node）结构<br />
+v节点包含：<ul>
+<li>
+文件类型</li>
+<li>
+该文件进行各种操作的函数指针</li>
+<li>
+大多数文件，v节点还包含了该文件的i节点（索引节点）</li>
+</ul>
+</td><td rowspan="2">这些信息是在打开文件时从磁盘上读入内存的，所以所有关于文件的信息都是快速可供使用的<br />
+Linux没有使用v节点，而是使用了通用i节点结构。虽然两种实现有所不同，但在概念上，v节点和i节点是一样的。两者都是执行文件系统特有的i节点结构 </td></tr>
+<tr>
+<td>i-node节点 </td></tr>
+</table>
+<p>分解两个进程共享过程<br />
+ 若两个独立进程各自打开同一文件，打开该文件的每个进程都会得到一个文件表项，但对于一个给定的文件只有一个v节点表项（进程之间是共享的）<br />
+ 每个进程拥有队里的文件表项，是使得每个进程都有它自己的对该文件的当前偏移量<br />
+ <br />
+ </p><dl class="section warning"><dt>警告</dt><dd>存在多个文件描述符项指向同一个文件表项，例如dup操作， fork后父、子进程对于每一个打开文件描述符共享同一个文件表项</dd></dl>
+<p><code> int dup(int filedes); int dup2(int filedes, int filedes2);</code></p>
+<p><code> 返回值：若成功则返回新的文件描述符，若出错则返回-1<br />
+ </code></p>
+<dl class="section warning"><dt>警告</dt><dd>dup返回的新文件描述符一定是当前可用文件描述符中的最小数值； </dd>
+<dd>
+用dup2则可以用filedes2参数指定新描述符的数值； </dd>
+<dd>
+若filedes2已经打开，则先将其关闭。若filedes等于filedes2，则返回filedes2，而不关闭它； </dd>
+<dd>
+dup和dup2返回的新文件描述符与参数filedes共享同一个文件表项。</dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00227">227</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a28f5bcc3fe48ffcef24fa3838d9745c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f5bcc3fe48ffcef24fa3838d9745c7">&sect;&nbsp;</a></span>test_fcntl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_fcntl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试fcntl函数 </p>
+<p><code> int fcntl(int filedes, int cmd, ...);</code></p>
+<p><code> 返回值：若成功则依赖于cmd， 若出错则返回-1 </code> <br />
+ fcntl函数有5种功能： </p><ul>
+<li>
+复制一个现有的描述符（cmd=F_DUPFD） </li>
+<li>
+获得/设置文件描述符标记（cmd=F_GETFD或F_SETFD） </li>
+<li>
+获得/设置文件状态标记（cmd=F_GETFL或F_SETFL） </li>
+<li>
+获得/设置异步I/O所有权（cmd=F_GETOWN或F_SETOWN） </li>
+<li>
+获得/设置记录锁（cmd=F_GETLK、F_SETLK或F_SETLKW） </li>
+</ul>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>cmd介绍</caption>
+<tr>
+<th width="100">命令</th><th width="400">描述</th><th>备注 </th></tr>
+<tr>
+<td>F_DUPFD</td><td>复制文件描述符filedes，新的文件描述符作为返回值，它是尚未打开的个描述符中大于或等于第三个参数值中各值得最小值</td><td><ul>
+<li>
+新描述符与filedes共享同一个文件表项</li>
+<li>
+新描述符有自己的一套文件描述符标志，其FD_CLOEXEC文件描述符标志被清除</li>
+</ul>
+</td></tr>
+<tr>
+<td>F_GETFD</td><td>返回filedes的文件描述符标志</td><td>当前只定义了一个文件描述符标志FD_CLOEXEC </td></tr>
+<tr>
+<td>F_SETFD</td><td>对filedes设置文件描述符标志，新标志值按第三个参数设置</td><td></td></tr>
+<tr>
+<td>F_GETFL</td><td>返回filedes的文件状态标志</td><td>文件状态标志，参见open函数的介绍 </td></tr>
+<tr>
+<td>F_SETFL</td><td>将文件状态标志设置为第三个参数的值</td><td>支持设置的几个标志如下：<ol>
+<li>
+O_APPEND，每次写时追加</li>
+<li>
+O_NONBLOCK，非阻塞模式</li>
+<li>
+O_SYNC， 待写完成（数据和属性）</li>
+<li>
+O_DSYNC，待写完成（仅数据）</li>
+<li>
+O_RSYNC， 同步读写</li>
+<li>
+O_FSYNC，待写完成（仅FreeBSD 和 Mac OS X）</li>
+<li>
+O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li>
+</ol>
+</td></tr>
+<tr>
+<td>F_GETOWN</td><td>取当前接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+<tr>
+<td>F_SETOWN</td><td>设置接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+</table>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>操作命令 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00290">290</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a318e7a17dcb12a770b99417b986fbb44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a318e7a17dcb12a770b99417b986fbb44">&sect;&nbsp;</a></span>test_lseek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_lseek </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>filedes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试lseek函数 </p>
+<p><code> off_t lseek(int filedes, off_t offset, int whence);</code></p>
+<p><code> 返回值： 若成功则返回新的文件偏移量， 若出错则返回-1 </code></p>
+<ul>
+<li>
+每个打开的文件都有一个与其关联的"当前文件偏移量" </li>
+<li>
+通常读，写操作都是从当前文件偏移量处开始，并使偏移量增加所读写的字节数 </li>
+<li>
+默认地，第一次打开文件（除非指定O_APPEND选项），该偏移量被设置为0 </li>
+<li>
+lseek仅将当前的文件偏移量记录在内核中，它并不会引起任何I/O操作 </li>
+<li>
+文件偏移量可设置大于文件的长度，下次写文件会在文件中构成一个空洞，空洞并不要求在磁盘上占用存储区，空洞在读取的时候内容是为0的 </li>
+</ul>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>whence的意义</caption>
+<tr>
+<th width="100">标记</th><th width="450">描述</th><th>备注 </th></tr>
+<tr>
+<td>SEEK_SET</td><td>将该文件的偏移量设置为距文件开处offset个字节</td><td></td></tr>
+<tr>
+<td>SEEK_CUR</td><td>将该文件的偏移量设置为其当前值加offset个字节</td><td>offset可为正或负 </td></tr>
+<tr>
+<td>SEEK_END</td><td>将该文件的偏移量设置为文件长度加offset个字节</td><td>offset可为正或负 </td></tr>
+</table>
+<dl class="section warning"><dt>警告</dt><dd>若lseek成功执行， 则返回新的文件偏移量， 为此可以用下列方式确定打开的当前偏移量: </dd>
+<dd>
+<code> </code></dd>
+<dd>
+<code> off_t currpos = lseek(fd, 0, SEEK_CUR); </code></dd>
+<dd>
+<code> </code> </dd>
+<dd>
+这种方法也可用来确定文件是否可以设置偏移量。若文件描述符引用的是一个管理、FIFO或网络套接字， 则lseek返回-1，并将errno设置为ESPIPE </dd>
+<dd>
+不要测试lseek返回值是否小于0， 而要测试它是否等于-1 </dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00130">130</a> 行定义.</p>
 
 </div>
 </div>
 <a id="a2d0ef40aae202b301bca16dc495d824f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d0ef40aae202b301bca16dc495d824f">&#9670;&nbsp;</a></span>test_open()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d0ef40aae202b301bca16dc495d824f">&sect;&nbsp;</a></span>test_open()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,7 +579,180 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00044">44</a> 行定义.</p>
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9c776a60c67353956a33f86ee246ae87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c776a60c67353956a33f86ee246ae87">&sect;&nbsp;</a></span>test_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_read </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>filedes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nbytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试read函数 </p>
+<p><code> ssize_t read(int filedes, void *buf, size_t nbytes)</code></p>
+<p><code> 返回值： 若成功则返回读到的字节数， 若已到文件末尾则返回0， 若出错返回-1 </code></p>
+<p>下面列举的情况下，实际读到的字节数少于要求读的字节数： </p><ul>
+<li>
+读普通文件， 在读到要求字节数之前已到达了文件末尾 </li>
+<li>
+读终端设备， 通常一次最多读一行 </li>
+<li>
+读网络数据， 网络中的缓冲机制会导致返回的字节少于要求读的 </li>
+<li>
+读管道或FIFO， 若管道包含的字节少于所需的数量，那么，read只返回实际可用的字节数 </li>
+<li>
+信号造成中断， 而已经读了部分数据时 </li>
+</ul>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>将接受读取内容的缓存 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nbytes</td><td>缓存可以接受的缓存最大字节 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00158">158</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a335164212185562d3f617ca5ec7226a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335164212185562d3f617ca5ec7226a0">&sect;&nbsp;</a></span>test_sync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_sync </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>filedes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试sync函数 </p>
+<p><code> int fsync(int filedes);<br />
+ int fdatasync(int filedes);<br />
+ <br />
+ 返回值：若成功则返回0， 若出错则返回-1<br />
+ <br />
+ void sync(void); </code></p>
+<ul>
+<li>
+sync函数只将所有修改过的块缓冲区排入写队列，即返回，并不等待实际写磁盘的结束 </li>
+<li>
+fsync函数只对指定的文件描述符filedes起作用，并且等待写磁盘操作结束后才返回 </li>
+<li>
+fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除数据外，fsync还会同步更新文件的属性 </li>
+</ul>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00253">253</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ace36d46d52032ec17bfc64e0e79c5a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace36d46d52032ec17bfc64e0e79c5a61">&sect;&nbsp;</a></span>test_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_write </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>filedes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nbytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试write函数 </p>
+<p><code> ssize_t write(int filedes, const void *buf, size_t nbytes)</code></p>
+<p><code> 返回值：若成功则返回已写的字节数， 若出错则返回-1 </code> </p><dl class="section warning"><dt>警告</dt><dd>通常与参数nbytes的值相同，否则表示出错 </dd>
+<dd>
+磁盘已写满 或 超过了给定进程的文件长度限制 是write常见的出错原因 </dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">buf</td><td>将写文件的内容 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nbytes</td><td>将写文件的长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00179">179</a> 行定义.</p>
 
 </div>
 </div>
@@ -304,7 +761,7 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
 <hr class="footer"/><address class="footer"><small>
 制作者 &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
+</a> 1.8.12
 </small></address>
 </body>
 </html>

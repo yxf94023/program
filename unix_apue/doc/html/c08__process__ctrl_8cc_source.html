@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.12"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>unix_apue: E:/yxf_github_dir/program/unix_apue/code/c08_process_ctrl/c08_process_ctrl.cc 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">unix_apue
+   &#160;<span id="projectnumber">1.0.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.12 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','搜索');
+});
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li><li class="navelem"><a class="el" href="dir_f0cb5942dd0816ee93f92f929c016bf6.html">c08_process_ctrl</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">c08_process_ctrl.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="c08__process__ctrl_8cc.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;sys/wait.h&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;sys/times.h&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#ac7d808308a607f9f88daefa8550f1fa1">   39</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#ac7d808308a607f9f88daefa8550f1fa1">test_id</a>()</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div><div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#a3dbf7271a851814757e98b3056ba559f">   84</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#a3dbf7271a851814757e98b3056ba559f">test_fork</a>()</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div><div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#aa87bf18d3f22cf8c141fd67ed6adbf7f">   99</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#aa87bf18d3f22cf8c141fd67ed6adbf7f">test_exit</a>()</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;{</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div><div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#a526dbd4cbd53eec6434e11fcbed2acaf">  153</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#a526dbd4cbd53eec6434e11fcbed2acaf">test_wait</a>()</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;{</div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div><div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#aeaf55ef41c3ebaa1f371330333957fb2">  185</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#aeaf55ef41c3ebaa1f371330333957fb2">test_waitid</a>()</div><div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;{</div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div><div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div><div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#a6d305113852a4cc97a7a77b3071564bb">  210</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#a6d305113852a4cc97a7a77b3071564bb">test_exec</a>()</div><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;{</div><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div><div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div><div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="c08__process__ctrl_8cc.html#aee379d71a748a11889a9d105fe1eacc4">  233</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="c08__process__ctrl_8cc.html#aee379d71a748a11889a9d105fe1eacc4">test_times</a>()</div><div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;{</div><div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">return</span> 0;</div><div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div><div class="ttc" id="c08__process__ctrl_8cc_html_ac7d808308a607f9f88daefa8550f1fa1"><div class="ttname"><a href="c08__process__ctrl_8cc.html#ac7d808308a607f9f88daefa8550f1fa1">test_id</a></div><div class="ttdeci">int test_id()</div><div class="ttdoc">测试进程id函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00039">c08_process_ctrl.cc:39</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_aeaf55ef41c3ebaa1f371330333957fb2"><div class="ttname"><a href="c08__process__ctrl_8cc.html#aeaf55ef41c3ebaa1f371330333957fb2">test_waitid</a></div><div class="ttdeci">int test_waitid()</div><div class="ttdoc">测试waitid函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00185">c08_process_ctrl.cc:185</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_a6d305113852a4cc97a7a77b3071564bb"><div class="ttname"><a href="c08__process__ctrl_8cc.html#a6d305113852a4cc97a7a77b3071564bb">test_exec</a></div><div class="ttdeci">int test_exec()</div><div class="ttdoc">测试exec函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00210">c08_process_ctrl.cc:210</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_a3dbf7271a851814757e98b3056ba559f"><div class="ttname"><a href="c08__process__ctrl_8cc.html#a3dbf7271a851814757e98b3056ba559f">test_fork</a></div><div class="ttdeci">int test_fork()</div><div class="ttdoc">测试fork函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00084">c08_process_ctrl.cc:84</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_aa87bf18d3f22cf8c141fd67ed6adbf7f"><div class="ttname"><a href="c08__process__ctrl_8cc.html#aa87bf18d3f22cf8c141fd67ed6adbf7f">test_exit</a></div><div class="ttdeci">int test_exit()</div><div class="ttdoc">测试exit函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00099">c08_process_ctrl.cc:99</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_a526dbd4cbd53eec6434e11fcbed2acaf"><div class="ttname"><a href="c08__process__ctrl_8cc.html#a526dbd4cbd53eec6434e11fcbed2acaf">test_wait</a></div><div class="ttdeci">int test_wait()</div><div class="ttdoc">测试wait函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00153">c08_process_ctrl.cc:153</a></div></div>
+<div class="ttc" id="c08__process__ctrl_8cc_html_aee379d71a748a11889a9d105fe1eacc4"><div class="ttname"><a href="c08__process__ctrl_8cc.html#aee379d71a748a11889a9d105fe1eacc4">test_times</a></div><div class="ttdeci">int test_times()</div><div class="ttdoc">测试times函数 </div><div class="ttdef"><b>Definition:</b> <a href="c08__process__ctrl_8cc_source.html#l00233">c08_process_ctrl.cc:233</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.12
+</small></address>
+</body>
+</html>
