@@ -19,7 +19,7 @@
  *
  *<table>
  *<caption>UNIX系统信号列表</caption>
- *<tr><th width="40">序号</th><th width="60">名字</th><th>描述</th><th>默认动作</th></tr>
+ *<tr><th width="40">序号</th><th width="60">名字</th><th>描述</th><th width="100">默认动作</th></tr>
  *<tr><td>1</td><td>SIGABRT</td><td>异常终止(abort)<br/>调用abort函数时产生此信号，进程异常终止</td><td>终止+core</td></tr>
  *<tr><td>2</td><td>SIGALRM</td><td>超时（alarm）<br/>在调用alarm函数设置的计时器超时，产生此信号，若由setitimer函数设置的间隔时间超时时，也会产生此信号</td><td>终止</td></tr>
  *<tr><td>3</td><td>SIGBUS</td><td>硬件故障<br/>指示一个实现定义的硬件故障，当出现某些类型的内存故障时，实现常常产生此种信号</td><td>终止+core</td></tr>
@@ -39,25 +39,25 @@
  *<tr><td>17</td><td>SIGLWP</td><td>线程库内部使用</td><td>忽略</td></tr>
  *<tr><td>18</td><td>SIGPIPE</td><td>写至无读进程的管道<br/>如果在写到管道时读进程已终止，则产生此信号。当类型为SOCK_STREAM的套接字已不再连接时， 进程写到该套接字也产生此信号</td><td>终止</td></tr>
  *<tr><td>19</td><td>SIGPOLL</td><td>可轮询事件（poll）</td><td>终止</td></tr>
- *<tr><td>20</td><td>SIGPROF</td><td>梗概时间超时（setitimer）</td><td>终止</td></tr>
- *<tr><td>21</td><td>SIGPWR</td><td>电源失效/重启动</td><td>终止/忽略</td></tr>
+ *<tr><td>20</td><td>SIGPROF</td><td>梗概时间超时（setitimer）<br/>当setitimer(2)函数设置的梗概统计计时器（profiling interval timer）已到期时产生次信号</td><td>终止</td></tr>
+ *<tr><td>21</td><td>SIGPWR</td><td>电源失效/重启动<br/>这是一种依赖于系统信号。它主要用于有不间断电源(UPS)的系统。如果电源失效，则UPS起作用，而且通常软件会接到通知。在这种情况下，系统依靠蓄电池电源继续运行，所以无须任何处理。但是如果蓄电池也将不能支持工作，则软件通常会再次接到通知，此时，系统必须在15~30秒内使其各部分都停止运行。此时应当发送SIGPWR信号。在大多数系统中，接到蓄电池电压过低信息的进程将信号SIGPWR发送给init进程，然后由init处理停机操作。</td><td>终止/忽略</td></tr>
  *<tr><td>22</td><td>SIGQUIT</td><td>终端退出符<br/>当用户在终端上按退出键（一般采用Ctrl+\）时，产生此信号，并发送至前台进程组中的所有进程， 此信号不仅会终止前台进程组， 同时还会产生一个core文件</td><td>终止+core</td></tr>
- *<tr><td>23</td><td>SIGSEGV</td><td>无效内存引用</td><td>终止+core</td></tr>
+ *<tr><td>23</td><td>SIGSEGV</td><td>无效内存引用<br/>该信号指示进程进行了一次无效内存引用</td><td>终止+core</td></tr>
  *<tr><td>24</td><td>SIGSKFLT</td><td>协处理器栈故障</td><td>终止</td></tr>
- *<tr><td>25</td><td>SIGSTOP</td><td>停止</td><td>暂停进程</td></tr>
- *<tr><td>26</td><td>SIGSYS</td><td>无效系统调用</td><td>终止+core</td></tr>
- *<tr><td>27</td><td>SIGTERM</td><td>终止</td><td>终止</td></tr>
+ *<tr><td>25</td><td>SIGSTOP</td><td>停止<br/>这是一个作业控制信号，用于停止一个进程它类似于交互停止信号（SIGTSTP），但是SIGSTOP不能被捕捉或忽略</td><td>暂停进程</td></tr>
+ *<tr><td>26</td><td>SIGSYS</td><td>无效系统调用<br/>该信号指示一个无效的系统调用。由于某种未知的原因，进程执行了一条机器指令，内核认为这是一个系统调用，但该指令指示系统调用类型的参数却是无效的。这种情况是可能发生的，例如，用户编写了一道使用新	系统调用的程序，然后尝试运行该程序的二进制可执行代码，而所用的操作系统却是不支持该系统调用的较早版本，于是就会出现上述情况。</td><td>终止+core</td></tr>
+ *<tr><td>27</td><td>SIGTERM</td><td>终止<br/>这是由kill（1）命令发送的系统默认终止信号。</td><td>终止</td></tr>
  *<tr><td>28</td><td>SIGTHAW</td><td>检查点解冻</td><td>忽略</td></tr>
- *<tr><td>29</td><td>SIGTRAP</td><td>硬件故障</td><td>终止+core</td></tr>
- *<tr><td>30</td><td>SIGTSTP</td><td>终端停止符</td><td>暂停进程</td></tr>
- *<tr><td>31</td><td>SIGTTIN</td><td>后台读控制tty</td><td>暂停进程</td></tr>
- *<tr><td>32</td><td>SIGTTOU</td><td>后台写至控制tty</td><td>暂停进程</td></tr>
- *<tr><td>33</td><td>SIGURG</td><td>紧急情况（套接字）</td><td>忽略</td></tr>
+ *<tr><td>29</td><td>SIGTRAP</td><td>硬件故障在</td><td>终止+core</td></tr>
+ *<tr><td>30</td><td>SIGTSTP</td><td>终端停止符<br/>交互式停止信号，当用户在终端上按挂起键（一般采用Ctrl+Z）时，终端驱动程序产生次信号。该信号送至前台进程组中的所有进程</td><td>暂停进程</td></tr>
+ *<tr><td>31</td><td>SIGTTIN</td><td>后台读控制tty<br/>当一个后台进程组中的进程试图读其控制终端时，终端驱动程序产生此信号。在下列特殊情形下不产生次信号：（a）读进程忽略或阻塞次信号，（b）读进程所属的进程u是孤儿进程组，此时操作返回出错，并将errno设置为EIO</td><td>暂停进程</td></tr>
+ *<tr><td>32</td><td>SIGTTOU</td><td>后台写至控制tty<br/>当一个后台进程组中的进程试图写到其控制终端时产生次信号。与上面所述的SIGTTIN信号不同，一个进程可以选择允许后台进程写到控制终端。<br/> 如果不允许后台进程写，则与SIGTTIN相似，也有两种特殊情况：（a）写进程忽略或阻塞此信号，（b）写进程所属进程组是孤儿进程组。在这种情况下不产生次信号，写操作返回出错， 并将errno设置为EIO。</td><td>暂停进程</td></tr>
+ *<tr><td>33</td><td>SIGURG</td><td>紧急情况（套接字）<br/>此信号通知进程已经发生一次紧急情况。在网络连接上接受到带外的数据时， 可选择产生次信号。</td><td>忽略</td></tr>
  *<tr><td>34</td><td>SIGUSR1</td><td>用户定义的信号</td><td>终止</td></tr>
  *<tr><td>35</td><td>SIGUSR2</td><td>用户定义的信号</td><td>终止</td></tr>
- *<tr><td>36</td><td>SIGVTALRM</td><td>虚拟时间闹钟（setitimer）</td><td>终止</td></tr>
+ *<tr><td>36</td><td>SIGVTALRM</td><td>虚拟时间闹钟（setitimer）<br/>当一个由setitimer(2)函数设置的虚拟间隔时间到期时产生此信号。</td><td>终止</td></tr>
  *<tr><td>37</td><td>SIGWAITING</td><td>线程库内部使用</td><td>忽略</td></tr>
- *<tr><td>38</td><td>SIGWINCH</td><td>终端窗口大小改变</td><td>忽略</td></tr>
+ *<tr><td>38</td><td>SIGWINCH</td><td>终端窗口大小改变<br/>内核维持与每个终端或为终端相关联的窗口大小。进程可以用ioctl函数得到或设置窗口大小。如果进程用ioctl的设置窗口大小命令更改窗口大小，则内核产生SIGWINCH信号并将其送至前台进程组。</td><td>忽略</td></tr>
  *<tr><td>39</td><td>SIGXCPU</td><td>超过CPU限制（setrlimit）</td><td>终止+core</td></tr> 
  *<tr><td>40</td><td>SIGXFSZ</td><td>超过文件长度限制</td><td>终止+core</td></tr> 
  *<tr><td>41</td><td>SIGXRES</td><td>超过资源控制</td><td>忽略</td></tr> 
@@ -66,6 +66,47 @@
  *\retval !0 失败
  */
 int test_signal()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试kill函数
+ *
+ *int kill(pid_t pid, int signo);<br/>
+ *int raise(int signo);<br/>
+ *返回值：成功返回0， 出错返回-1<br/>
+ *raise只能将命令发送给进程自身，等价于kill(getpid(), signo)<br/>
+ *<table>
+ *<tr><th width="40">序号</th><th width="90">pid参数</th><th>描述</th></tr>
+ *<tr><td>1</td><td>pid > 0</td><td>将该信号发送给进程ID为pid的进程</td></tr>
+ *<tr><td>2</td><td>pid == 0</td><td>将该信号发送给与发送进程属于同一进程组的所有进程（这些进程的进程组ID等于发送进程的进程组ID），而且发送进程具有向这些进程发送信号的权限。</td></tr>
+ *<tr><td>3</td><td>pid < 0</td><td>将该信号发送给其他进程组ID等于pid的绝对值，而且发送进程具有向其发送信号的权限。</td></tr>
+ *<tr><td>4</td><td>pid == -1</td><td>将该信号发送给发送进程有权限向它们发送信号的系统上的所有进程。</td></tr>
+ *</table>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_kill()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试alarm函数
+ *
+ *unsigned int alarm(unsigned int seconds);<br/>
+ *返回值：0或以前设置的闹钟事件的余留秒数<br/>
+ *<br/>
+ *使用alarm函数可以设置一个计时器，在将来某个指定的时间该计时器会超时。当计时器超时时，产生SIGALRM信号。如果不忽略或不捕捉此信号，则其默认动作时终止调用该alarm函数的进程。
+ *
+ *\warning 经过指定的seconds秒后会产生信号SIGALRM，由于信号来自内核产生，存在进程调度的延迟，所以最终到信号的处理还需一些时间
+ *\warning 每个进程只能有一个闹钟时钟
+ *
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_alarm()
 {
 	return 0;
 }

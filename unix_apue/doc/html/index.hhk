@@ -71,9 +71,15 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#aad2510df6428251f4662a1d4fdd0bbd4"><param name="Name" value="test_setpgid"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#a929e98248a9c20daa9f00670c82e8d22"><param name="Name" value="test_setsid"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6"><param name="Name" value="c10_signal.cc"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html"><param name="Name" value="c10_signal.cc"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a51053f0d403c9e6c95cbcb5926a749bb"><param name="Name" value="test_alarm"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a327a3311d7486ef1c22064371837dbc8"><param name="Name" value="test_kill"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6"><param name="Name" value="test_signal"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="main"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6"><param name="Name" value="test_access"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a51053f0d403c9e6c95cbcb5926a749bb"><param name="Name" value="test_alarm"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c07__process__env_8cc.html#a78fe18cd6e9316cf78b2362518c6c43d"><param name="Name" value="test_atexit"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a131a9b4fbbef903c93b53fbdfe083201"><param name="Name" value="test_chdir"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#ae3ac743f5e3c72e57b46417d92edadf6"><param name="Name" value="test_chmod"></OBJECT>
@@ -101,6 +107,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c05__stdio_8cc.html#ac1ba4910c362dd1d19b7da23ec58593c"><param name="Name" value="test_gets"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#adeacfc1c381cdfe6840236a6ce8423b1"><param name="Name" value="test_getsid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c08__process__ctrl_8cc.html#ac7d808308a607f9f88daefa8550f1fa1"><param name="Name" value="test_id"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a327a3311d7486ef1c22064371837dbc8"><param name="Name" value="test_kill"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a89c98791a741469900396c8284384362"><param name="Name" value="test_link"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a318e7a17dcb12a770b99417b986fbb44"><param name="Name" value="test_lseek"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a6d6ebf1f158819b223d40f9093f00806"><param name="Name" value="test_mkdir"></OBJECT>
