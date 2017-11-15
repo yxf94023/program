@@ -102,6 +102,7 @@
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_alarm"><param name="Local" value="c10__signal_8cc.html#a51053f0d403c9e6c95cbcb5926a749bb"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_kill"><param name="Local" value="c10__signal_8cc.html#a327a3311d7486ef1c22064371837dbc8"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_signal"><param name="Local" value="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_sigset"><param name="Local" value="c10__signal_8cc.html#afb035926dd500fb04cf9573a8d904b15"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
         </UL>
       </UL>

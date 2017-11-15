@@ -76,6 +76,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a51053f0d403c9e6c95cbcb5926a749bb"><param name="Name" value="test_alarm"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a327a3311d7486ef1c22064371837dbc8"><param name="Name" value="test_kill"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6"><param name="Name" value="test_signal"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#afb035926dd500fb04cf9573a8d904b15"><param name="Name" value="test_sigset"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="main"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6"><param name="Name" value="test_access"></OBJECT>
@@ -121,6 +122,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#aad2510df6428251f4662a1d4fdd0bbd4"><param name="Name" value="test_setpgid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#a929e98248a9c20daa9f00670c82e8d22"><param name="Name" value="test_setsid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6"><param name="Name" value="test_signal"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#afb035926dd500fb04cf9573a8d904b15"><param name="Name" value="test_sigset"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#ac2778a5b2b50ad02ab04294b4541dc54"><param name="Name" value="test_stat"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#adf1a6a81c5d588bd4192b27e8f6ab777"><param name="Name" value="test_symlink"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a335164212185562d3f617ca5ec7226a0"><param name="Name" value="test_sync"></OBJECT>

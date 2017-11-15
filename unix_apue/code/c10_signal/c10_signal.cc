@@ -110,3 +110,34 @@ int test_alarm()
 {
 	return 0;
 }
+
+/**
+ *\brief 测试sigset信号集
+ *
+ *<ul>
+ *<li>信号集是一种数据类型（sigset_t），能表示多个信号</li>
+ *<li>根据前面介绍，系统中的信号种类数量可能超过一个整型量所包含的位数，所以一般不能用整型中的一位代表一种信号</li>
+ *</ul>
+ * 
+ *int sigemptyset(sigset_t *set);<br/>
+ *int sigfillset(sigset_t *set);<br/>
+ *int sigaddset(sigset_t *set, int signo);<br/>
+ *int sigdelset(sigset_t *set, int signo);<br/>
+ *返回值：若成功则返回0，若出错则返回-1<br/><br/>
+ *int sigismember(const sigset_t *set, int signo);<br/>
+ *返回值：若真则返回1，若假则返回0，若出错则返回-1<br/>
+ *
+ *<ol>
+ *<li>sigemptyset初始化由set指向的信号集，清除其中所有信号</li>
+ *<li>sigfillset初始化由set指向的信号集，使其包括所有信号</li>
+ *<li>sigaddset将一个信号添加到现有集中</li>
+ *<li>sigdelset则从信号集中删除一个信号</li>
+ *</ol>
+ *
+ *\retval 0 成功
+ *\retval !0 失败 
+ */
+ int test_sigset()
+ {
+	 return 0;
+ }
