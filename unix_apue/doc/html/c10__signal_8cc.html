@@ -69,6 +69,15 @@ $(function() {
 <tr class="memitem:afb035926dd500fb04cf9573a8d904b15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#afb035926dd500fb04cf9573a8d904b15">test_sigset</a> ()</td></tr>
 <tr class="memdesc:afb035926dd500fb04cf9573a8d904b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigset信号集  <a href="#afb035926dd500fb04cf9573a8d904b15">更多...</a><br /></td></tr>
 <tr class="separator:afb035926dd500fb04cf9573a8d904b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dde2e59f29c69b33c95fd752224843"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#ac8dde2e59f29c69b33c95fd752224843">test_sigprocmask</a> ()</td></tr>
+<tr class="memdesc:ac8dde2e59f29c69b33c95fd752224843"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigprocmask函数  <a href="#ac8dde2e59f29c69b33c95fd752224843">更多...</a><br /></td></tr>
+<tr class="separator:ac8dde2e59f29c69b33c95fd752224843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80cb6e0101e7fb27630848e0b4147ab6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#a80cb6e0101e7fb27630848e0b4147ab6">test_sigpengding</a> ()</td></tr>
+<tr class="memdesc:a80cb6e0101e7fb27630848e0b4147ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigpending函数  <a href="#a80cb6e0101e7fb27630848e0b4147ab6">更多...</a><br /></td></tr>
+<tr class="separator:a80cb6e0101e7fb27630848e0b4147ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a656a292c7d39cfb115615c5e2254d67f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#a656a292c7d39cfb115615c5e2254d67f">test_sigaction</a> ()</td></tr>
+<tr class="memdesc:a656a292c7d39cfb115615c5e2254d67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigaction函数  <a href="#a656a292c7d39cfb115615c5e2254d67f">更多...</a><br /></td></tr>
+<tr class="separator:a656a292c7d39cfb115615c5e2254d67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>练习信号 </p>
@@ -152,6 +161,44 @@ $(function() {
 </dl>
 
 <p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00090">90</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a656a292c7d39cfb115615c5e2254d67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a656a292c7d39cfb115615c5e2254d67f">&#9670;&nbsp;</a></span>test_sigaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_sigaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试sigaction函数 </p>
+<p>int sigaction(int signo, const struct sigaction *restrict act, struct sigaction *restrict oact);<br />
+ 返回值：若成功则返回0， 若出错则返回-1<br />
+ <br />
+ struct sigaction{<br />
+ void (*sa_handler)(int); // 信号处理函数 sigset_t sa_mask; // 阻塞信号集 int sa_flags; // void (*sa_sigaction)(int, siginfo_t *, void *); // } </p><ul>
+<li>
+sigacton函数的功能是检查或修改与指定信号相关联的处理动作 </li>
+<li>
+</li>
+</ul>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00208">208</a> 行定义.</p>
 
 </div>
 </div>
@@ -309,6 +356,90 @@ $(function() {
 </dl>
 
 <p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00068">68</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a80cb6e0101e7fb27630848e0b4147ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80cb6e0101e7fb27630848e0b4147ab6">&#9670;&nbsp;</a></span>test_sigpengding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_sigpengding </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试sigpending函数 </p>
+<p>int sigpending(sigset_t *set);<br />
+ 返回值：若成功则返回0， 若出错则返回-1<br />
+ sigpending函数返回信号集，其中的各个信号对于调用进程是阻塞的而不能递送，因而也一定是当前未决的，信号集通过set参数返回。<br />
+ </p><dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00184">184</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac8dde2e59f29c69b33c95fd752224843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8dde2e59f29c69b33c95fd752224843">&#9670;&nbsp;</a></span>test_sigprocmask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_sigprocmask </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试sigprocmask函数 </p>
+<p>一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br />
+ 调用函数sigprocmask可以检测或更改其信号屏蔽字，或者在一个步骤中同时执行这两个操作。<br />
+</p>
+<p>int sigprocmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);<br />
+ 返回值：若成功则返回0， 若出错则返回-1<br />
+</p>
+<ul>
+<li>
+若oset != NULL，那么进程的当前信号屏蔽字通过oset返回 </li>
+<li>
+<p class="startli">若 set != NULL，则参数how指示如何修改当前信号屏蔽字 </p><table class="doxtable">
+<tr>
+<th width="60">序号</th><th width="60">how取值</th><th>说明 </th></tr>
+<tr>
+<td>1</td><td>SIG_BLOCK</td><td>该进程新的信号屏蔽字是其当前信号屏蔽字和set指向信号集的并集。set包含了我们希望阻塞的附加信号 </td></tr>
+<tr>
+<td>2</td><td>SIG_UNBLOCK</td><td>该进程新的信号屏蔽字是其当前信号屏蔽字和set指向信号集的补集的交集。set包含了我们希望解除阻塞的信号 </td></tr>
+<tr>
+<td>3</td><td>SIG_SETMASK</td><td>该进程新的信号屏蔽字将被set指向的信号集的值代替 </td></tr>
+</table>
+<p class="endli"></p>
+</li>
+<li>
+若 set == NULL，则不能改变进程的信号屏蔽字，how的值也无意义 </li>
+</ul>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00170">170</a> 行定义.</p>
 
 </div>
 </div>

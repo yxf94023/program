@@ -137,7 +137,75 @@ int test_alarm()
  *\retval 0 成功
  *\retval !0 失败 
  */
- int test_sigset()
- {
-	 return 0;
+int test_sigset()
+{
+	return 0;
+}
+ 
+/**
+ *\brief 测试sigprocmask函数
+ *
+ *一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br/>
+ *调用函数sigprocmask可以检测或更改其信号屏蔽字，或者在一个步骤中同时执行这两个操作。<br/>
+ * 
+ *int sigprocmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1<br/>
+ *
+ *<ul>
+ *<li>若oset != NULL，那么进程的当前信号屏蔽字通过oset返回</li>
+ *<li>若 set != NULL，则参数how指示如何修改当前信号屏蔽字
+ *<table>
+ *<tr><th width="60">序号</th><th width="60">how取值</th><th>说明</th></tr>
+ *<tr><td>1</td><td>SIG_BLOCK</td><td>该进程新的信号屏蔽字是其当前信号屏蔽字和set指向信号集的并集。set包含了我们希望阻塞的附加信号</td></tr>
+ *<tr><td>2</td><td>SIG_UNBLOCK</td><td>该进程新的信号屏蔽字是其当前信号屏蔽字和set指向信号集的补集的交集。set包含了我们希望解除阻塞的信号</td></tr>
+ *<tr><td>3</td><td>SIG_SETMASK</td><td>该进程新的信号屏蔽字将被set指向的信号集的值代替</td></tr>
+ *</table>
+ 
+ </li>
+ *<li>若 set == NULL，则不能改变进程的信号屏蔽字，how的值也无意义</li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败  
+ */
+int test_sigprocmask()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试sigpending函数
+ *
+ *int sigpending(sigset_t *set);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1<br/>
+ *sigpending函数返回信号集，其中的各个信号对于调用进程是阻塞的而不能递送，因而也一定是当前未决的，信号集通过set参数返回。<br/>
+ *\retval 0 成功
+ *\retval !0 失败  
+ */
+int test_sigpengding()
+{
+	return 0;
+}
+
+/**
+ *\brief 测试sigaction函数
+ *
+ *int sigaction(int signo, const struct sigaction *restrict act, struct sigaction *restrict oact);<br/>
+ *返回值：若成功则返回0， 若出错则返回-1<br/>
+ *<br/>
+ *struct sigaction{<br/>
+	 void	(*sa_handler)(int);	// 信号处理函数
+	 sigset_t sa_mask;	// 阻塞信号集
+	 int	sa_flags;	// 
+	 void	(*sa_sigaction)(int, siginfo_t *, void *);	//
  }
+ *<ul>
+ *<li>sigacton函数的功能是检查或修改与指定信号相关联的处理动作</li>
+ *<li></li>
+ *</ul>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_sigaction()
+{
+	return 0;
+}

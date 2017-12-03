@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>unix_apue: E:/git_thub/program/unix_apue/code/c03_file_IO/c03_file.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">unix_apue
+   &#160;<span id="projectnumber">1.0.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','搜索');
+});
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li><li class="navelem"><a class="el" href="dir_2d4890816bd7d819fbeff46b6269cb2d.html">c03_file_IO</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">c03_file.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="c03__file_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef __C03_FILE_H__</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define __C03_FILE_H__</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifdef  __CPLUSPLUS__</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a088f91c01272418a36f263999e61a7c1">test_open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pathname, <span class="keywordtype">int</span> flags, mode_t mode);</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a7f5e9bcc45130fef697ffe9fb571a059">test_creat</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pathname, mode_t mode);</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#af6c1ae4d71166f9f1a8c1237de5c01ed">test_close</a>(<span class="keywordtype">int</span> filedes);</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a523c497d9d52c8de83b6f7b1089d67c0">test_lseek</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *file_path, <span class="keywordtype">int</span> whence);</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a9c776a60c67353956a33f86ee246ae87">test_read</a>(<span class="keywordtype">int</span> filedes, <span class="keywordtype">void</span> *buf, <span class="keywordtype">size_t</span> nbytes);</div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#ace36d46d52032ec17bfc64e0e79c5a61">test_write</a>(<span class="keywordtype">int</span> filedes, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, <span class="keywordtype">size_t</span> nbytes);</div><div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div><div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a18b6fabc944ca0c7cec322d947efa866">test_dup</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *file_path);</div><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div><div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a335164212185562d3f617ca5ec7226a0">test_sync</a>(<span class="keywordtype">int</span> filedes);</div><div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div><div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keywordtype">int</span> <a class="code" href="c03__file_8h.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a>(<span class="keywordtype">int</span> cmd);</div><div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div><div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor">#ifdef __CPLUSPLUS__</span></div><div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div><div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="c03__file_8h_html_a28f5bcc3fe48ffcef24fa3838d9745c7"><div class="ttname"><a href="c03__file_8h.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a></div><div class="ttdeci">int test_fcntl(int cmd)</div><div class="ttdoc">测试fcntl函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00491">c03_file.cc:491</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a18b6fabc944ca0c7cec322d947efa866"><div class="ttname"><a href="c03__file_8h.html#a18b6fabc944ca0c7cec322d947efa866">test_dup</a></div><div class="ttdeci">int test_dup(const char *file_path)</div><div class="ttdoc">测试dup/dup2函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00414">c03_file.cc:414</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a7f5e9bcc45130fef697ffe9fb571a059"><div class="ttname"><a href="c03__file_8h.html#a7f5e9bcc45130fef697ffe9fb571a059">test_creat</a></div><div class="ttdeci">int test_creat(const char *pathname, mode_t mode)</div><div class="ttdoc">测试creat函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00180">c03_file.cc:180</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a9c776a60c67353956a33f86ee246ae87"><div class="ttname"><a href="c03__file_8h.html#a9c776a60c67353956a33f86ee246ae87">test_read</a></div><div class="ttdeci">int test_read(int filedes, void *buf, size_t nbytes)</div><div class="ttdoc">测试read函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00322">c03_file.cc:322</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a088f91c01272418a36f263999e61a7c1"><div class="ttname"><a href="c03__file_8h.html#a088f91c01272418a36f263999e61a7c1">test_open</a></div><div class="ttdeci">int test_open(const char *pathname, int flags, mode_t mode)</div><div class="ttdoc">测试open函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00128">c03_file.cc:128</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a523c497d9d52c8de83b6f7b1089d67c0"><div class="ttname"><a href="c03__file_8h.html#a523c497d9d52c8de83b6f7b1089d67c0">test_lseek</a></div><div class="ttdeci">int test_lseek(const char *file_path, int whence)</div><div class="ttdoc">测试lseek函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00269">c03_file.cc:269</a></div></div>
+<div class="ttc" id="c03__file_8h_html_a335164212185562d3f617ca5ec7226a0"><div class="ttname"><a href="c03__file_8h.html#a335164212185562d3f617ca5ec7226a0">test_sync</a></div><div class="ttdeci">int test_sync(int filedes)</div><div class="ttdoc">测试sync函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00454">c03_file.cc:454</a></div></div>
+<div class="ttc" id="c03__file_8h_html_af6c1ae4d71166f9f1a8c1237de5c01ed"><div class="ttname"><a href="c03__file_8h.html#af6c1ae4d71166f9f1a8c1237de5c01ed">test_close</a></div><div class="ttdeci">int test_close(int filedes)</div><div class="ttdoc">测试close函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00202">c03_file.cc:202</a></div></div>
+<div class="ttc" id="c03__file_8h_html_ace36d46d52032ec17bfc64e0e79c5a61"><div class="ttname"><a href="c03__file_8h.html#ace36d46d52032ec17bfc64e0e79c5a61">test_write</a></div><div class="ttdeci">int test_write(int filedes, const void *buf, size_t nbytes)</div><div class="ttdoc">测试write函数 </div><div class="ttdef"><b>Definition:</b> <a href="c03__file_8cc_source.html#l00354">c03_file.cc:354</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

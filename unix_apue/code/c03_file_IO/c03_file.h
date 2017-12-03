@@ -3,90 +3,14 @@
  *\brief 练习文件相关操作
  *\date 2017/07/27
  */
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <errno.h>
-#include <stdlib.h>
-#include "c03_file.h"
 
-static int convert_flags(const char *str_flags)
-{
-	int flags = 0; // 待返回的标记位
-	int size = 0, idx = 0;
-	
-	// 将字符串标记位 和 标记位建立联系
-	struct st_flag_pairs{
-		
-		const char *str_flags;	// 标记字符串
-		int int_flags;	// 标记值
-	}flag_pairs[] = {
-		{"O_RDONLY", O_RDONLY},
-		{"O_WRONLY", O_WRONLY},
-		{"O_RDWR", O_RDWR},
-		{"O_APPEND", O_APPEND},
-		{"O_CREAT", O_CREAT},
-		{"O_EXCL", O_EXCL},
-		{"O_TRUNC", O_TRUNC},
-		{"O_NOCTTY", O_NOCTTY},
-		{"O_NONBLOCK", O_NONBLOCK},
-		{"O_DSYNC", O_DSYNC},
-		{"O_RSYNC", O_RSYNC},
-		{"O_SYNC", O_SYNC},
-	};
-	
-	size = sizeof(flag_pairs)/sizeof(flag_pairs[0]);
-	printf("%s:%d size[%d]\n", __FILE__, __LINE__, size);
-	
-	// 循环统计标记位信息
-	for (idx = 0; idx < size; ++idx){
-		
-		if (strstr(str_flags, flag_pairs[idx].str_flags) != NULL){
-			
-			flags |= flag_pairs[idx].int_flags;
-		}
-	}
-	printf("%s:%d flags[%d]\n", __FILE__, __LINE__, flags);
-	
-	return flags;
-}
+ 
+#ifndef __C03_FILE_H__
+#define __C03_FILE_H__
 
-static mode_t convert_modes(const char *str_modes)
-{
-	mode_t modes = 0;
-	int size = 0, idx = 0;
-	
-	struct st_mode_pairs{
-		
-		const char *str_modes;
-		mode_t t_modes;
-	}mode_pairs[] = {
-		{"S_IRUSR", S_IRUSR},
-		{"S_IWUSR", S_IWUSR},
-		{"S_IXUSR", S_IXUSR},
-		{"S_IRGRP", S_IRGRP},
-		{"S_IWGRP", S_IWGRP},
-		{"S_IXGRP", S_IXGRP},
-		{"S_IROTH", S_IROTH},
-		{"S_IWOTH", S_IWOTH},
-		{"S_IXOTH", S_IXOTH},
-	};
-	size = sizeof(mode_pairs)/sizeof(mode_pairs[0]);
-	printf("%s:%d size[%d]\n", __FILE__, __LINE__, size);
-	
-	// 循环统计标记位信息
-	for (idx = 0; idx < size; ++idx){
-		
-		if (strstr(str_modes, mode_pairs[idx].str_modes) != NULL){
-			
-			modes |= mode_pairs[idx].t_modes;
-		}
-	}
-	printf("%s:%d modes[%d]\n", __FILE__, __LINE__, modes);	
-	
-	return modes;
-}
+#ifdef	__CPLUSPLUS__
+extern "C" {
+#endif
 
 /**
  *\brief 测试open函数
@@ -105,15 +29,14 @@ static mode_t convert_modes(const char *str_modes)
  *<table>
  *<caption>标记为意义</caption>
  *<tr><th width="100">标记</th><th width="450">描述</th><th>备注</th>
- *<tr><td>O_RDONLY</td><td>只读打开</td><td rowspan="3">三个常量中必须指定一个且只能指定一个<br/>
- *待操作的文件必须已经存在了否则会提示错误：No such file or directory<br/><br/>默认写方式打开文件， 都是从文件头部开始写的，这样会覆盖前面所写的文件内容，所以需要指定追加方式打开写，这个与O_TRUNC截断有所区别<br/>./c03_file_exercise open test.file O_EXCL,O_WRONLY,O_APPEND S_IRUSR,S_IXOTH</td></tr>
+ *<tr><td>O_RDONLY</td><td>只读打开</td><td rowspan="3">三个常量中必须指定一个且只能指定一个</td></tr>
  *<tr><td>O_WRONLY</td><td>只写打开</td></tr>
  *<tr><td>O_RDWR</td><td>读、写打开</td></tr>
  *<tr><td colspan="3">下面列出的常量则是可选择的</td></tr>
  *<tr><td>O_APPEND</td><td>每次写文件都以追加的方式写到文件末尾</td><td></td></tr>
- *<tr><td>O_CREAT</td><td><ul><li>打开的文件不存在，则创建它</li><li><b>打开的文件存在，会不会修改文件的权限?</b></li></ul></td><td>使用该选项是，需要指定第三个参数，用来指定新文件的访问权限位<br/> <b>注意：</b>如果不指定第三个权限位参数 文件也能创建成功 但是没有任何权限</td></tr>
- *<tr><td>O_EXCL</td><td><ul><li>可以测试一个文件是否存在</li><li>若文件不存在，则创建此文件，这使测试和创建两者称为一个原子操作</li></ul></td><td>若同时指定了O_CREAT， 而文件已经存在， 则会出错。<br/><b>新创建的文件权限是怎样的？</b><br/><b>注意：</b>如果不指定第三个权限参数，函数调用是会出错的的，错误信息为：No such file or directory</td></tr>
- *<tr><td>O_TRUNC</td><td>若文件存在，而且为只写或读写成功打开，则将其长度截短为0</td><td><b>打开后立马关闭会截短么？</b><br/><br/>截断是将文件的长度设置为0后再重新写，类似于一个新的文件一样，和上面描述的覆盖式有所区别的<br/>./c03_file_exercise open test.file O_EXCL,O_WRONLY,O_TRUNC S_IRUSR,S_IXOTH</td></tr>
+ *<tr><td>O_CREAT</td><td><ul><li>打开的文件不存在，则创建它</li><li><b>打开的文件存在，会不会修改文件的权限?</b></li></ul></td><td>使用该选项是，需要指定第三个参数，用来指定新文件的访问权限位</td></tr>
+ *<tr><td>O_EXCL</td><td><ul><li>可以测试一个文件是否存在</li><li>若文件不存在，则创建此文件，这使测试和创建两者称为一个原子操作</li></ul></td><td>若同时指定了O_CREAT， 而文件已经存在， 则会出错。<br/><b>新创建的文件权限是怎样的？</b></td></tr>
+ *<tr><td>O_TRUNC</td><td>若文件存在，而且为只写或读写成功打开，则将其长度截短为0</td><td><b>打开后立马关闭会截短么？</b></td></tr>
  *<tr><td>O_NOCTTY</td><td>若pathname指的是终端设备，则不将改设备分配作为此进程的控制终端</td><td><b>这个完全不明其意，懂了后再回来备注？</b></td></tr>
  *<tr><td>O_NONBLOCK</td><td>若pathname指的是一个FIFO、块特殊文件或字符特殊文件，则此选项为文件的本次打开操作和后续的I/O操作设置非阻塞模式</td><td></td></tr>
  *<tr><td>O_DSYNC</td><td>使每次write等待物理I/O操作完成，但是，若写操作并不影响读取刚写入的数据，则不等待文件属性被更新</td><td></td></tr>
@@ -126,38 +49,7 @@ static mode_t convert_modes(const char *str_modes)
  *\retval 0 成功
  *\retval !0 失败
  */
-int test_open(const char *pathname, int flags, mode_t mode)
-{
-	int fd = -1;
-	char buf[80] = {0};
-	const char *write_str = "Hello World!\n";
-	
-	if (flags & O_CREAT || flags & O_EXCL){
-		
-		printf("hello 3\n");
-		fd = open(pathname, flags, mode);
-	}else{
-		
-		printf("hello 2\n");
-		fd = open(pathname, flags);
-	}
-	if (fd == -1){
-		
-		printf("%s:%d call open failed(%s)!\n", __FILE__, __LINE__, strerror(errno));
-		return -1;
-	}
-	printf("%s:%d fd[%d]\n", __FILE__, __LINE__, fd);
-	
-	if (!test_read(fd, buf, sizeof(buf) - 1)){
-		
-		printf("%s:%d buf[%s]\n", __FILE__, __LINE__, buf);
-	}
-	
-	printf("%s:%d write string(%s)\n", __FILE__, __LINE__, write_str);
-	test_write(fd, write_str, strlen(write_str));
-	
-	return test_close(fd);
-}
+int test_open(const char *pathname, int flags, mode_t mode);
 
 /**
  *\brief 测试creat函数
@@ -178,10 +70,7 @@ int test_open(const char *pathname, int flags, mode_t mode)
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_creat(const char *pathname, mode_t mode)
-{
-	return 0;
-}
+int test_creat(const char *pathname, mode_t mode);
 
 /**
  *\brief 测试close函数
@@ -200,37 +89,7 @@ int test_creat(const char *pathname, mode_t mode)
  *\retval 0 成功
  *\retval !0 失败  
  */
-int test_close(int filedes)
-{
-	int ret = close(filedes);
-	if (ret == -1){
-
-		printf("%s:%d close fd[%d] failed(%s)!\n", __FILE__, __LINE__, filedes, strerror(errno));
-		return -1;	
-	}
-	printf("%s:%d close fd[%d] success\n", __FILE__, __LINE__, filedes);
-	
-	return 0;
-}
-
-static int convert_position(const char *str_position)
-{
-	int position = 0;
-	
-	if (strcmp(str_position, "SEEK_SET") == 0){
-		
-		position = SEEK_SET;
-	}else if (strcmp(str_position, "SEEK_CUR") == 0){
-		
-		position = SEEK_CUR;
-	}else if (strcmp(str_position, "SEEK_END") == 0){
-		
-		position = SEEK_END;
-	}
-	printf("%s:%d position[%d]\n", __FILE__, __LINE__, position);
-	
-	return position;
-}
+int test_close(int filedes);
 
 /**
  *\brief 测试lseek函数
@@ -267,35 +126,7 @@ static int convert_position(const char *str_position)
  *\retval 0 成功
  *\retval !0 失败  
  */
-int test_lseek(const char *file_path, int whence)
-{
-	off_t file_pos = 0;
-	int fd = open(file_path, O_RDWR);	// 以读写方式打开
-	if (fd == -1){
-		
-		printf("%s:%d open file(%s) failed(%s)\n", __FILE__, __LINE__, file_path, strerror(errno));
-		return -1;
-	}
-	
-	file_pos = lseek(fd, 0, SEEK_END);
-	printf("%s:%d fd[%d] pos[%ld]\n", __FILE__, __LINE__, fd, file_pos);
-	
-	if (whence == SEEK_SET){
-		
-		lseek(fd, file_pos/2, SEEK_SET);
-		test_write(fd, "Middle", sizeof("Middle") - 1);
-	}else if (whence == SEEK_CUR){
-		
-		lseek(fd, 0, SEEK_SET);
-		test_write(fd, "Start", sizeof("Start") - 1);
-	}else{
-		
-		lseek(fd, file_pos, SEEK_SET);
-		test_write(fd, "End", sizeof("End") - 1);
-	}
-	
-	return test_close(fd);
-}
+int test_lseek(const char *file_path, int whence);
 
 /**
  *\brief 测试read函数
@@ -320,21 +151,7 @@ int test_lseek(const char *file_path, int whence)
  *\retval 0 成功
  *\retval !0 失败  
  */
-int test_read(int filedes, void *buf, size_t nbytes)
-{
-	int ret = -1;
-	
-	ret = read(filedes, buf, nbytes);
-	if (ret == -1){
-		
-		printf("%s:%d (%s)\n", __FILE__, __LINE__, strerror(errno));
-		return -1;
-	}
-	
-	printf("%s:%d read ret[%d]\n", __FILE__, __LINE__, ret);
-	
-	return 0;
-}
+int test_read(int filedes, void *buf, size_t nbytes);
 
 /**
  *\brief 测试write函数
@@ -352,21 +169,7 @@ int test_read(int filedes, void *buf, size_t nbytes)
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_write(int filedes, const void *buf, size_t nbytes)
-{
-	int ret = -1;
-	
-	ret = write(filedes, buf, nbytes);
-	if (ret == -1){
-		
-		printf("%s:%d (%s)\n", __FILE__, __LINE__, strerror(errno));
-		return -1;		
-	}
-	
-	printf("%s:%d write ret[%d]\n", __FILE__, __LINE__, ret);
-	
-	return 0;
-}
+int test_write(int filedes, const void *buf, size_t nbytes);
 
 
 /**
@@ -397,7 +200,6 @@ int test_write(int filedes, const void *buf, size_t nbytes)
  *
  *<code>
  *	int dup(int filedes);
- *
  *	int dup2(int filedes, int filedes2);
  *
  *	返回值：若成功则返回新的文件描述符，若出错则返回-1<br/>
@@ -412,34 +214,17 @@ int test_write(int filedes, const void *buf, size_t nbytes)
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_dup(const char *file_path)
-{
-	int fd = open(file_path, O_RDWR);
-	if (fd == -1){
-		
-		printf("%s:%d open fail(%s)\n", __FILE__, __LINE__, strerror(errno));
-		return -1;
-	}
-	printf("%s:%d fd[%d]\n", __FILE__, __LINE__, fd);
-	
-	test_close(1);
-	int dup_fd = dup(fd);
-	test_close(fd);
-	printf("hello dup_fd[%d]\n", dup_fd);	//　日志写到了标准输出，　也即　dup_fd对应的文件
-	
-	return test_close(dup_fd);
-}
+int test_dup(const char *file_path);
 
 /**
  *\brief 测试sync函数
  *
  *	<code>
- *	int fsync(int filedes);
- *
- *	int fdatasync(int filedes);
- *
- *	返回值：若成功则返回0， 若出错则返回-1
- *	
+ *	int fsync(int filedes);<br/>
+ *	int fdatasync(int filedes);<br/>
+ *	<br/>
+ *	返回值：若成功则返回0， 若出错则返回-1<br/>
+ *	<br/>
  *	void sync(void);
  *	</code>
  *
@@ -452,10 +237,7 @@ int test_dup(const char *file_path)
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_sync(int filedes)
-{
-	return 0;
-}
+int test_sync(int filedes);
 
 /**
  *\brief 测试fcntl函数
@@ -485,81 +267,13 @@ int test_sync(int filedes)
  *<tr><td>F_GETOWN</td><td>取当前接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
  *<tr><td>F_SETOWN</td><td>设置接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
  *</table>
- *\param[in] filedes 操作命令
+ *\param[in] cmd 操作命令
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_fcntl(int filedes)
-{
-	int val = 0;
-	
-	val = fcntl(filedes, F_GETFL, 0);
-	if (val == -1){
-		
-		printf("%s:%d %s\n", __FILE__, __LINE__, strerror(errno));
-		return -1;
-	}
-	
-	switch (val & O_ACCMODE){
-	
-	case O_RDONLY:
-		printf("read only\n");
-		break;
-	case O_WRONLY:
-		printf("write only\n");
-		break;
-	case O_RDWR:
-		printf("read and write\n");
-		break;
-	default:
-		printf("error\n");
-		break;
-	}
-	
-	if (val & O_APPEND){
-		
-		printf("append\n");
-	}
-	
-	if (val & O_NONBLOCK){
-		
-		printf("nonblocking\n");
-	}
-	
-	return 0;
-}
+int test_fcntl(int cmd);
 
-static void show_help()
-{
-	printf("open file_name flags [modes],  多个标记信息可以用分割符隔开\n"
-		"\tflags    O_RDONLY|O_WRONLY|O_RDWR|O_APPEND|O_CREAT|O_EXCL|O_TRUNC|O_NOCTTY|O_NONBLOCK|O_DSYNC|O_RSYNC|O_SYNC\n"
-		"\tmodes    S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP|S_IXGRP|S_IROTH|S_IWOTH|S_IXOTH\n\n"
-		"lseek file_name position, 分别在文件头、中间 和 末尾写一段数据\n"
-		"\tposition    SEEK_SET, SEEK_CUR, SEEK_END\n\n"
-		"dup file_name, 复制文件描述符\n\n"
-		"fcntl filedes, 获取文件标记信息\n\n");
+#ifdef __CPLUSPLUS__
 }
-
-int main(int argc, char **argv)
-{
-	if (argc == 4 && strcmp(argv[1], "open") == 0){
-		
-		test_open(argv[2], convert_flags(argv[3]), 0);
-	}else if (argc == 5 && strcmp(argv[1], "open") == 0){
-		
-		test_open(argv[2], convert_flags(argv[3]), convert_modes(argv[4]));
-	}else if (argc == 4 && strcmp(argv[1], "lseek") == 0){
-		
-		test_lseek(argv[2], convert_position(argv[3]));
-	}else if (argc == 3 && strcmp(argv[1], "dup") == 0){
-		
-		test_dup(argv[2]);
-	}else if (argc == 3 && strcmp(argv[1], "fcntl") == 0){
-		
-		test_fcntl(atoi(argv[2]));
-	}else{
-		
-		show_help();
-	}
-	return 0;
-}
+#endif
+#endif

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>unix_apue: E:/git_thub/program/unix_apue/code/c03_file_IO/c03_file.cc 文件参考</title>
+<title>unix_apue: E:/git_thub/program/unix_apue/code/c03_file_IO/c03_file.h 文件参考</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,57 +45,43 @@ $(function() {
   <div class="summary">
 <a href="#func-members">函数</a>  </div>
   <div class="headertitle">
-<div class="title">c03_file.cc 文件参考</div>  </div>
+<div class="title">c03_file.h 文件参考</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>练习文件相关操作  
-<a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;errno.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="c03__file_8h_source.html">c03_file.h</a>&quot;</code><br />
-</div>
-<p><a href="c03__file_8cc_source.html">浏览源代码.</a></p>
+<p><a href="c03__file_8h_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:a088f91c01272418a36f263999e61a7c1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a088f91c01272418a36f263999e61a7c1">test_open</a> (const char *pathname, int flags, mode_t mode)</td></tr>
+<tr class="memitem:a088f91c01272418a36f263999e61a7c1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a088f91c01272418a36f263999e61a7c1">test_open</a> (const char *pathname, int flags, mode_t mode)</td></tr>
 <tr class="memdesc:a088f91c01272418a36f263999e61a7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试open函数  <a href="#a088f91c01272418a36f263999e61a7c1">更多...</a><br /></td></tr>
 <tr class="separator:a088f91c01272418a36f263999e61a7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f5e9bcc45130fef697ffe9fb571a059"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a7f5e9bcc45130fef697ffe9fb571a059">test_creat</a> (const char *pathname, mode_t mode)</td></tr>
+<tr class="memitem:a7f5e9bcc45130fef697ffe9fb571a059"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a7f5e9bcc45130fef697ffe9fb571a059">test_creat</a> (const char *pathname, mode_t mode)</td></tr>
 <tr class="memdesc:a7f5e9bcc45130fef697ffe9fb571a059"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试creat函数  <a href="#a7f5e9bcc45130fef697ffe9fb571a059">更多...</a><br /></td></tr>
 <tr class="separator:a7f5e9bcc45130fef697ffe9fb571a059"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#af6c1ae4d71166f9f1a8c1237de5c01ed">test_close</a> (int filedes)</td></tr>
+<tr class="memitem:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#af6c1ae4d71166f9f1a8c1237de5c01ed">test_close</a> (int filedes)</td></tr>
 <tr class="memdesc:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试close函数  <a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">更多...</a><br /></td></tr>
 <tr class="separator:af6c1ae4d71166f9f1a8c1237de5c01ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a523c497d9d52c8de83b6f7b1089d67c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a523c497d9d52c8de83b6f7b1089d67c0">test_lseek</a> (const char *file_path, int whence)</td></tr>
+<tr class="memitem:a523c497d9d52c8de83b6f7b1089d67c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a523c497d9d52c8de83b6f7b1089d67c0">test_lseek</a> (const char *file_path, int whence)</td></tr>
 <tr class="memdesc:a523c497d9d52c8de83b6f7b1089d67c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试lseek函数  <a href="#a523c497d9d52c8de83b6f7b1089d67c0">更多...</a><br /></td></tr>
 <tr class="separator:a523c497d9d52c8de83b6f7b1089d67c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c776a60c67353956a33f86ee246ae87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a9c776a60c67353956a33f86ee246ae87">test_read</a> (int filedes, void *buf, size_t nbytes)</td></tr>
+<tr class="memitem:a9c776a60c67353956a33f86ee246ae87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a9c776a60c67353956a33f86ee246ae87">test_read</a> (int filedes, void *buf, size_t nbytes)</td></tr>
 <tr class="memdesc:a9c776a60c67353956a33f86ee246ae87"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试read函数  <a href="#a9c776a60c67353956a33f86ee246ae87">更多...</a><br /></td></tr>
 <tr class="separator:a9c776a60c67353956a33f86ee246ae87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace36d46d52032ec17bfc64e0e79c5a61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#ace36d46d52032ec17bfc64e0e79c5a61">test_write</a> (int filedes, const void *buf, size_t nbytes)</td></tr>
+<tr class="memitem:ace36d46d52032ec17bfc64e0e79c5a61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#ace36d46d52032ec17bfc64e0e79c5a61">test_write</a> (int filedes, const void *buf, size_t nbytes)</td></tr>
 <tr class="memdesc:ace36d46d52032ec17bfc64e0e79c5a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试write函数  <a href="#ace36d46d52032ec17bfc64e0e79c5a61">更多...</a><br /></td></tr>
 <tr class="separator:ace36d46d52032ec17bfc64e0e79c5a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18b6fabc944ca0c7cec322d947efa866"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a18b6fabc944ca0c7cec322d947efa866">test_dup</a> (const char *file_path)</td></tr>
+<tr class="memitem:a18b6fabc944ca0c7cec322d947efa866"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a18b6fabc944ca0c7cec322d947efa866">test_dup</a> (const char *file_path)</td></tr>
 <tr class="memdesc:a18b6fabc944ca0c7cec322d947efa866"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试dup/dup2函数  <a href="#a18b6fabc944ca0c7cec322d947efa866">更多...</a><br /></td></tr>
 <tr class="separator:a18b6fabc944ca0c7cec322d947efa866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a335164212185562d3f617ca5ec7226a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a335164212185562d3f617ca5ec7226a0">test_sync</a> (int filedes)</td></tr>
+<tr class="memitem:a335164212185562d3f617ca5ec7226a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a335164212185562d3f617ca5ec7226a0">test_sync</a> (int filedes)</td></tr>
 <tr class="memdesc:a335164212185562d3f617ca5ec7226a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sync函数  <a href="#a335164212185562d3f617ca5ec7226a0">更多...</a><br /></td></tr>
 <tr class="separator:a335164212185562d3f617ca5ec7226a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a> (int cmd)</td></tr>
+<tr class="memitem:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8h.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a> (int cmd)</td></tr>
 <tr class="memdesc:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试fcntl函数  <a href="#a28f5bcc3fe48ffcef24fa3838d9745c7">更多...</a><br /></td></tr>
 <tr class="separator:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
-<div class="textblock"><p>练习文件相关操作 </p>
-<dl class="section date"><dt>日期</dt><dd>2017/07/27 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 中定义.</p>
-</div><h2 class="groupheader">函数说明</h2>
+<h2 class="groupheader">函数说明</h2>
 <a id="af6c1ae4d71166f9f1a8c1237de5c01ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">&#9670;&nbsp;</a></span>test_close()</h2>
 
@@ -268,8 +254,7 @@ Linux没有使用v节点，而是使用了通用i节点结构。虽然两种实�
  每个进程拥有队里的文件表项，是使得每个进程都有它自己的对该文件的当前偏移量<br />
  <br />
  </p><dl class="section warning"><dt>警告</dt><dd>存在多个文件描述符项指向同一个文件表项，例如dup操作， fork后父、子进程对于每一个打开文件描述符共享同一个文件表项</dd></dl>
-<p><code> int dup(int filedes);</code></p>
-<p><code> int dup2(int filedes, int filedes2);</code></p>
+<p><code> int dup(int filedes); int dup2(int filedes, int filedes2);</code></p>
 <p><code> 返回值：若成功则返回新的文件描述符，若出错则返回-1<br />
  </code></p>
 <dl class="section warning"><dt>警告</dt><dd>dup返回的新文件描述符一定是当前可用文件描述符中的最小数值； </dd>
@@ -516,6 +501,72 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
 <tr>
 <th width="100">标记</th><th width="450">描述</th><th>备注 </th></tr>
 <tr>
+<td>O_RDONLY</td><td>只读打开</td><td rowspan="3">三个常量中必须指定一个且只能指定一个 </td></tr>
+<tr>
+<td>O_WRONLY</td><td>只写打开 </td></tr>
+<tr>
+<td>O_RDWR</td><td>读、写打开 </td></tr>
+<tr>
+<td colspan="3">下面列出的常量则是可选择的 </td></tr>
+<tr>
+<td>O_APPEND</td><td>每次写文件都以追加的方式写到文件末尾</td><td></td></tr>
+<tr>
+<td>O_CREAT</td><td><ul>
+<li>
+打开的文件不存在，则创建它</li>
+<li>
+<b>打开的文件存在，会不会修改文件的权限?</b></li>
+</ul>
+</td><td>使用该选项是，需要指定第三个参数，用来指定新文件的访问权限位 </td></tr>
+<tr>
+<td>O_EXCL</td><td><ul>
+<li>
+可以测试一个文件是否存在</li>
+<li>
+若文件不存在，则创建此文件，这使测试和创建两者称为一个原子操作</li>
+</ul>
+</td><td>若同时指定了O_CREAT， 而文件已经存在， 则会出错。<br />
+<b>新创建的文件权限是怎样的？</b> </td></tr>
+<tr>
+<td>O_TRUNC</td><td>若文件存在，而且为只写或读写成功打开，则将其长度截短为0</td><td><b>打开后立马关闭会截短么？</b> </td></tr>
+<tr>
+<td>O_NOCTTY</td><td>若pathname指的是终端设备，则不将改设备分配作为此进程的控制终端</td><td><b>这个完全不明其意，懂了后再回来备注？</b> </td></tr>
+<tr>
+<td>O_NONBLOCK</td><td>若pathname指的是一个FIFO、块特殊文件或字符特殊文件，则此选项为文件的本次打开操作和后续的I/O操作设置非阻塞模式</td><td></td></tr>
+<tr>
+<td>O_DSYNC</td><td>使每次write等待物理I/O操作完成，但是，若写操作并不影响读取刚写入的数据，则不等待文件属性被更新</td><td></td></tr>
+<tr>
+<td>O_RSYNC</td><td>使每个以文件描述符作为参数的read操作等待，直至任何对文件同一部分进行的未决写操作完成</td><td></td></tr>
+<tr>
+<td>O_SYNC</td><td>使每次write都等到物理I/O操作完成，包括由write操作引起的文件属性更新所需的I/O</td><td></td></tr>
+</table>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pathname</td><td>文件路径 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>标记参照 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>文件创建模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><code> int open(const char *pathname, int flags);<br />
+ int open(const char *pathname, int flags, mode_t mode);</code></p>
+<p><code> 返回值：成功返回文件描述符，出错返回-1 </code></p>
+<dl class="section warning"><dt>警告</dt><dd>open, 仅当创建新文件时才使用第三个参数 </dd>
+<dd>
+open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>标记为意义</caption>
+<tr>
+<th width="100">标记</th><th width="450">描述</th><th>备注 </th></tr>
+<tr>
 <td>O_RDONLY</td><td>只读打开</td><td rowspan="3">三个常量中必须指定一个且只能指定一个<br />
  待操作的文件必须已经存在了否则会提示错误：No such file or directory<br />
 <br />
@@ -668,6 +719,33 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
 </div><div class="memdoc">
 
 <p>测试sync函数 </p>
+<p><code> int fsync(int filedes);<br />
+ int fdatasync(int filedes);<br />
+ <br />
+ 返回值：若成功则返回0， 若出错则返回-1<br />
+ <br />
+ void sync(void); </code></p>
+<ul>
+<li>
+sync函数只将所有修改过的块缓冲区排入写队列，即返回，并不等待实际写磁盘的结束 </li>
+<li>
+fsync函数只对指定的文件描述符filedes起作用，并且等待写磁盘操作结束后才返回 </li>
+<li>
+fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除数据外，fsync还会同步更新文件的属性 </li>
+</ul>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败</td></tr>
+  </table>
+  </dd>
+</dl>
 <p><code> int fsync(int filedes);</code></p>
 <p><code> int fdatasync(int filedes);</code></p>
 <p><code> 返回值：若成功则返回0， 若出错则返回-1</code></p>
