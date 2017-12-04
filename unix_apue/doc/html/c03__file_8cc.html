@@ -56,6 +56,7 @@ $(function() {
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="c03__file_8h_source.html">c03_file.h</a>&quot;</code><br />
 </div>
 <p><a href="c03__file_8cc_source.html">浏览源代码.</a></p>
@@ -86,9 +87,11 @@ $(function() {
 <tr class="memitem:a335164212185562d3f617ca5ec7226a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a335164212185562d3f617ca5ec7226a0">test_sync</a> (int filedes)</td></tr>
 <tr class="memdesc:a335164212185562d3f617ca5ec7226a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sync函数  <a href="#a335164212185562d3f617ca5ec7226a0">更多...</a><br /></td></tr>
 <tr class="separator:a335164212185562d3f617ca5ec7226a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a28f5bcc3fe48ffcef24fa3838d9745c7">test_fcntl</a> (int cmd)</td></tr>
-<tr class="memdesc:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试fcntl函数  <a href="#a28f5bcc3fe48ffcef24fa3838d9745c7">更多...</a><br /></td></tr>
-<tr class="separator:a28f5bcc3fe48ffcef24fa3838d9745c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafa6878247ceef0ad1e038f234b35aa9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#aafa6878247ceef0ad1e038f234b35aa9">test_fcntl</a> (int filedes)</td></tr>
+<tr class="memdesc:aafa6878247ceef0ad1e038f234b35aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试fcntl函数  <a href="#aafa6878247ceef0ad1e038f234b35aa9">更多...</a><br /></td></tr>
+<tr class="separator:aafa6878247ceef0ad1e038f234b35aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>练习文件相关操作 </p>
@@ -96,6 +99,36 @@ $(function() {
 
 <p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 中定义.</p>
 </div><h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00543">543</a> 行定义.</p>
+
+</div>
+</div>
 <a id="af6c1ae4d71166f9f1a8c1237de5c01ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6c1ae4d71166f9f1a8c1237de5c01ed">&#9670;&nbsp;</a></span>test_close()</h2>
 
@@ -134,7 +167,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00202">202</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00203">203</a> 行定义.</p>
 
 </div>
 </div>
@@ -190,7 +223,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00180">180</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00181">181</a> 行定义.</p>
 
 </div>
 </div>
@@ -293,12 +326,12 @@ dup和dup2返回的新文件描述符与参数filedes共享同一个文件表项
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00414">414</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00415">415</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a28f5bcc3fe48ffcef24fa3838d9745c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28f5bcc3fe48ffcef24fa3838d9745c7">&#9670;&nbsp;</a></span>test_fcntl()</h2>
+<a id="aafa6878247ceef0ad1e038f234b35aa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafa6878247ceef0ad1e038f234b35aa9">&#9670;&nbsp;</a></span>test_fcntl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +340,7 @@ dup和dup2返回的新文件描述符与参数filedes共享同一个文件表项
           <td class="memname">int test_fcntl </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td class="paramname"><em>filedes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -372,7 +405,7 @@ O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li>
 </table>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>操作命令 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>操作命令 </td></tr>
   </table>
   </dd>
 </dl>
@@ -384,7 +417,7 @@ O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00491">491</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00492">492</a> 行定义.</p>
 
 </div>
 </div>
@@ -467,7 +500,7 @@ lseek仅将当前的文件偏移量记录在内核中，它并不会引起任何
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00269">269</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00270">270</a> 行定义.</p>
 
 </div>
 </div>
@@ -580,7 +613,7 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00128">128</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00129">129</a> 行定义.</p>
 
 </div>
 </div>
@@ -647,7 +680,7 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00322">322</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00323">323</a> 行定义.</p>
 
 </div>
 </div>
@@ -694,7 +727,7 @@ fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除�
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00454">454</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00455">455</a> 行定义.</p>
 
 </div>
 </div>
@@ -751,7 +784,7 @@ fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除�
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00354">354</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00355">355</a> 行定义.</p>
 
 </div>
 </div>

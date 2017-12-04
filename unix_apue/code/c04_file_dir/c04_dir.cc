@@ -8,6 +8,67 @@
 #include <utime.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+
+
+static void show_stat_info(struct stat *pstat)
+{
+	assert(pstat != NULL);
+	
+	printf("mode_t -->>[%d]\n"
+		"ino_t -->>[%ld]\n"
+		"dev_t -->>[%ld]\n"
+		"dev_t -->>[%ld]\n"
+		"nlink_t -->>[%ld]\n"
+		"uid_t -->>[%d]\n"
+		"git_t -->>[%d]\n"
+		"st_size -->>[%ld]\n"
+		"st_atime -->>[%lu]\n"
+		"st_mtime -->>[%lu]\n"
+		"st_ctime -->>[%lu]\n"
+		"st_blksize -->>[%ld]\n"
+		"st_blocks -->>[%ld]\n\n", 
+		pstat->st_mode, 
+		pstat->st_ino,
+		pstat->st_dev,
+		pstat->st_rdev,
+		pstat->st_nlink,
+		pstat->st_uid,
+		pstat->st_gid,
+		pstat->st_size,
+		pstat->st_atime,
+		pstat->st_mtime,
+		pstat->st_ctime,
+		pstat->st_blksize,
+		pstat->st_blocks);
+		
+		if (S_ISREG(pstat->st_mode)){
+			
+			printf("regular\n");
+		}else if (S_ISDIR(pstat->st_mode)){
+			
+			printf("directory\n");
+		}else if (S_ISCHR(pstat->st_mode)){
+			
+			printf("charactor special\n");
+		}else if (S_ISBLK(pstat->st_mode)){
+			
+			printf("block special\n");
+		}else if (S_ISFIFO(pstat->st_mode)){
+			
+			printf("fifo\n");
+		}else if (S_ISLNK(pstat->st_mode)){
+			
+			printf("symbolic link\n");
+		}else if (S_ISSOCK(pstat->st_mode)){
+			
+			printf("socket\n");
+		}
+}
 
 /**
  *\brief 测试stat函数
@@ -35,7 +96,7 @@
  <li>目录文件，文件长度常是一个数（例如16或512）的倍数</li>
  <li>符号链接文件，文件长度是文件名中的实际字节数</li>
  </ul></td></tr>
- *<tr><td>9</td><td>类型：time_t --->> 名称：<b>st_actime</b></td><td>time of last access </td></tr>
+ *<tr><td>9</td><td>类型：time_t --->> 名称：<b>st_atime</b></td><td>time of last access<br/><br/>cat 会修改这个访问时间戳， 当然修改类的操作也会修改这个时间<br/> </td></tr>
  *<tr><td>10</td><td>类型：time_t --->> 名称：<b>st_mtime</b></td><td>time of modification </td></tr>
  *<tr><td>11</td><td>类型：time_t --->> 名称：<b>st_ctime</b></td><td>time of last file status change</td></tr>
  *<tr><td>12</td><td>类型：blksize_t --->> 名称：<b>st_blksize</b></td><td>best I/O block size </td></tr> 
@@ -81,11 +142,35 @@
  *<tr><td colspan="3"><b>补充说明</b></td></tr>
  *<tr><td colspan="3"><ul><li>一般地，有效用户ID等于实际用户ID，有效组ID等于实际组ID</li><li>当执行一个可执行文件时，进程的有效用户ID、有效组ID通常就是对应的实际用户ID和实际组ID。<br/>俗话说万事都有例外，在文件模式字（st_mode）有那么两位分别为设置用户ID（set-user-ID）位和设置组ID（set-groupID ）位。<br/>它们的作用是，当执行此程序文件时，将进程的有效用户ID或有效组ID 设置为文件所有者的用户ID（st_uid）或文件的组所有者ID（st_gid）</li><li>举个栗子，若文件所有者是超级用户，而且设置了该文件的设置用户ID位， 然后当该程序由一个进程执行时，则该进程具有超级用户权限。不管执行此文件的进程的进程的实际用户ID是什么，都进行这种处理。像passwd程序，允许任意用户改变其口令，它就是一个设置用户ID程序。</li><li>就像上面描述的一样，因为运行设置用户ID程序的进程通常得到额外的权限，所以编写这种程序时要特别谨慎。</li></ul></td></tr>
  *</table>
+ *\param[in] file_name 文件路径
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_stat()
+int test_stat(const char *file_name)
 {
+	struct stat st_stat;
+	int ret = -1;
+	//int fd = -1;
+	
+	ret = stat(file_name, &st_stat);
+	if (ret == -1){
+		
+		printf("%s:%d (%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	show_stat_info(&st_stat);
+	printf("\n");
+	
+	ret = lstat(file_name, &st_stat);
+	if (ret == -1){
+		
+		printf("%s:%d (%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	show_stat_info(&st_stat);
+	
 	return 0;
 }
 
@@ -452,5 +537,23 @@ int test_chdir()
  */
 int test_getcwd()
 {
+	return 0;
+}
+
+static void show_help()
+{
+	printf("stat file_name, 显示文件信息\n");
+}
+
+int main(int argc, char **argv)
+{
+	if (argc == 3 && strcmp(argv[1], "stat") == 0){
+		
+		test_stat(argv[2]);
+	}else{
+		
+		show_help();
+	}
+	
 	return 0;
 }

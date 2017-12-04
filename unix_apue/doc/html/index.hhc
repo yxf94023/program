@@ -14,10 +14,11 @@
         <UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="c03_file.cc"><param name="Local" value="c03__file_8cc.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_close"><param name="Local" value="c03__file_8cc.html#af6c1ae4d71166f9f1a8c1237de5c01ed"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_creat"><param name="Local" value="c03__file_8cc.html#a7f5e9bcc45130fef697ffe9fb571a059"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_dup"><param name="Local" value="c03__file_8cc.html#a18b6fabc944ca0c7cec322d947efa866"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_fcntl"><param name="Local" value="c03__file_8cc.html#a28f5bcc3fe48ffcef24fa3838d9745c7"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_fcntl"><param name="Local" value="c03__file_8cc.html#aafa6878247ceef0ad1e038f234b35aa9"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_lseek"><param name="Local" value="c03__file_8cc.html#a523c497d9d52c8de83b6f7b1089d67c0"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_open"><param name="Local" value="c03__file_8cc.html#a088f91c01272418a36f263999e61a7c1"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_read"><param name="Local" value="c03__file_8cc.html#a9c776a60c67353956a33f86ee246ae87"><param name="ImageNumber" value="11"></OBJECT>
@@ -41,6 +42,7 @@
         <UL>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="c04_dir.cc"><param name="Local" value="c04__dir_8cc.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="c04__dir_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_access"><param name="Local" value="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_chdir"><param name="Local" value="c04__dir_8cc.html#a131a9b4fbbef903c93b53fbdfe083201"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_chmod"><param name="Local" value="c04__dir_8cc.html#ae3ac743f5e3c72e57b46417d92edadf6"><param name="ImageNumber" value="11"></OBJECT>
@@ -50,7 +52,7 @@
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_mkdir"><param name="Local" value="c04__dir_8cc.html#a6d6ebf1f158819b223d40f9093f00806"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_readdir"><param name="Local" value="c04__dir_8cc.html#ae88375ceb255245679d4f78873093321"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_rename"><param name="Local" value="c04__dir_8cc.html#a813ec03c7343dae66cb82d3921ea2cba"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_stat"><param name="Local" value="c04__dir_8cc.html#ac2778a5b2b50ad02ab04294b4541dc54"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_stat"><param name="Local" value="c04__dir_8cc.html#ab6a219bbe902c8c9b0528e0dd45ee905"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_symlink"><param name="Local" value="c04__dir_8cc.html#adf1a6a81c5d588bd4192b27e8f6ab777"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_truncate"><param name="Local" value="c04__dir_8cc.html#aa6ba93946eb51c443bd8a21bcf6f7509"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_umask"><param name="Local" value="c04__dir_8cc.html#a373d397fb6ee5b23edd0354298848ba7"><param name="ImageNumber" value="11"></OBJECT>

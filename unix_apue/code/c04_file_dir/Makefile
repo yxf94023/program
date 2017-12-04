@@ -1,6 +1,6 @@
 sources = $(wildcard *.cc)
 objects := $(patsubst %.cc, %.o, $(sources))
-target = c03_file_exercise
+target = c04_dir_exercise
 
 CC = g++
 CFLAGS = -g -O2 -Wall -Werror -fno-strict-aliasing  -Wall -Werror -fPIC

@@ -120,7 +120,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00202">202</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00203">203</a> 行定义.</p>
 
 </div>
 </div>
@@ -176,7 +176,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00180">180</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00181">181</a> 行定义.</p>
 
 </div>
 </div>
@@ -278,7 +278,7 @@ dup和dup2返回的新文件描述符与参数filedes共享同一个文件表项
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00414">414</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00415">415</a> 行定义.</p>
 
 </div>
 </div>
@@ -292,7 +292,7 @@ dup和dup2返回的新文件描述符与参数filedes共享同一个文件表项
           <td class="memname">int test_fcntl </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td class="paramname"><em>filedes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -364,12 +364,81 @@ O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><code> int fcntl(int filedes, int cmd, ...);</code></p>
+<p><code> 返回值：若成功则依赖于cmd， 若出错则返回-1 </code> <br />
+ fcntl函数有5种功能： </p><ul>
+<li>
+复制一个现有的描述符（cmd=F_DUPFD） </li>
+<li>
+获得/设置文件描述符标记（cmd=F_GETFD或F_SETFD） </li>
+<li>
+获得/设置文件状态标记（cmd=F_GETFL或F_SETFL） </li>
+<li>
+获得/设置异步I/O所有权（cmd=F_GETOWN或F_SETOWN） </li>
+<li>
+获得/设置记录锁（cmd=F_GETLK、F_SETLK或F_SETLKW） </li>
+</ul>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>cmd介绍</caption>
+<tr>
+<th width="100">命令</th><th width="400">描述</th><th>备注 </th></tr>
+<tr>
+<td>F_DUPFD</td><td>复制文件描述符filedes，新的文件描述符作为返回值，它是尚未打开的个描述符中大于或等于第三个参数值中各值得最小值</td><td><ul>
+<li>
+新描述符与filedes共享同一个文件表项</li>
+<li>
+新描述符有自己的一套文件描述符标志，其FD_CLOEXEC文件描述符标志被清除</li>
+</ul>
+</td></tr>
+<tr>
+<td>F_GETFD</td><td>返回filedes的文件描述符标志</td><td>当前只定义了一个文件描述符标志FD_CLOEXEC </td></tr>
+<tr>
+<td>F_SETFD</td><td>对filedes设置文件描述符标志，新标志值按第三个参数设置</td><td></td></tr>
+<tr>
+<td>F_GETFL</td><td>返回filedes的文件状态标志</td><td>文件状态标志，参见open函数的介绍 </td></tr>
+<tr>
+<td>F_SETFL</td><td>将文件状态标志设置为第三个参数的值</td><td>支持设置的几个标志如下：<ol>
+<li>
+O_APPEND，每次写时追加</li>
+<li>
+O_NONBLOCK，非阻塞模式</li>
+<li>
+O_SYNC， 待写完成（数据和属性）</li>
+<li>
+O_DSYNC，待写完成（仅数据）</li>
+<li>
+O_RSYNC， 同步读写</li>
+<li>
+O_FSYNC，待写完成（仅FreeBSD 和 Mac OS X）</li>
+<li>
+O_ASYNC，异步I/O（仅FreeBSD 和 Mac OS X）</li>
+</ol>
+</td></tr>
+<tr>
+<td>F_GETOWN</td><td>取当前接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+<tr>
+<td>F_SETOWN</td><td>设置接收SIGIO和SIGURG信号的进程ID或进程组ID</td><td></td></tr>
+</table>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filedes</td><td>操作命令 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
     <tr><td class="paramname">!0</td><td>失败 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00491">491</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00492">492</a> 行定义.</p>
 
 </div>
 </div>
@@ -452,7 +521,7 @@ lseek仅将当前的文件偏移量记录在内核中，它并不会引起任何
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00269">269</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00270">270</a> 行定义.</p>
 
 </div>
 </div>
@@ -631,7 +700,7 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00128">128</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00129">129</a> 行定义.</p>
 
 </div>
 </div>
@@ -698,7 +767,7 @@ open, 返回的文件描述符一定是最小的未用描述符数值</dd></dl>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00322">322</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00323">323</a> 行定义.</p>
 
 </div>
 </div>
@@ -772,7 +841,7 @@ fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除�
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00454">454</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00455">455</a> 行定义.</p>
 
 </div>
 </div>
@@ -829,7 +898,7 @@ fdatasync函数类似于fsync，但它只影响文件的数据部分， 而除�
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00354">354</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c03__file_8cc_source.html">c03_file.cc</a> 第 <a class="el" href="c03__file_8cc_source.html#l00355">355</a> 行定义.</p>
 
 </div>
 </div>
