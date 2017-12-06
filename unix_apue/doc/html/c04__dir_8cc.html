@@ -69,9 +69,9 @@ $(function() {
 <tr class="memitem:ab6a219bbe902c8c9b0528e0dd45ee905"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c04__dir_8cc.html#ab6a219bbe902c8c9b0528e0dd45ee905">test_stat</a> (const char *file_name)</td></tr>
 <tr class="memdesc:ab6a219bbe902c8c9b0528e0dd45ee905"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试stat函数  <a href="#ab6a219bbe902c8c9b0528e0dd45ee905">更多...</a><br /></td></tr>
 <tr class="separator:ab6a219bbe902c8c9b0528e0dd45ee905"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa919d1c58eb40c2f9c84fb8ee097ceb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6">test_access</a> ()</td></tr>
-<tr class="memdesc:aa919d1c58eb40c2f9c84fb8ee097ceb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试access函数  <a href="#aa919d1c58eb40c2f9c84fb8ee097ceb6">更多...</a><br /></td></tr>
-<tr class="separator:aa919d1c58eb40c2f9c84fb8ee097ceb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ed8c2896baae8cadb1cad9ddd91957"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c04__dir_8cc.html#a90ed8c2896baae8cadb1cad9ddd91957">test_access</a> (const char *pathname, int mode)</td></tr>
+<tr class="memdesc:a90ed8c2896baae8cadb1cad9ddd91957"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试access函数  <a href="#a90ed8c2896baae8cadb1cad9ddd91957">更多...</a><br /></td></tr>
+<tr class="separator:a90ed8c2896baae8cadb1cad9ddd91957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a373d397fb6ee5b23edd0354298848ba7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c04__dir_8cc.html#a373d397fb6ee5b23edd0354298848ba7">test_umask</a> ()</td></tr>
 <tr class="memdesc:a373d397fb6ee5b23edd0354298848ba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试umask函数  <a href="#a373d397fb6ee5b23edd0354298848ba7">更多...</a><br /></td></tr>
 <tr class="separator:a373d397fb6ee5b23edd0354298848ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,12 +143,12 @@ $(function() {
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00514">514</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00611">611</a> 行定义.</p>
 
 </div>
 </div>
-<a id="aa919d1c58eb40c2f9c84fb8ee097ceb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa919d1c58eb40c2f9c84fb8ee097ceb6">&#9670;&nbsp;</a></span>test_access()</h2>
+<a id="a90ed8c2896baae8cadb1cad9ddd91957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ed8c2896baae8cadb1cad9ddd91957">&#9670;&nbsp;</a></span>test_access()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,15 +156,27 @@ $(function() {
         <tr>
           <td class="memname">int test_access </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pathname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>测试access函数 </p>
-<p><code> int access(const char *pathname, int mode);<br />
- 返回值：成功返回0， 失败返回-1 </code> </p><a class="anchor" id=""></a>
+<p><code> int access(const char *pathname, int mode);</code></p>
+<p><code>返回值：成功返回0， 失败返回-1</code></p>
+<p><code>除非测试的文件不存在， 一般错误返回的提示都是Permission denied </code> </p><a class="anchor" id=""></a>
 <table class="doxtable">
 <caption>access函数的mode常量</caption>
 <tr>
@@ -183,6 +195,13 @@ $(function() {
 有时，进程期望按实际用户ID和实际组ID来测试其访问能力 </dd>
 <dd>
 access函数就是按实际用户ID和实际组ID进行访问权限测试的 </dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file_path</td><td>文件路径 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modes</td><td>测试文件属性 </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -191,7 +210,7 @@ access函数就是按实际用户ID和实际组ID进行访问权限测试的 </d
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00164">164</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00231">231</a> 行定义.</p>
 
 </div>
 </div>
@@ -231,7 +250,7 @@ access函数就是按实际用户ID和实际组ID进行访问权限测试的 </d
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00486">486</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00581">581</a> 行定义.</p>
 
 </div>
 </div>
@@ -305,7 +324,7 @@ chmod在指定的文件上进行操作，fchmod函数则对已打开的文件进
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00238">238</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00333">333</a> 行定义.</p>
 
 </div>
 </div>
@@ -361,7 +380,7 @@ chmod在指定的文件上进行操作，fchmod函数则对已打开的文件进
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00272">272</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00367">367</a> 行定义.</p>
 
 </div>
 </div>
@@ -392,7 +411,7 @@ chmod在指定的文件上进行操作，fchmod函数则对已打开的文件进
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00504">504</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00599">599</a> 行定义.</p>
 
 </div>
 </div>
@@ -438,7 +457,7 @@ unlink，如果pathname是符号链接，那么unlink删除该符号链接，而
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00317">317</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00412">412</a> 行定义.</p>
 
 </div>
 </div>
@@ -478,7 +497,7 @@ rmdir, 如果调用此函数使目录的链接计数成为0，并且也没有其
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00441">441</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00536">536</a> 行定义.</p>
 
 </div>
 </div>
@@ -515,7 +534,7 @@ rmdir, 如果调用此函数使目录的链接计数成为0，并且也没有其
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00464">464</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00559">559</a> 行定义.</p>
 
 </div>
 </div>
@@ -554,7 +573,7 @@ rmdir, 如果调用此函数使目录的链接计数成为0，并且也没有其
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00339">339</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00434">434</a> 行定义.</p>
 
 </div>
 </div>
@@ -813,7 +832,8 @@ cat 会修改这个访问时间戳， 当然修改类的操作也会修改这个
 俗话说万事都有例外，在文件模式字（st_mode）有那么两位分别为设置用户ID（set-user-ID）位和设置组ID（set-groupID ）位。<br />
 它们的作用是，当执行此程序文件时，将进程的有效用户ID或有效组ID 设置为文件所有者的用户ID（st_uid）或文件的组所有者ID（st_gid）</li>
 <li>
-举个栗子，若文件所有者是超级用户，而且设置了该文件的设置用户ID位， 然后当该程序由一个进程执行时，则该进程具有超级用户权限。不管执行此文件的进程的进程的实际用户ID是什么，都进行这种处理。像passwd程序，允许任意用户改变其口令，它就是一个设置用户ID程序。</li>
+举个栗子，若文件所有者是超级用户，而且设置了该文件的设置用户ID位， 然后当该程序由一个进程执行时，则该进程具有超级用户权限。不管执行此文件的进程的进程的实际用户ID是什么，都进行这种处理。像passwd程序，允许任意用户改变其口令，它就是一个设置用户ID程序。<br />
+-rwsr-xr-x. 1 root root 27832 Jun 10 2014 /usr/bin/passwd </li>
 <li>
 就像上面描述的一样，因为运行设置用户ID程序的进程通常得到额外的权限，所以编写这种程序时要特别谨慎。</li>
 </ul>
@@ -833,7 +853,7 @@ cat 会修改这个访问时间戳， 当然修改类的操作也会修改这个
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00126">126</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00150">150</a> 行定义.</p>
 
 </div>
 </div>
@@ -920,7 +940,7 @@ readlink函数提供一种方法打开该链接本身，并读该链接中的名
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00390">390</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00485">485</a> 行定义.</p>
 
 </div>
 </div>
@@ -956,7 +976,7 @@ readlink函数提供一种方法打开该链接本身，并读该链接中的名
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00292">292</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00387">387</a> 行定义.</p>
 
 </div>
 </div>
@@ -1016,7 +1036,7 @@ readlink函数提供一种方法打开该链接本身，并读该链接中的名
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00197">197</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00292">292</a> 行定义.</p>
 
 </div>
 </div>
@@ -1065,7 +1085,7 @@ readlink函数提供一种方法打开该链接本身，并读该链接中的名
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00419">419</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c04__dir_8cc_source.html">c04_dir.cc</a> 第 <a class="el" href="c04__dir_8cc_source.html#l00514">514</a> 行定义.</p>
 
 </div>
 </div>

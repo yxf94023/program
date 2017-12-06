@@ -32,7 +32,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html"><param name="Name" value="c04_dir.cc"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="main"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6"><param name="Name" value="test_access"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a90ed8c2896baae8cadb1cad9ddd91957"><param name="Name" value="test_access"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a131a9b4fbbef903c93b53fbdfe083201"><param name="Name" value="test_chdir"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#ae3ac743f5e3c72e57b46417d92edadf6"><param name="Name" value="test_chmod"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a6551271402aeb404721939ac77b6e181"><param name="Name" value="test_chown"></OBJECT>
@@ -99,7 +99,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="c03_file.cc"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="c04_dir.cc"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#aa919d1c58eb40c2f9c84fb8ee097ceb6"><param name="Name" value="test_access"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a90ed8c2896baae8cadb1cad9ddd91957"><param name="Name" value="test_access"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a51053f0d403c9e6c95cbcb5926a749bb"><param name="Name" value="test_alarm"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c07__process__env_8cc.html#a78fe18cd6e9316cf78b2362518c6c43d"><param name="Name" value="test_atexit"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a131a9b4fbbef903c93b53fbdfe083201"><param name="Name" value="test_chdir"></OBJECT>

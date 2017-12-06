@@ -46,28 +46,28 @@ static void show_stat_info(struct stat *pstat)
 		pstat->st_blksize,
 		pstat->st_blocks);
 		
-		if (S_ISREG(pstat->st_mode)){
-			
-			printf("regular\n");
-		}else if (S_ISDIR(pstat->st_mode)){
-			
-			printf("directory\n");
-		}else if (S_ISCHR(pstat->st_mode)){
-			
-			printf("charactor special\n");
-		}else if (S_ISBLK(pstat->st_mode)){
-			
-			printf("block special\n");
-		}else if (S_ISFIFO(pstat->st_mode)){
-			
-			printf("fifo\n");
-		}else if (S_ISLNK(pstat->st_mode)){
-			
-			printf("symbolic link\n");
-		}else if (S_ISSOCK(pstat->st_mode)){
-			
-			printf("socket\n");
-		}
+	if (S_ISREG(pstat->st_mode)){
+		
+		printf("regular\n");
+	}else if (S_ISDIR(pstat->st_mode)){
+		
+		printf("directory\n");
+	}else if (S_ISCHR(pstat->st_mode)){
+		
+		printf("charactor special\n");
+	}else if (S_ISBLK(pstat->st_mode)){
+		
+		printf("block special\n");
+	}else if (S_ISFIFO(pstat->st_mode)){
+		
+		printf("fifo\n");
+	}else if (S_ISLNK(pstat->st_mode)){
+		
+		printf("symbolic link\n");
+	}else if (S_ISSOCK(pstat->st_mode)){
+		
+		printf("socket\n");
+	}
 }
 
 /**
@@ -140,7 +140,8 @@ static void show_stat_info(struct stat *pstat)
  *<tr><td>6</td><td>保存的设置用户ID</td><td rowspan="2">由exec函数保存</td></tr>
  *<tr><td>7</td><td>保存的设置组ID</td></tr>
  *<tr><td colspan="3"><b>补充说明</b></td></tr>
- *<tr><td colspan="3"><ul><li>一般地，有效用户ID等于实际用户ID，有效组ID等于实际组ID</li><li>当执行一个可执行文件时，进程的有效用户ID、有效组ID通常就是对应的实际用户ID和实际组ID。<br/>俗话说万事都有例外，在文件模式字（st_mode）有那么两位分别为设置用户ID（set-user-ID）位和设置组ID（set-groupID ）位。<br/>它们的作用是，当执行此程序文件时，将进程的有效用户ID或有效组ID 设置为文件所有者的用户ID（st_uid）或文件的组所有者ID（st_gid）</li><li>举个栗子，若文件所有者是超级用户，而且设置了该文件的设置用户ID位， 然后当该程序由一个进程执行时，则该进程具有超级用户权限。不管执行此文件的进程的进程的实际用户ID是什么，都进行这种处理。像passwd程序，允许任意用户改变其口令，它就是一个设置用户ID程序。</li><li>就像上面描述的一样，因为运行设置用户ID程序的进程通常得到额外的权限，所以编写这种程序时要特别谨慎。</li></ul></td></tr>
+ *<tr><td colspan="3"><ul><li>一般地，有效用户ID等于实际用户ID，有效组ID等于实际组ID</li><li>当执行一个可执行文件时，进程的有效用户ID、有效组ID通常就是对应的实际用户ID和实际组ID。<br/>俗话说万事都有例外，在文件模式字（st_mode）有那么两位分别为设置用户ID（set-user-ID）位和设置组ID（set-groupID ）位。<br/>它们的作用是，当执行此程序文件时，将进程的有效用户ID或有效组ID 设置为文件所有者的用户ID（st_uid）或文件的组所有者ID（st_gid）</li><li>举个栗子，若文件所有者是超级用户，而且设置了该文件的设置用户ID位， 然后当该程序由一个进程执行时，则该进程具有超级用户权限。不管执行此文件的进程的进程的实际用户ID是什么，都进行这种处理。像passwd程序，允许任意用户改变其口令，它就是一个设置用户ID程序。<br/>-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd
+</li><li>就像上面描述的一样，因为运行设置用户ID程序的进程通常得到额外的权限，所以编写这种程序时要特别谨慎。</li></ul></td></tr>
  *</table>
  *\param[in] file_name 文件路径
  *\retval 0 成功
@@ -174,12 +175,42 @@ int test_stat(const char *file_name)
 	return 0;
 }
 
+static int convert_modes(const char *str_modes)
+{
+	int mode = 0;
+	int size = 0, idx = 0;
+	
+	struct st_mode_pair{
+		
+		const char *str_mode;
+		int int_mode;
+	}mode_pairs[] = {
+		{"R_OK", R_OK},{"W_OK", W_OK},{"X_OK", X_OK},{"F_OK", F_OK}
+	};
+	
+	size = sizeof(mode_pairs)/sizeof(mode_pairs[0]);
+	printf("%s:%d size[%d]\n", __FILE__, __LINE__, size);
+	for (idx = 0; idx < size; ++idx){
+		
+		if (strstr(str_modes, mode_pairs[idx].str_mode)){
+			
+			mode |= mode_pairs[idx].int_mode;
+		}
+	}
+	printf("%s:%d mode[%d]\n", __FILE__, __LINE__, mode);
+	
+	return mode;
+}
+
 /**
  *\brief 测试access函数
  *
  *<code>
- *int access(const char *pathname, int mode);<br/>
+ *int access(const char *pathname, int mode);
+ *
  *返回值：成功返回0， 失败返回-1
+ *
+ *除非测试的文件不存在， 一般错误返回的提示都是Permission denied
  *</code>
  *<table>
  *<caption>access函数的mode常量</caption>
@@ -192,11 +223,41 @@ int test_stat(const char *file_name)
  *\warning 当用open函数打开一个文件时，内核以进程的有效用户ID和有效组ID为基础执行访问权限测试
  *\warning 有时，进程期望按实际用户ID和实际组ID来测试其访问能力
  *\warning access函数就是按实际用户ID和实际组ID进行访问权限测试的
+ *\param[in] file_path 文件路径
+ *\param[in] modes 测试文件属性
  *\retval 0 成功
  *\retval !0 失败 
  */
-int test_access()
+int test_access(const char *pathname, int mode)
 {
+	int ret = -1;
+	
+	ret = access(pathname, mode);
+	if (ret == -1){
+		
+		printf("%s:%d errno(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	if ((mode & F_OK) == F_OK){
+		
+		printf("文件存在\n");
+	}
+	
+	if ((mode & R_OK) == R_OK){
+		
+		printf("文件有读权限\n");
+	}
+	
+	if ((mode & W_OK) == W_OK){
+		
+		printf("文件有写权限\n");
+	}
+	
+	if ((mode & X_OK) == X_OK){
+		
+		printf("文件有执行权限\n");
+	}
+	
 	return 0;
 }
 
@@ -542,7 +603,9 @@ int test_getcwd()
 
 static void show_help()
 {
-	printf("stat file_name, 显示文件信息\n");
+	printf("stat file_name, 显示文件信息\n\n"
+		"access file_name modes, 测试文件的权限\n"
+		"\tmodes   R_OK|W_OK|X_OK|F_OK\n\n");
 }
 
 int main(int argc, char **argv)
@@ -550,6 +613,9 @@ int main(int argc, char **argv)
 	if (argc == 3 && strcmp(argv[1], "stat") == 0){
 		
 		test_stat(argv[2]);
+	}else if (argc == 4 && strcmp(argv[1], "access") == 0){
+		
+		test_access(argv[2], convert_modes(argv[3]));
 	}else{
 		
 		show_help();
