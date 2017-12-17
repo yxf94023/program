@@ -274,6 +274,8 @@ static mode_t convert_umask_mode(const char *str_modes)
 		{"S_IRUSR", S_IRUSR}, {"S_IWUSR", S_IWUSR}, {"S_IXUSR", S_IXUSR},
 		{"S_IRGRP", S_IRGRP}, {"S_IWGRP", S_IWGRP}, {"S_IXGRP", S_IXGRP},
 		{"S_IROTH", S_IROTH}, {"S_IWOTH", S_IWOTH}, {"S_IXOTH", S_IXOTH},
+		{"S_ISUID", S_ISUID}, {"S_ISGID", S_ISGID}, {"S_ISVTX", S_ISVTX},
+		{"S_IRWXU", S_IRWXU}, {"S_IRWXG", S_IRWXG}, {"S_IRWXO", S_IRWXO},
 	};
 	
 	size = sizeof(mask_pairs)/sizeof(mask_pairs[0]);
@@ -382,11 +384,63 @@ int test_umask(mode_t cmask)
  *</table>
  </li>
  *</ul>
+ *\param[in] file_path 文件名
+ *\param[in] cmask 文件访问权限位 
  *\retval 0 成功
  *\retval !0 失败   
  */
-int test_chmod()
+int test_chmod(const char *file_path, mode_t cmask)
 {
+	int fd = -1;
+	int ret = 0;
+	struct stat obj_stat;
+	
+	//1. 通过文件直接修改权限
+	ret = stat(file_path, &obj_stat);
+	if (ret){
+		
+		printf("%s:%d stat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	// 打印权限
+	printf("%s:%d st_mode[%u]\n", __FILE__, __LINE__, obj_stat.st_mode);
+	// 修改权限
+	ret = chmod(file_path, obj_stat.st_mode | cmask);
+	if (ret){
+		
+		printf("%s:%d chmod failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	//2. 打开文件修改权限
+	fd = open(file_path, O_RDONLY);
+	if (fd == -1){
+		
+		printf("%s:%d open failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	ret = fstat(fd, &obj_stat);
+	if (ret){
+		
+		printf("%s:%d stat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		close(fd);
+		return -1;
+	}
+	printf("%s:%d fd[%d] st_mode[%u]\n", __FILE__, __LINE__, fd, obj_stat.st_mode);	
+	ret = fchmod(fd, obj_stat.st_mode | cmask);
+	if (ret){
+		
+		printf("%s:%d chmod failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		close(fd);
+		return -1;
+	}
+	
+	// 打印权限
+	printf("%s:%d st_mode[%u]\n", __FILE__, __LINE__,  obj_stat.st_mode);
+
+	close(fd);
+	
 	return 0;
 }
 
@@ -394,9 +448,12 @@ int test_chmod()
  *\brief 测试chown函数
  *
  *<code>
- *int chown(const char *pathname, uid_t owner, gid_t group);<br/>
- *int fchown(int filedes, uid_t owner, gid_t group);<br/>
- *int lchown(const char *pathname, uid_t owner, gid_t group);<br/>
+ *int chown(const char *pathname, uid_t owner, gid_t group);
+ *
+ *int fchown(int filedes, uid_t owner, gid_t group);
+ *
+ *int lchown(const char *pathname, uid_t owner, gid_t group);
+ *
  *返回值：成功返回0， 失败返回-1
  *</code>
  *<ul>
@@ -416,11 +473,33 @@ int test_chmod()
  *你可以更改你所拥有的文件组ID，但只能改到你所属的组</li>
  *<li>若这些函数由非超级用户进程调用，则在成功返回时，该文件的设置用户ID为和设置组ID位都会被清除</li>
  *</ul>
+ *\param[in] file_name 文件名
+ *\param[in] uid 用户id
+ *\param[in] gid 组id
  *\retval 0 成功
  *\retval !0 失败   
  */
-int test_chown()
+int test_chown(const char *file_name, uid_t uid, gid_t gid)
 {
+	int ret = -1;
+	struct stat obj_stat;
+	
+	ret = stat(file_name, &obj_stat);
+	if (ret){
+		
+		printf("%s:%d stat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	printf("%s:%d uid[%d] gid[%d]\n", __FILE__, __LINE__, obj_stat.st_uid, obj_stat.st_gid);
+	
+	ret = chown(file_name, uid, gid);
+	if (ret){
+		
+		printf("%s:%d chown failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	printf("success.\n");
+	
 	return 0;
 }
 
@@ -662,7 +741,10 @@ static void show_help()
 		"access file_name modes, 测试文件的权限\n"
 		"\tmodes   R_OK|W_OK|X_OK|F_OK\n\n"
 		"umask modes, 设置umask权限\n"
-		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH\n\n");
+		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH\n\n"
+		"chmod file_name modes, 修改文件权限\n"
+		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH|S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO\n\n"
+		"chown file_name uid gid, 修改文件所有者\n\n");
 }
 
 int main(int argc, char **argv)
@@ -676,6 +758,12 @@ int main(int argc, char **argv)
 	}else if (argc == 3 && strcmp(argv[1], "umask") == 0){
 		
 		test_umask(convert_umask_mode(argv[2]));
+	}else if (argc == 4 && strcmp(argv[1], "chmod") == 0){
+		
+		test_chmod(argv[2], convert_umask_mode(argv[3]));
+	}else if (argc == 5 && strcmp(argv[1], "chown") == 0){
+		
+		test_chown(argv[2], atoi(argv[3]), atoi(argv[4]));
 	}else{
 		
 		show_help();
