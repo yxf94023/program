@@ -507,19 +507,43 @@ int test_chown(const char *file_name, uid_t uid, gid_t gid)
  *\brief 测试truncate函数
  *
  *<code>
- *int truncate(const char *pathname, off_t length);<br/>
- *int ftruncate(int filedes, off_t length);<br/>
+ *int truncate(const char *pathname, off_t length);
+ *
+ *int ftruncate(int filedes, off_t length);
+ *
  *返回值：若成功则返回0， 若出错则返回-1
  *</code>
  *<ul>
  *<li>若该文件以前的长度大于length，则超过length以外的数据就不能访问</li>
  *<li>若该文件以前的长度短语length，则效果与系统有关</li>
  *</ul>
+ *\param[in] file_name 文件名
+ *\param[in] length 截取的长度
  *\retval 0 成功
  *\retval !0 失败   
  */
-int test_truncate()
+int test_truncate(const char *file_name, off_t length)
 {
+	int ret = 0;
+	struct stat obj_stat;
+	
+	ret = stat(file_name, &obj_stat);
+	if (ret){
+		
+		printf("%s:%d stat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+
+	printf("%s:%d file_length[%ld]\n", __FILE__, __LINE__, obj_stat.st_size);
+	
+	ret = truncate(file_name, length);
+	if (ret){
+		
+		printf("%s:%d truncate failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	printf("success.\n");
+	
 	return 0;
 }
 
@@ -527,12 +551,14 @@ int test_truncate()
  *\brief 测试link函数
  *
  *<code>
- *int link(const char *existingpath, const char *newpath);<br/>
- *int ulink(const char *pathname);<br/>
+ *int link(const char *existingpath, const char *newpath);
+ *
+ *int ulink(const char *pathname);
+ *
  *返回值：若成功则返回0， 若出错则返回-1
  *</code>
  *<ul>
- *<li>link，函数创建一个新目录项newpath，所以任何一个文件可以有多个目录项指向i节点</li>
+ *<li>link，函数创建一个新目录项newpath(硬链接)，所以任何一个文件可以有多个目录项指向i节点</li>
  *<li>link，若newpath已经存在，则返回出错</li>
  *<li>link，只创建newpath中的最后一个分量，路径中的其他部分应当已经存在</li>
  *<li>unlink，删除一个现有的目录项，并将由pathname所引用文件的链接计数减1</li>
@@ -543,8 +569,19 @@ int test_truncate()
  *\retval 0 成功
  *\retval !0 失败  
  */
-int test_link()
+int test_link(const char *efile, const char *nfile)
 {
+	int ret = 0;
+	
+	ret = link(efile, nfile);
+	if (ret){
+		
+		printf("%s:%d link filed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	printf("success.\n");
+	
 	return 0;
 }
 
@@ -552,8 +589,10 @@ int test_link()
  *\brief 测试rename函数
  *
  *<code>
- *int rename(const char *oldname, const char *newname);<br/>
+ *int rename(const char *oldname, const char *newname);
+ *
  *返回值：若成功则返回0， 若出错则返回-1
+ *
  *</code>
  *rename可以对文件或目录进行更名操作，根据oldname是指文件还是目录， 有几种情况需要说明
  *<ol>
@@ -562,11 +601,24 @@ int test_link()
  *<li>若oldname或newname引用符号链接，则处理的石符号链接本身，而不是它所引用的文件</li>
  *<li>若oldname和newname引用同一个文件，则函数不做任何更改而成功返回。</li>
  *</ol>
+ *
+ *\param[in] oldname 旧的名称
+ *\param[in] newname 新的名称
+ *
  *\retval 0 成功
- *\retval !0 失败   
+ *\retval !0 失败
  */
-int test_rename()
+int test_rename(const char *oldname, const char *newname)
 {
+	int ret = 0;
+	
+	ret = rename(oldname, newname);
+	if (ret){
+			
+		printf("%s:%d rename failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	printf("success.\n");
 	return 0;
 }
 
@@ -580,7 +632,7 @@ int test_rename()
  *</ol>
  *对于符号链接以及它指向何种对象并无任何文件系统限制，任何用户都可创建指向目录的符号链接。符号链接一般用于将一个文件或整个目录结构移到系统中的另一个位置。<br/>
  *<br/>
- *当使以名字应用文件的函数时，需要了解函数是否处理符号链接，也就是函数是否跟谁符号链接到达它所链接的文件。如果函数具有处理符号链接的功能，则其路径名参数引用由符号链接指向的文件。否则，路径名参数将引用链接本身，而不是链接指向的文件。
+ *当使用以名字应用文件的函数时，需要了解函数是否处理符号链接，也就是函数是否跟谁符号链接到达它所链接的文件。如果函数具有处理符号链接的功能，则其路径名参数引用由符号链接指向的文件。否则，路径名参数将引用链接本身，而不是链接指向的文件。
  *<table>
  *<caption></caption>
  *<tr><th width="40">序号</th><th width="50">函数</th><th width="120">跟随符号链接</th><th>说明</th></tr>
@@ -606,10 +658,13 @@ int test_rename()
  *<br/>
  *
  *<code>
- *int symlink(const char *actualpath, const char *sympath);<br/>
- *返回值：成功则返回0， 出错则返回-1<br/>
- *ssize_t readlink(const char *restrict pathname, char *restrict buf, size_t bufsize);<br/>
- *返回值：成功则返回读到的字节数， 出错则返回-1<br/>
+ *int symlink(const char *actualpath, const char *sympath);
+ *
+ *返回值：成功则返回0， 出错则返回-1
+ *
+ *ssize_t readlink(const char *restrict pathname, char *restrict buf, size_t bufsize);
+ *
+ *返回值：成功则返回读到的字节数， 出错则返回-1
  *</code>
  *\warning symlink函数创建一个指向actualpath的新目录项sympath，在创建此符号链接时，并不要求actualpath已经存在，并且，actualpath和sympath并不需要位于同一文件系统中。<br/>
  *\warning readlink函数提供一种方法打开该链接本身，并读该链接中的名字。该函数组合了open、read和close的所有操作，如果函数成功执行，则它返回读入buf的字节数，在buf中返回的符号链接的内容不以null字符终止。<br/>
@@ -744,7 +799,10 @@ static void show_help()
 		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH\n\n"
 		"chmod file_name modes, 修改文件权限\n"
 		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH|S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO\n\n"
-		"chown file_name uid gid, 修改文件所有者\n\n");
+		"chown file_name uid gid, 修改文件所有者\n\n"
+		"truncate file_name length, 截短文件\n\n"
+		"link efile nfile, 创建连接（硬链接）\n\n"
+		"rename oldname newnae, 重命名\n\n");
 }
 
 int main(int argc, char **argv)
@@ -764,6 +822,15 @@ int main(int argc, char **argv)
 	}else if (argc == 5 && strcmp(argv[1], "chown") == 0){
 		
 		test_chown(argv[2], atoi(argv[3]), atoi(argv[4]));
+	}else if (argc == 4 && strcmp(argv[1], "truncate") == 0){
+		
+		test_truncate(argv[2], atoi(argv[3]));
+	}else if (argc == 4 && strcmp(argv[1], "link") == 0){
+		
+		test_link(argv[2], argv[3]);
+	}else if (argc == 4 && strcmp(argv[1], "rename") == 0){
+		
+		test_rename(argv[2], argv[3]);
 	}else{
 		
 		show_help();
