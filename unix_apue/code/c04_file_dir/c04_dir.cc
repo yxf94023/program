@@ -175,7 +175,7 @@ int test_stat(const char *file_name)
 	return 0;
 }
 
-static int convert_modes(const char *str_modes)
+static int convert_access_modes(const char *str_modes)
 {
 	int mode = 0;
 	int size = 0, idx = 0;
@@ -223,8 +223,8 @@ static int convert_modes(const char *str_modes)
  *\warning 当用open函数打开一个文件时，内核以进程的有效用户ID和有效组ID为基础执行访问权限测试
  *\warning 有时，进程期望按实际用户ID和实际组ID来测试其访问能力
  *\warning access函数就是按实际用户ID和实际组ID进行访问权限测试的
- *\param[in] file_path 文件路径
- *\param[in] modes 测试文件属性
+ *\param[in] pathname 文件路径
+ *\param[in] mode 测试文件属性
  *\retval 0 成功
  *\retval !0 失败 
  */
@@ -261,11 +261,40 @@ int test_access(const char *pathname, int mode)
 	return 0;
 }
 
+static mode_t convert_umask_mode(const char *str_modes)
+{
+	mode_t mask = 0;
+	int size = 0, i = 0;
+	
+	struct mask_pair_st{
+		
+		const char *str_name;
+		mode_t mask;
+	}mask_pairs[] = {
+		{"S_IRUSR", S_IRUSR}, {"S_IWUSR", S_IWUSR}, {"S_IXUSR", S_IXUSR},
+		{"S_IRGRP", S_IRGRP}, {"S_IWGRP", S_IWGRP}, {"S_IXGRP", S_IXGRP},
+		{"S_IROTH", S_IROTH}, {"S_IWOTH", S_IWOTH}, {"S_IXOTH", S_IXOTH},
+	};
+	
+	size = sizeof(mask_pairs)/sizeof(mask_pairs[0]);
+	for (i = 0; i < size; ++i){
+		
+		if (strstr(str_modes, mask_pairs[i].str_name)){
+			
+			mask |= mask_pairs[i].mask;
+		}
+	}
+	
+	printf("%s:%d size[%d] mask[%u]\n", __FILE__, __LINE__, size, mask);
+	return mask;
+}
+
 /**
  *\brief 测试umask函数
  *
  *<code>
- *mode_t umask(mode_t cmask);<br/>
+ *mode_t umask(mode_t cmask);
+ *
  *返回值：以前的文件模式创建屏蔽字，函数没有出错返回
  *</code>
  *<ul>
@@ -286,11 +315,35 @@ int test_access(const char *pathname, int mode)
  *<tr><td>8</td><td>0002</td><td>其他-写</td></tr>
  *<tr><td>9</td><td>0001</td><td>其他-执行</td></tr>
  *</table> 
+ *\param[in] cmask 文件访问权限位
  *\retval 0 成功
  *\retval !0 失败  
  */
-int test_umask()
+int test_umask(mode_t cmask)
 {
+	mode_t old_mask = 0;
+	mode_t new_mask = 0;
+	
+	old_mask = umask(0);
+	printf("%s:%d  mask[%u]\n", __FILE__, __LINE__, old_mask);
+	
+	if (creat("hello", S_IRUSR|S_IWUSR|S_IXUSR) < 0){
+		
+		printf("%s:%d creat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+	}
+	
+	old_mask = umask(cmask);
+	printf("%s:%d  mask[%u]\n", __FILE__, __LINE__, old_mask);
+	if (creat("world", S_IRUSR|S_IWUSR|S_IXUSR) < 0){
+		
+		printf("%s:%d creat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+	}	
+	new_mask = umask(0);
+	printf("%s:%d  mask[%u]\n", __FILE__, __LINE__, new_mask);
+	new_mask = umask(0);
+	printf("%s:%d  mask[%u]\n", __FILE__, __LINE__, new_mask);
+	
+	
 	return 0;
 }
 
@@ -298,8 +351,10 @@ int test_umask()
  *\brief 测试chmod函数
  *
  *<code>
- *int chmod(const char *pathname, mode_t mode);<br/>
- *int fchmod(int filedes, mode_t mode);<br/>
+ *int chmod(const char *pathname, mode_t mode);
+ *
+ *int fchmod(int filedes, mode_t mode);
+ *
  *返回值：成功返回0， 失败返回-1
  *</code>
  *<ul>
@@ -605,7 +660,9 @@ static void show_help()
 {
 	printf("stat file_name, 显示文件信息\n\n"
 		"access file_name modes, 测试文件的权限\n"
-		"\tmodes   R_OK|W_OK|X_OK|F_OK\n\n");
+		"\tmodes   R_OK|W_OK|X_OK|F_OK\n\n"
+		"umask modes, 设置umask权限\n"
+		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH\n\n");
 }
 
 int main(int argc, char **argv)
@@ -615,7 +672,10 @@ int main(int argc, char **argv)
 		test_stat(argv[2]);
 	}else if (argc == 4 && strcmp(argv[1], "access") == 0){
 		
-		test_access(argv[2], convert_modes(argv[3]));
+		test_access(argv[2], convert_access_modes(argv[3]));
+	}else if (argc == 3 && strcmp(argv[1], "umask") == 0){
+		
+		test_umask(convert_umask_mode(argv[2]));
 	}else{
 		
 		show_help();
