@@ -635,7 +635,7 @@ int test_rename(const char *oldname, const char *newname)
  *当使用以名字应用文件的函数时，需要了解函数是否处理符号链接，也就是函数是否跟谁符号链接到达它所链接的文件。如果函数具有处理符号链接的功能，则其路径名参数引用由符号链接指向的文件。否则，路径名参数将引用链接本身，而不是链接指向的文件。
  *<table>
  *<caption></caption>
- *<tr><th width="40">序号</th><th width="50">函数</th><th width="120">跟随符号链接</th><th>说明</th></tr>
+ *<tr><th width="40">序号</th><th width="50">函数</th><th width="120">跟随符号链接</th><th width="400">说明</th></tr>
  *<tr><td>1</td><td>access</td><td>是</td><td></td></tr>
  *<tr><td>2</td><td>chdir</td><td>是</td><td></td></tr>
  *<tr><td>3</td><td>chmod</td><td>是</td><td></td></tr>
@@ -645,10 +645,10 @@ int test_rename(const char *oldname, const char *newname)
  *<tr><td>7</td><td>lchown</td><td><b>/否</b></td><td></td></tr>
  *<tr><td>8</td><td>link</td><td>是</td><td></td></tr>
  *<tr><td>9</td><td>lstat</td><td><b>/否</b></td><td></td></tr>
- *<tr><td>10</td><td>open</td><td>是</td><td></td></tr>
+ *<tr><td>10</td><td>open</td><td>是</td><td>用open打开文件时，如果传递给open函数的路径名指定了一个符号链接，那么open跟随此链接到达你所指定的文件。若此符号链接所指定的文件并不存在，则open返回出错，表示它不能打开该文件。</td></tr>
  *<tr><td>11</td><td>opendir</td><td>是</td><td></td></tr>
  *<tr><td>12</td><td>pathconf</td><td>是</td><td></td></tr>
- *<tr><td>13</td><td>readlink</td><td><b>/否</b></td><td></td></tr>
+ *<tr><td>13</td><td>readlink</td><td><b>/否</b></td><td>如果传递给readlink函数的文件不是符号链接文件，则函数会返回出错readlink failed(Invalid argument)</td></tr>
  *<tr><td>14</td><td>remove</td><td><b>/否</b></td><td></td></tr>
  *<tr><td>15</td><td>stat</td><td>是</td><td></td></tr>
  *<tr><td>16</td><td>truncate</td><td>是</td><td></td></tr> 
@@ -668,11 +668,44 @@ int test_rename(const char *oldname, const char *newname)
  *</code>
  *\warning symlink函数创建一个指向actualpath的新目录项sympath，在创建此符号链接时，并不要求actualpath已经存在，并且，actualpath和sympath并不需要位于同一文件系统中。<br/>
  *\warning readlink函数提供一种方法打开该链接本身，并读该链接中的名字。该函数组合了open、read和close的所有操作，如果函数成功执行，则它返回读入buf的字节数，在buf中返回的符号链接的内容不以null字符终止。<br/>
+ *\param[in] actualpath  待创建符号链接的文件
+ *\param[in] sympath 创建的符号链接文件
  *\retval 0 成功
  *\retval !0 失败    
  */
-int test_symlink()
+int test_symlink(const char *actualpath, const char *sympath)
 {
+	int ret = 0;
+	const int BUF_SIZE = 80;
+	char buf[BUF_SIZE] = {0};
+	ssize_t read_size = 0;
+	
+	ret = symlink(actualpath, sympath);
+	if (ret){
+		
+		printf("%s:%d symlink failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	printf("%s:%d success.\n", __FILE__, __LINE__);
+	
+	read_size = readlink(sympath, buf, sizeof(buf));
+	if (read_size < 0){
+		
+		printf("%s:%d readlink failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	buf[read_size] = '\0';
+	printf("%s\n", buf);
+
+	read_size = readlink(actualpath, buf, sizeof(buf));
+	if (read_size < 0){
+		
+		printf("%s:%d readlink failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	buf[read_size] = '\0';
+	printf("%s\n", buf);
+	
 	return 0;
 }
 
@@ -687,8 +720,15 @@ int test_symlink()
  *<tr><td>3</td><td>st_ctime</td><td>i节点状态的最后更改时间，可以用 ls -c 命令显示查看， chmod、chown函数可以修改该值</td></tr>
  *</table>
  *<code>
- *int utime(const char *pathname, const struct utimebuf *times);<br/>
+ *int utime(const char *pathname, const struct utimebuf *times);
+ *
  *返回值：成功返回0， 出错则返回-1
+ *
+ *struct utimbuf{<br/>
+ *  time_t	actime;	// access time<br/>
+ *	time_t	modtime;	// modification time<br/>
+ *};
+ *
  *</code>
  *一个文件的访问和修改时间可以用utime函数更改，
  *此函数的操作以及执行它所要求的特权取决于times参数是否是NULL
@@ -697,11 +737,72 @@ int test_symlink()
  *<li>如果times是非空指针， 则访问时间和修改时间被设置为times所指向结构中的值，此时，进程的有效用户ID必须等于该文件的所有者ID，或者进程必须是一个超级用户进程，对文件只具有写权限是不够的</li>
  *<li>不能对更改状态时间st_ctime指定一个值，当调用utime函数时，此字段将自动更新</li>
  *</ul>
+ *<table>
+ *<caption>各种函数对访问、修改和更改状态时间的作用</caption>
+ *<tr><th width="40" rowspan="2">序号</th><th width="150" rowspan="2">函数</th><th width="100" colspan="3"  >引用的文件或目录</th><th width="100" colspan="3">引用文件或目录所在父目录</th><th rowspan="2">说明</th></tr>
+ *<tr><th>a</th><th>m</th><th>c</th><th>a</th><th>m</th><th>c</th></tr>
+ *<tr><td>1</td><td>chmod、fchmod</td><td></td><td></td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>2</td><td>chown、fchown</td><td></td><td></td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>3</td><td>creat</td><td>*</td><td>*</td><td>*</td><td></td><td>*</td><td>*</td><td>O_CREAT新文件</td></tr>
+ *<tr><td>4</td><td>creat</td><td></td><td>*</td><td>*</td><td></td><td></td><td></td><td>O_TRUNC现有文件</td></tr>
+ *<tr><td>5</td><td>exec</td><td>*</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>6</td><td>lchown</td><td></td><td></td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>7</td><td>link</td><td></td><td></td><td>*</td><td></td><td>*</td><td>*</td><td>第二个参数的父目录</td></tr>
+ *<tr><td>8</td><td>mkdir</td><td>*</td><td>*</td><td>*</td><td></td><td>*</td><td>*</td><td></td></tr>
+ *<tr><td>9</td><td>mkfifo</td><td>*</td><td>*</td><td>*</td><td></td><td>*</td><td>*</td><td></td></tr>
+ *<tr><td>10</td><td>open</td><td>*</td><td>*</td><td>*</td><td></td><td>*</td><td>*</td><td>O_CREAT新文件</td></tr>
+ *<tr><td>11</td><td>open</td><td></td><td>*</td><td>*</td><td></td><td></td><td></td><td>O_TRUNC现有文件</td></tr> 
+ *<tr><td>12</td><td>pipe</td><td>*</td><td>*</td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>13</td><td>read</td><td>*</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>14</td><td>remove</td><td></td><td></td><td>*</td><td></td><td>*</td><td>*</td><td>删除文件=unlink</td></tr>
+ *<tr><td>15</td><td>remove</td><td></td><td></td><td></td><td></td><td>*</td><td>*</td><td>删除目录=rmdir</td></tr>
+ *<tr><td>16</td><td>rename</td><td></td><td></td><td>*</td><td></td><td>*</td><td>*</td><td>对于两个参数</td></tr>
+ *<tr><td>17</td><td>rmdir</td><td></td><td></td><td></td><td></td><td>*</td><td>*</td><td></td></tr>
+ *<tr><td>18</td><td>truncate、ftruncate</td><td></td><td>*</td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *<tr><td>19</td><td>unlink</td><td></td><td></td><td>*</td><td></td><td>*</td><td>*</td><td></td></tr>
+ *<tr><td>20</td><td>utime</td><td>*</td><td>*</td><td>*</td><td></td><td></td><td></td><td></td></tr> 
+ *<tr><td>21</td><td>write</td><td></td><td>*</td><td>*</td><td></td><td></td><td></td><td></td></tr>
+ *</table> 
+ *\warning 系统并不保存对一个i节点的最后一次访问时间， 所以access和stat函数并不更改这三个时间中的任一个。
+ *\param[in] filename 文件名称
  *\retval 0 成功
  *\retval !0 失败
  */
-int test_utime()
+int test_utime(const char *filename)
 {
+	int ret = 0;
+	struct stat obj_stat;
+	struct utimbuf obj_time;
+	
+	ret = stat(filename, &obj_stat);
+	if (ret){
+			
+		printf("%s:%d stat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	obj_time.actime = obj_stat.st_atime;
+	obj_time.modtime = obj_stat.st_mtime;
+	
+	ret = utime(filename, NULL);
+	if (ret){
+		
+		printf("%s:%d utime failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	
+	printf("%s:%d success\n", __FILE__, __LINE__);
+	
+	ret = utime("hello", &obj_time);
+	if (ret){
+		
+		printf("%s:%d utime failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	
+	printf("%s:%d success\n", __FILE__, __LINE__);
+		
+	
 	return 0;
 }
 
@@ -709,8 +810,10 @@ int test_utime()
  *\brief 测试mkdir函数
  *
  *<code>
- *int mkdir(const char *pathname, mode_t mode);<br/>
- *int rmdir(const char *pathname);<br/>
+ *int mkdir(const char *pathname, mode_t mode);
+ *
+ *int rmdir(const char *pathname);
+ *
  *返回值：若成功则返回0， 若出错则返回-1
  *</code>
  *<ul>
@@ -719,36 +822,127 @@ int test_utime()
  *<li>rmdir, 函数可以删除一个空目录</li>
  *<li>rmdir, 如果调用此函数使目录的链接计数成为0，并且也没有其他进程打开此目录，则释放由此目录占用的空间；如果在链接计数达到0时，有一个或几个进程打开了此目录，则在此函数返回前删除最后一个链接，另外，在此目录中不能在创建新文件，但是在最后一个进程关闭它之前并不释放此目录</li>
  *</ul>
+ *\param[in] dirname 目录名称
+ *\param[in] modes 模式
+ *\warning 不能一次创建多级目录(mkdir failed(No such file or directory)); 不能创建已存在的目录(mkdir failed(File exists));
  *\retval 0 成功
  *\retval !0 失败
  */
-int test_mkdir()
+int test_mkdir(const char *dirname, mode_t modes)
 {
+	int ret = 0;
+	
+	ret = mkdir(dirname, modes);
+	if (ret){
+		
+		printf("%s:%d mkdir failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	printf("%s:%d create dir success.\n", __FILE__, __LINE__);
+	
 	return 0;
+}
+
+void print_dir(const char *dirname, const int left)
+{
+	struct stat obj_stat;
+	DIR *dp = NULL;
+	struct dirent *dirp = NULL;
+	const int PATH_SIZE = 1024;
+	char file_path[PATH_SIZE] = {0};
+	int ret = 0;
+	int idx = 0;
+	
+	ret = lstat(dirname, &obj_stat);
+	if (ret){
+		
+		printf("%s:%d lstat failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return;
+	}
+
+	for (idx = 0; idx < left; ++idx){
+		
+		printf("\t");
+	}	
+	if (!S_ISDIR(obj_stat.st_mode)){
+		
+		printf("%s\n", dirname);
+		
+		return;
+	}
+	printf("%s\n", dirname);
+	dp = opendir(dirname);
+	if (!dp){
+		
+		printf("%s:%d opendir failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return;
+	}
+	
+	while ((dirp = readdir(dp)) != NULL){
+		
+		if (strcmp(dirp->d_name, ".") == 0 ||
+			strcmp(dirp->d_name, "..") == 0){
+				
+			for (idx = 0; idx < left; ++idx){
+				
+				printf("\t");
+			}
+			printf("%s/%s\n", dirname, dirp->d_name);
+			continue;
+		}
+		
+		snprintf(file_path, PATH_SIZE, "%s/%s", dirname, dirp->d_name);
+		print_dir(file_path, left + 1);
+	}
+	ret = closedir(dp);
+	if (ret){
+		
+		printf("%s:%d closedir failed(%s)\n", __FILE__, __LINE__, strerror(errno));	
+	}
 }
 
 /**
  *\brief 测试readdir函数
  *
  *<code>
- *DIR *opendir(const char *pathname);<br/>
- *返回值：成功返回指针，出错返回NULL<br/>
- *struct dirent *readdir(DIR *dp);<br/>
- *返回值：成功返回指针，在目录结尾或出错则返回NULL<br/>
- *void rewinddir(DIR *dp);<br/>
- *void closedir(DIR *dp);<br/>
- *返回值：若成功则返回0，若出错则返回-1<br/>
- *long telldir(DIR *dp);<br/>
- *返回值：若成功则返回0，若出错则返回-1<br/>
+ *DIR *opendir(const char *pathname);
+ *
+ *返回值：成功返回指针，出错返回NULL
+ *
+ *struct dirent *readdir(DIR *dp);
+ *
+ *返回值：成功返回指针，在目录结尾或出错则返回NULL
+ *
+ *void rewinddir(DIR *dp);
+ *
+ *void closedir(DIR *dp);
+ *
+ *返回值：若成功则返回0，若出错则返回-1
+ *
+ *long telldir(DIR *dp);
+ *
+ *返回值：与dp关联的目录中的当前位置
+ *
  *void seekdir(DIR *dp, long loc);
  *</code>
+ *
+ *struct dirent{<br/>
+ *  ino_t	d_ino;	// i-node number<br/>
+ *	char 	d_name[NAME_MAX + 1];	// null-terminated filename<br/>
+ *}<br/>
+ *
+ *\warning 对某个目录具有访问权限的任一用户都可读该目录，但是，为了防止文件系统产生混乱，只有内核才能写目录。
+ *\param[in] dirname 将要读取的目录
  *\retval 0 成功
  *\retval !0 失败
  */
-int test_readdir()
-{
+int test_readdir(const char *dirname)
+{	
+	print_dir(dirname, 0);
+	
 	return 0;
 }
+
 
 /**
  *\brief 测试chdir函数
@@ -802,7 +996,12 @@ static void show_help()
 		"chown file_name uid gid, 修改文件所有者\n\n"
 		"truncate file_name length, 截短文件\n\n"
 		"link efile nfile, 创建连接（硬链接）\n\n"
-		"rename oldname newnae, 重命名\n\n");
+		"rename oldname newnae, 重命名\n\n"
+		"symlink actualpath sympath, 创建链接文件\n\n"
+		"utime filename, 修改文件的访问和修改时间\n\n"
+		"mkdir dirname modes, 修改文件的访问和修改时间\n"
+		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH|S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO\n\n"
+		"readdir dirname, 读取目录内容\n\n");
 }
 
 int main(int argc, char **argv)
@@ -831,6 +1030,18 @@ int main(int argc, char **argv)
 	}else if (argc == 4 && strcmp(argv[1], "rename") == 0){
 		
 		test_rename(argv[2], argv[3]);
+	}else if (argc == 4 && strcmp(argv[1], "symlink") == 0){
+		
+		test_symlink(argv[2], argv[3]);
+	}else if (argc == 3 && strcmp(argv[1], "utime") == 0){
+		
+		test_utime(argv[2]);
+	}else if (argc == 4 && strcmp(argv[1], "mkdir") == 0){
+		
+		test_mkdir(argv[2], convert_umask_mode(argv[3]));
+	}else if (argc == 3 && strcmp(argv[1], "readdir") == 0){
+		
+		test_readdir(argv[2]);
 	}else{
 		
 		show_help();
