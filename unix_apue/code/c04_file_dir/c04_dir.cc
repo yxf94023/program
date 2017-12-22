@@ -843,7 +843,7 @@ int test_mkdir(const char *dirname, mode_t modes)
 	return 0;
 }
 
-void print_dir(const char *dirname, const int left)
+static void print_dir(const char *dirname, const int left)
 {
 	struct stat obj_stat;
 	DIR *dp = NULL;
@@ -954,15 +954,42 @@ int test_readdir(const char *dirname)
  *<li>进程通过调用chdir和fchdir函数可以更改当前工作目录，在这两个函数中，分别用pathname或打开文件描述符来指定新的当前工作目录</li>
  *</ul>
  *<code>
- *int chdir(const char *pathname);<br/>
- *int fchdir(int filedes);<br/>
+ *int chdir(const char *pathname);
+ *
+ *int fchdir(int filedes);
+ *
  *返回值：成功返回0， 出错返回-1
  *</code>
+ *\param[in] pathname 跳转的目录
  *\retval 0 成功
  *\retval !0 失败
  */
-int test_chdir()
+int test_chdir(const char *pathname)
 {
+	int ret = 0;
+	int fd = -1;
+	
+	if (0 == access(pathname, F_OK)){
+		
+		printf("文件存在\n");
+		fd = open(pathname, O_RDONLY);
+		if (fd < 0){
+			
+			printf("%s:%d open failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+			return -1;
+		}
+		ret = fchdir(fd);
+	}else{
+		
+		ret = chdir(pathname);
+	}
+	
+	if (ret){
+	
+		printf("%s:%d chdir failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+
 	return 0;
 }
 
@@ -972,7 +999,8 @@ int test_chdir()
  *获取当前工作目录的绝对路径
  *
  *<code>
- *char *getcwd(char *buf, size_t size);<br/>
+ *char *getcwd(char *buf, size_t size);
+ *
  *返回值：成功则返回buf，出错则返回NULL
  *</code>
  *
@@ -981,6 +1009,18 @@ int test_chdir()
  */
 int test_getcwd()
 {
+	const int BUF_SIZE = 1024;
+	char buf[BUF_SIZE] = {0};
+	
+	if (getcwd(buf, sizeof(buf))){
+		
+		printf("%s:%d current path is [%s]\n", __FILE__, __LINE__, buf);
+	}else{
+		
+		printf("%s:%d getcwd failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
 	return 0;
 }
 
@@ -1001,7 +1041,8 @@ static void show_help()
 		"utime filename, 修改文件的访问和修改时间\n\n"
 		"mkdir dirname modes, 修改文件的访问和修改时间\n"
 		"\tmodes   S_I[RWX]USR|S_I[RWX]GRP|S_I[RWX]OTH|S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO\n\n"
-		"readdir dirname, 读取目录内容\n\n");
+		"readdir dirname, 读取目录内容\n\n"
+		"chdir pathname, 更改当前目录\n\n");
 }
 
 int main(int argc, char **argv)
@@ -1042,6 +1083,10 @@ int main(int argc, char **argv)
 	}else if (argc == 3 && strcmp(argv[1], "readdir") == 0){
 		
 		test_readdir(argv[2]);
+	}else if (argc == 3 && strcmp(argv[1], "chdir") == 0){
+		
+		test_chdir(argv[2]);
+		test_getcwd();
 	}else{
 		
 		show_help();
