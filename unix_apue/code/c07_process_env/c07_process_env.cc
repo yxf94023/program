@@ -296,6 +296,7 @@ static void pr_limits(const char *, int);
  *<tr><td>13</td><td>RLIMIT_VMEM</td><td>这是RLIMIT_AS的同义词</td></tr>
  *</table>
  *资源限制影响到调用进程并由其子进程继承，这就意味着为了影响一个用户的所有后续进程，需将资源限制的设置构造在shell之中。
+ *<br/>ulimit -a可以查看默认进程的占用资源
  *
  *\retval 0 	成功
  *\retval !0	失败 
