@@ -5,9 +5,58 @@
  */
 
 #include <unistd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <string.h>
+
+void deal_signal(int signo)
+{
+#ifndef SIGRTMIN
+#define	SIGRTMIN (34)
+#endif
+	printf("access signo is [%d]\n", signo);
+	switch (signo)
+	{
+		case SIGINT:
+		printf("SIGINT\n");
+		break;
+		case SIGTSTP:
+		printf("SIGTSTP\n");
+		break;
+		case SIGQUIT:
+		printf("SIGQUIT\n");
+		break;
+		case SIGTERM:
+		printf("SIGTERM\n");
+		break;
+		default:
+		if (signo == SIGRTMIN){
+		
+			printf("SIGRTMIN\n");
+		}
+		break;
+	}
+	sleep(2);
+}
 
 /**
  *\brief 测试signal函数
+ *
+ *<code>
+ *void (*signal)(int signo, void (*func)(int)))(int);
+ *
+ *返回值：若成功则返回信号以前的处理配置， 若出错则返回SIG_ERR
+ *</code>
+ *
+ *signo是下面列出的信号列表名。 
+ *
+ *<table>
+ *<caption>signal中func的分类</caption>
+ *<tr><th width="40">序号</th><th width="60">分类</th><th>说明</th></tr>
+ *<tr><td>1</td><td>SIG_IGN</td><td>则向内核表示忽略此信号（记住有两个信号SIGKILL和SIGSTOP不能忽略）</td></tr>
+ *<tr><td>2</td><td>SIG_DFL</td><td>则表示接到此信号后的动作时系统默认动作</td></tr>
+ *<tr><td>3</td><td>函数地址</td><td>则在信号发生时，调用该函数。我们称这种处理为“捕捉”该信号。称此函数为信号处理程序或信号扑捉函数</td></tr>
+ *</table>
  *
  *<ul>
  *<li>信号是软件中断</li>
@@ -62,11 +111,67 @@
  *<tr><td>40</td><td>SIGXFSZ</td><td>超过文件长度限制</td><td>终止+core</td></tr> 
  *<tr><td>41</td><td>SIGXRES</td><td>超过资源控制</td><td>忽略</td></tr> 
  *</table>
+ *
+ *<ul>
+ *<li><b>程序启动：</b>当执行一个程序时，所有信号的状态都是系统默认或忽略。通常所有信号都被设置为他们的默认动作，除非调用exec的进程忽略该信号。确切地讲， exec函数将原先设置为要捕捉的信号都更改为它们的默认动作，其他信号的状态则不变（对于一个进程原先要捕捉的信号，当其执行一个新程序后，就自然不能再捕捉它了，因为信号捕捉函数的地址很可能在所执行的新程序中已无意义）</li>
+ *<li><b>进程创建：</b>当一个进程调用fork时，其子进程继承父进程的信号处理方式。因为子进程在开始时复制了父进程的存储印象，所以信号捕捉函数的地址在子进程中是有意义的</li>
+ *</ul>
+ *
+ *
+ *在早期的UNIX中信号是不可靠的，不可靠是指信号可能丢失（在执行自定义函数期间会丢失同类信号），现在Linux在SIGRTMIN实时信号之前的都叫不可靠信号（可以通过kill -l命令显示所有信号），这里的不可靠主要是不支持信号队列，就是当多个信号发生在进程中的时候（收到信号的速度超过进程处理的速度的时候），这些没来的及处理的信号就会被丢掉，仅仅留下一个信号。<br/>
+ *可靠信号是多个信号发送到进程的时候（收到信号的速度超过进程处理信号的速度的时候），这些没来得及处理的信号就会排入进程的队列，等待进程有机会处理的时候，依次再处理，信号不丢失<br/>
  *\retval 0 成功
  *\retval !0 失败
  */
 int test_signal()
 {
+	signal(SIGINT, deal_signal); // 2 ctrl + c
+	signal(SIGKILL, deal_signal);// 
+	signal(SIGSTOP, deal_signal);//
+	signal(SIGTSTP, deal_signal);// 20 ctrl + z
+	signal(SIGQUIT, deal_signal);// 3 'ctrl + \'
+	signal(SIGTERM, deal_signal);// 15 kill pid
+	signal(SIGRTMIN, deal_signal);// 可靠信号
+	
+	/*i=0;while [ $i -lt 10 ];do pid=$(pidof c10_signal); kill -2 $pid; kill -34 $pid; ((++i)) done */
+/*
+
+access signo is [2]
+SIGINT
+access signo is [2]
+SIGINT
+
+
+
+
+
+
+
+
+
+
+
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+access signo is [34]
+SIGRTMIN
+*/	
 	return 0;
 }
 
@@ -207,5 +312,28 @@ int test_sigpengding()
  */
 int test_sigaction()
 {
+	return 0;
+}
+
+static void show_help()
+{
+	printf("signal, 测试signal函数\n\n"
+			"fork, 测试fork函数\n\n"
+			"wait, 测试wait函数\n\n"
+			"exec, 测试exec函数\n\n"
+			"times system_cmd, 测试times函数\n\n");
+}
+
+int main(int argc, char **argv)
+{
+	if (argc == 2 and strcmp("signal", argv[1]) == 0){
+		
+		test_signal();
+		while (1){}
+	}else{
+		
+		show_help();
+	}
+	
 	return 0;
 }
