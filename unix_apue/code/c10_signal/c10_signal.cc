@@ -362,7 +362,54 @@ int test_sigpengding()
  *</table>
  *
  * 
+ *<table>
+ *<caption> 可重入函数 </caption>
+ *<tr><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+ *<tr><td colspan=6>可重入函数是可以被中断的函数，可以在函数执行的任何时刻中断它，而一段时间之后又可以恢复运行，而相应的数据不会破坏或者丢失。
  *
+ *可重入函数使用的变量有两种情况：
+ *<ol>
+ *<li>使用局部变量，变量保存在CPU寄存器中或者堆栈中</li>
+ *<li>使用全局变量，但是这时候要注意保护全局变量（防止任务中断后被其它任务改变变量）</li>
+ *</ol>
+ *基本上下面的函数都是不可重入的：
+ *<ol>
+ *<li>函数内使用了静态的数据</li>
+ *<li>函数内使用了malloc（）或者free（）函数的</li>
+ *<li>函数内调用了标准的I/O函数的</li>
+ *</ol>
+ *常用的可重入函数的方法有：
+ *<ol>
+ *<li>不要使用全局变量，防止别的代码覆盖这些变量的值</li>
+ *<li>调用这类函数之前先关掉中断，调用完之后马上打开中断。防止函数执行期间被中断进入别的任务执行</li>
+ *<li>使用信号量（互斥条件）</li>
+ *</ol>
+ *总之：要保证中断是安全的
+ *</td></tr> 
+ *<tr><td>1</td><td>accept</td><td>fchmod</td><td>lseek</td><td>sendto</td><td>stat</td></tr>
+ *<tr><td>2</td><td>access</td><td>fchown</td><td>lstat</td><td>setgid</td><td>symlink</td></tr>
+ *<tr><td>3</td><td>aio_error</td><td>fcntl</td><td>mkdir</td><td>setpgid</td><td>sysconf</td></tr> 
+ *<tr><td>4</td><td>aio_return</td><td>fdatasync</td><td>mkfifo</td><td>setsid</td><td>tcdrain</td></tr>
+ *<tr><td>5</td><td>aio_suspend</td><td>fork</td><td>open</td><td>setsockopt</td><td>tcflow</td></tr>  
+ *<tr><td>6</td><td>alarm</td><td>fpathconf</td><td>pathconf</td><td>setuid</td><td>tcflush</td></tr>
+ *<tr><td>7</td><td>bind</td><td>fstat</td><td>pause</td><td>shutdown</td><td>tcgetattr</td></tr>
+ *<tr><td>8</td><td>cfgetispeed</td><td>fsync</td><td>pipe</td><td>sigaction</td><td>tcgetpgrp</td></tr>
+ *<tr><td>9</td><td>cfgetospeed</td><td>ftruncate</td><td>poll</td><td>sigaddset</td><td>tcsendbreak</td></tr>
+ *<tr><td>10</td><td>cfsetispeed</td><td>getegid</td><td>posix_trace_event</td><td>sigdelset</td><td>tcsetattr</td></tr>
+ *<tr><td>11</td><td>cfsetospeed</td><td>geteuid</td><td>pselect</td><td>sigemptyset</td><td>tcsetpgrp</td></tr> 
+ *<tr><td>12</td><td>chdir</td><td>getgid</td><td>raise</td><td>sigfillset</td><td>time</td></tr>
+ *<tr><td>13</td><td>chmod</td><td>getgroups</td><td>read</td><td>sigismember</td><td>timer_getoverrun</td></tr>  
+ *<tr><td>14</td><td>chown</td><td>getpeername</td><td>readlink</td><td>signal</td><td>timer_gettime</td></tr>
+ *<tr><td>15</td><td>clock_gettime</td><td>getpgrp</td><td>recv</td><td>sigpause</td><td>timer_settime</td></tr>  
+ *<tr><td>16</td><td>close</td><td>getpid</td><td>recvfrom</td><td>sigpending</td><td>times</td></tr>
+ *<tr><td>17</td><td>connect</td><td>getppid</td><td>recvmsg</td><td>sigprocmask</td><td>umask</td></tr>   
+ *<tr><td>18</td><td>creat</td><td>getsockname</td><td>rename</td><td>sigqueue</td><td>uname</td></tr> 
+ *<tr><td>19</td><td>dup</td><td>getsockopt</td><td>rmdir</td><td>sigset</td><td>unlink</td></tr> 
+ *<tr><td>20</td><td>dup2</td><td>getuid</td><td>select</td><td>sigsuspend</td><td>utime</td></tr> 
+ *<tr><td>21</td><td>execle</td><td>kill</td><td>sem_post</td><td>sleep</td><td>wait</td></tr> 
+ *<tr><td>22</td><td>execve</td><td>link</td><td>send</td><td>socket</td><td>waitpid</td></tr> 
+ *<tr><td>23</td><td>_Exit&_exit</td><td>listen</td><td>sendmsg</td><td>socketpair</td><td>write</td></tr>  
+ *</table>
  *
  *
  *\retval 0 成功
