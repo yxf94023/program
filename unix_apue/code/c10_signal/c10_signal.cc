@@ -8,6 +8,10 @@
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
+#include <pwd.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 static void deal_signal(int signo)
 {
@@ -29,6 +33,25 @@ static void deal_signal(int signo)
 		case SIGTERM:
 		printf("SIGTERM\n");
 		break;
+		case SIGALRM:
+			struct passwd *pw;
+			
+			printf("alarm signal handler\n");
+			if ((pw = getpwnam("root")) == NULL){
+				
+				printf("getpwnam(root) error\n");
+			}else{
+				    
+				printf("pw->pw_name = %s\n", pw->pw_name);  
+				printf("pw->pw_passwd = %s\n", pw->pw_passwd);  
+				printf("pw->pw_uid = %d\n", pw->pw_uid);  
+				printf("pw->pw_gid = %d\n", pw->pw_gid);  
+				printf("pw->pw_gecos = %s\n", pw->pw_gecos);  
+				printf("pw->pw_dir = %s\n", pw->pw_dir);  
+				printf("pw->pw_shell = %s\n", pw->pw_shell);  
+			}
+			alarm(1);
+			break;
 		default:
 		if (signo == SIGRTMIN){
 		
@@ -131,7 +154,20 @@ int test_signal()
 	signal(SIGTSTP, deal_signal);// 20 ctrl + z
 	signal(SIGQUIT, deal_signal);// 3 'ctrl + \'
 	signal(SIGTERM, deal_signal);// 15 kill pid
+	signal(SIGALRM, deal_signal);// 测试可重入性质
 	signal(SIGRTMIN, deal_signal);// 可靠信号
+	for (;;){
+		
+		struct passwd *pwd;
+		if ((pwd = getpwnam("test")) == NULL){
+			
+			printf("getpwnam error\n");
+		}
+		if ((strcmp(pwd->pw_name, "test")) != 0){
+			
+			printf("return value corrupted!\n");
+		}
+	}
 	
 	/*i=0;while [ $i -lt 10 ];do pid=$(pidof c10_signal); kill -2 $pid; kill -34 $pid; ((++i)) done */
 /*
@@ -194,7 +230,45 @@ SIGRTMIN
  */
 int test_kill()
 {
+	pid_t child_pid = -1;
+	int status = -1, ret = -1;
+	
+	child_pid = fork();
+	if (child_pid == -1){
+		
+		printf("fork failed!, %s\n", strerror(errno));
+		return 1;
+	}else if (0 == child_pid){
+		
+		printf("chilid process %d\n", getpid());
+		sleep(100);
+		return 0;
+	}
+	
+	sleep(5);
+	// 父进程
+	if (0 == (ret = waitpid(child_pid, &status, WNOHANG))){ // 非阻塞
+	
+		printf("return pid %d\n", ret);
+		ret = kill(child_pid, SIGKILL);
+		if (ret){
+			
+			printf("kill failed\n");
+			waitpid(child_pid, &status, 0);
+		}else{
+			
+			printf("%d killed\n", child_pid);
+		}
+	}
+	
 	return 0;
+}
+
+static void deal_alarm(int signo)
+{
+	unsigned int ret = alarm(10);
+	
+	printf("%s:%d resave %d sencods\n", __FILE__, __LINE__, ret);
 }
 
 /**
@@ -213,6 +287,14 @@ int test_kill()
  */
 int test_alarm()
 {
+	signal(SIGALRM, deal_alarm);
+	raise(SIGALRM); // 向自己发送信号
+	
+	sleep(3);
+	
+	unsigned int ret = alarm(10);
+	printf("%s:%d resave %u seconds\n", __FILE__, __LINE__, ret);
+	
 	return 0;
 }
 
@@ -223,15 +305,21 @@ int test_alarm()
  *<li>信号集是一种数据类型（sigset_t），能表示多个信号</li>
  *<li>根据前面介绍，系统中的信号种类数量可能超过一个整型量所包含的位数，所以一般不能用整型中的一位代表一种信号</li>
  *</ul>
- * 
- *int sigemptyset(sigset_t *set);<br/>
- *int sigfillset(sigset_t *set);<br/>
- *int sigaddset(sigset_t *set, int signo);<br/>
- *int sigdelset(sigset_t *set, int signo);<br/>
- *返回值：若成功则返回0，若出错则返回-1<br/><br/>
- *int sigismember(const sigset_t *set, int signo);<br/>
- *返回值：若真则返回1，若假则返回0，若出错则返回-1<br/>
+ *<code>
+ *int sigemptyset(sigset_t *set);
  *
+ *int sigfillset(sigset_t *set);
+ *
+ *int sigaddset(sigset_t *set, int signo);
+ *
+ *int sigdelset(sigset_t *set, int signo);
+ *
+ *返回值：若成功则返回0，若出错则返回-1
+ *
+ *int sigismember(const sigset_t *set, int signo);
+ *
+ *返回值：若真则返回1，若假则返回0，若出错则返回-1<br/>
+ *</code>
  *<ol>
  *<li>sigemptyset初始化由set指向的信号集，清除其中所有信号</li>
  *<li>sigfillset初始化由set指向的信号集，使其包括所有信号</li>
@@ -244,6 +332,29 @@ int test_alarm()
  */
 int test_sigset()
 {
+	//信号集的增删
+	sigset_t sigset;
+	
+	sigfillset(&sigset);// 填充所有信号
+	
+	if (sigismember(&sigset, SIGALRM)){
+		
+		printf("%s:%d SIGARLM exsit!\n", __FILE__, __LINE__);
+	}else{
+		
+		printf("%s:%d SIGARLM not exsit!\n", __FILE__, __LINE__);
+	}
+	
+	sigdelset(&sigset, SIGALRM);
+	
+	if (sigismember(&sigset, SIGALRM)){
+		
+		printf("%s:%d SIGARLM exsit!\n", __FILE__, __LINE__);
+	}else{
+		
+		printf("%s:%d SIGARLM not exsit!\n", __FILE__, __LINE__);
+	}
+		
 	return 0;
 }
  
@@ -417,15 +528,16 @@ int test_sigpengding()
  */
 int test_sigaction()
 {
+	
 	return 0;
 }
 
 static void show_help()
 {
 	printf("signal, 测试signal函数\n\n"
-			"fork, 测试fork函数\n\n"
-			"wait, 测试wait函数\n\n"
-			"exec, 测试exec函数\n\n"
+			"kill, 测试kill函数\n\n"
+			"alarm, 测试alarm函数\n\n"
+			"sigset, 测试sigset函数\n\n"
 			"times system_cmd, 测试times函数\n\n");
 }
 
@@ -435,6 +547,15 @@ int main(int argc, char **argv)
 		
 		test_signal();
 		while (1){}
+	}else if (argc == 2 and strcmp("kill", argv[1]) == 0){
+		
+		test_kill();
+	}else if (argc == 2 and strcmp("alarm", argv[1]) == 0){
+		
+		test_alarm();
+	}else if (argc == 2 and strcmp("sigset", argv[1]) == 0){
+		
+		test_sigset();
 	}else{
 		
 		show_help();
