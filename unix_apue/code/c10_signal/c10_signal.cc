@@ -357,11 +357,22 @@ int test_sigset()
 		
 	return 0;
 }
- 
+
+static void sig_procmask(int signo)
+{
+	if (signo == SIGINT){
+		
+		printf("%s:%d catch SIGINT \n", __FILE__, __LINE__);
+	}else if (signo == SIGRTMIN){
+		
+		printf("%s:%d catch SIGRTMIN \n", __FILE__, __LINE__);
+	}
+}
+
 /**
  *\brief 测试sigprocmask函数
  *
- *一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br/>
+ *在linux中，进程可以接收到各种信号，如果不对信号进行处理，系统会采用默认的处理方法。 但是，我们也可以在进程中屏蔽掉某些信号，使得进程不去处理这些信号（SIGKILL和SIGSTOP例外），这就是信号屏蔽字。一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br/>
  *调用函数sigprocmask可以检测或更改其信号屏蔽字，或者在一个步骤中同时执行这两个操作。<br/>
  * 
  *int sigprocmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);<br/>
@@ -385,6 +396,53 @@ int test_sigset()
  */
 int test_sigprocmask()
 {
+	// 这里分别对一个可靠信号 和 不可靠信号进行测试
+	sigset_t new_mask, old_mask;
+	
+	signal(SIGINT, sig_procmask);// 不可靠信号 
+	signal(SIGRTMIN, sig_procmask);// 可靠信号
+	
+	// 添加两个信号到信号屏蔽字中
+	sigemptyset(&new_mask);
+	sigaddset(&new_mask, SIGINT);
+	sigaddset(&new_mask, SIGRTMIN);
+	
+	if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask)){
+		
+		printf("%s:%d sigprocmask failed, %s\n", __FILE__, __LINE__, strerror(errno));
+		return 1;
+	}
+	printf("%s:%d Enter pengding\n", __FILE__, __LINE__);
+	sleep(5);  // 在睡眠的过程中执行下面的命令
+	/*
+i=0;pid=$(pidof c10_signal);while [ $i -lt 10 ]; do ((++i)); kill -2 $pid; kill -34 $pid; done;	
+	*/
+	
+	// 恢复老的屏蔽字， 这里需要注意， 老的屏蔽字中不能阻塞上面两个信号， 不然看不到效果了
+	if (sigprocmask(SIG_SETMASK, &old_mask, NULL)){
+
+		printf("%s:%d sigprocmask failed, %s\n", __FILE__, __LINE__, strerror(errno));
+		return 1;	
+	}
+	printf("%s:%d Exit pending\n", __FILE__, __LINE__);
+	sleep(5);
+
+/*
+# ./c10_signal sigprocmask
+c10_signal.cc:415 Enter pengding
+c10_signal.cc:427 Exit pending
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:368 catch SIGRTMIN 
+c10_signal.cc:365 catch SIGINT 
+*/	
 	return 0;
 }
 
@@ -408,12 +466,15 @@ int test_sigpengding()
  *int sigaction(int signo, const struct sigaction *restrict act, struct sigaction *restrict oact);<br/>
  *返回值：若成功则返回0， 若出错则返回-1<br/>
  *<br/>
- *struct sigaction{<br/>
-	 void	(*sa_handler)(int);	// 信号处理函数
-	 sigset_t sa_mask;	// 阻塞信号集
-	 int	sa_flags;	// 
-	 void	(*sa_sigaction)(int, siginfo_t *, void *);	//
- }
+ *
+ *struct sigaction{
+ *
+ *	 void	(*sa_handler)(int);	// 信号处理函数	 
+ *	 sigset_t sa_mask;	// 阻塞信号集
+ *	 int	sa_flags;	// 
+ *	 void	(*sa_sigaction)(int, siginfo_t *, void *);	//
+ *}
+ *
  *<ul>
  *<li>sigacton函数的功能是检查或修改与指定信号相关联的处理动作</li>
  *<li></li>
@@ -538,6 +599,7 @@ static void show_help()
 			"kill, 测试kill函数\n\n"
 			"alarm, 测试alarm函数\n\n"
 			"sigset, 测试sigset函数\n\n"
+			"sigprocmask, 测试sigprocmask函数\n\n"
 			"times system_cmd, 测试times函数\n\n");
 }
 
@@ -556,6 +618,9 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp("sigset", argv[1]) == 0){
 		
 		test_sigset();
+	}else if (argc == 2 and strcmp("sigprocmask", argv[1]) == 0){
+		
+		test_sigprocmask();
 	}else{
 		
 		show_help();
