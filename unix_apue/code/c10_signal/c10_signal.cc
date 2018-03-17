@@ -460,6 +460,20 @@ int test_sigpengding()
 	return 0;
 }
 
+static void test_siga(int signo)
+{
+	if (signo == SIGUSR1){
+		
+		printf("%s:%d SIGUSR1\n", __FILE__, __LINE__);
+	}else if (signo == SIGUSR2){
+		
+		printf("%s:%d SIGUSR2\n", __FILE__, __LINE__);
+	}else{
+		
+		printf("%s:%d else SIG\n", __FILE__, __LINE__);
+	}
+}
+
 /**
  *\brief 测试sigaction函数
  *
@@ -471,13 +485,26 @@ int test_sigpengding()
  *
  *	 void	(*sa_handler)(int);	// 信号处理函数	 
  *	 sigset_t sa_mask;	// 阻塞信号集
- *	 int	sa_flags;	// 
- *	 void	(*sa_sigaction)(int, siginfo_t *, void *);	//
+ *	 int	sa_flags;	// 指定信号处理行为
+ *	 void	(*sa_sigaction)(int, siginfo_t *, void *);	// 另一个信号处理函数
  *}
  *
  *<ul>
  *<li>sigacton函数的功能是检查或修改与指定信号相关联的处理动作</li>
- *<li></li>
+ *<li>成员sa_handler，是一个函数指针，指向信号处理函数</li>
+ *<li>成员sa_mask，是用来指定在信号处理函数执行期间需要被屏蔽的信号</li>
+ *<li>成员sa_flags， 用于指定信号处理的行为， 可以使以下值的“按位或”组合
+ *<table>
+ *<tr><th width=60>序号</th><th width=200>值</th><th>说明</th></tr>
+ *<tr><td>1</td><td>SA_RESTART</td><td>使被信号打断的系统调用自动重新发起</td></tr>
+ *<tr><td>2</td><td>SA_NOCLDSTOP</td><td>使父进程在它的子进程暂停或继续运行时不会收到SIGCHLD信号</td></tr>
+ *<tr><td>3</td><td>SA_NOCLDWAIT</td><td>使父进程在它的子进程退出时不会收到SIGCHLD信号，这时子进程如果退出也不会成为僵尸进程</td></tr>
+ *<tr><td>4</td><td>SA_NODEFER</td><td>使对信号屏蔽无效，即在信号处理函数执行期间仍能发出这个信号</td></tr>
+ *<tr><td>5</td><td>SA_RESETHAND</td><td>信号处理之后重新设置为默认的处理方式</td></tr> 
+ *<tr><td>6</td><td>SA_SIGINFO</td><td>使用sa_sigaction成员而不是sa_handler作为信号处理函数</td></tr> 
+ *</table>
+ *</li>
+ *<li>成员sa_sigaction，是另一个信号处理函数，有三个参数， 可以获得关于信号更为详细的信息。对于sa_sigaction字段和sa_handler字段这两者，其实现可能使用同一存储区， 所以应用程序只能一次使用这两个字段中的一个</li>
  *</ul>
  *
  *<table>
@@ -589,6 +616,29 @@ int test_sigpengding()
  */
 int test_sigaction()
 {
+	char line[80] = {0};
+	struct sigaction sig;
+	sig.sa_flags = 0;
+	sig.sa_handler = test_siga;
+	
+	sigaction(SIGUSR1, &sig, NULL);	// 10
+	sigaction(SIGUSR2, &sig, NULL);	// 12
+	
+	printf("%s:%d pid[%d]\n", __FILE__, __LINE__, getpid());
+	/* 进程执行后 向进程发送 信号 使用kill命令 */
+	while (true){
+		
+		if (read(STDIN_FILENO, line, 79) == -1){
+			
+			if (errno == EINTR){
+				
+				printf("%s:%d interrupted\n", __FILE__, __LINE__);
+			}
+		}else{
+			
+			printf("%s:%d %s\n", __FILE__, __LINE__, line);
+		}
+	}
 	
 	return 0;
 }
@@ -600,7 +650,7 @@ static void show_help()
 			"alarm, 测试alarm函数\n\n"
 			"sigset, 测试sigset函数\n\n"
 			"sigprocmask, 测试sigprocmask函数\n\n"
-			"times system_cmd, 测试times函数\n\n");
+			"sigaction, 测试sigaction函数\n\n");
 }
 
 int main(int argc, char **argv)
@@ -621,6 +671,9 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp("sigprocmask", argv[1]) == 0){
 		
 		test_sigprocmask();
+	}else if (argc == 2 and strcmp("sigaction", argv[1]) == 0){
+		
+		test_sigaction();
 	}else{
 		
 		show_help();
