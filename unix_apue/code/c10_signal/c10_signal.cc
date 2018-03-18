@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <pwd.h>
 #include <errno.h>
 #include <sys/wait.h>
@@ -643,6 +644,141 @@ int test_sigaction()
 	return 0;
 }
 
+/**
+ *\brief 测试sigsuspend
+ *
+ *<code>
+ *int sigsuspend(const sigset_t *sigmask);
+ *
+ *返回值：-1，并将errno设置为EINTR
+ *</code>
+ *
+ *将进程中的信号屏蔽字设置为有sigmask指向的值。 在捕捉到一个信号或发生了一个会终止该进程的信号之前，该进程被挂起。如果捕捉到一个信号而且从该信号处理程序返回，则sigsuspend返回，并且将该进程的信号屏蔽字设置为调用sigsuspend之前的值。
+ *
+ *更改进程的信号屏蔽字可以阻塞所选择的信号，或解除对它们的阻塞， 使用这种技术可以保护不希望由信号中断的代码临界区。
+ *
+ *\*param[in] type 为1表示传统不可靠方式
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_sigsuspend(int type)
+{
+	/* 先使用sigprocmask 阻塞， 让后调用pause等待唤醒*/
+	if (type == 1){/* 不可靠方式 */
+	
+		sigset_t new_mask, old_mask;
+		sigemptyset(&new_mask);
+		sigaddset(&new_mask, SIGINT);
+		
+		/* 阻塞 SIGINT */
+		if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask) < 0){
+			
+			printf("%s:%d call sigprocmask failed\n", __FILE__, __LINE__);
+			return 1;
+		}
+		
+		/* 临界区代码 */
+		
+		/* 恢复原来的信号屏蔽字 */
+		if (sigprocmask(SIG_SETMASK, &old_mask, NULL) < 0){
+			
+			printf("%s:%d call sigprocmask failed\n", __FILE__, __LINE__);
+			return 1;			
+		}
+		
+		pause(); // 等待信号 然后唤醒进程
+		/*若果在信号阻塞时将其发送给进程， 那么该信号的传递就被推迟直到对它解除了阻塞。对应用程序而言，该信号好像发生在解除对SIGINT的阻塞和pause之间（取决于内核如何实现信号）。如果发生了这种情况， 或者如果在解除阻塞时刻和pause之间确实发生了信号， 那么就产生了问题。因为我们可能不会再见到该信号，所以从这种意义上而言，在此时间窗口中发生的信号丢失了， 这样就使得pause永远阻塞。*/
+	}else if (type == 2){
+		
+		sigset_t new_mask, old_mask, wait_mask;
+		sigemptyset(&new_mask);
+		sigaddset(&new_mask, SIGINT);
+		sigemptyset(&wait_mask);
+		sigaddset(&wait_mask, SIGUSR1);
+		
+		/* 阻塞 SIGINT */
+		if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask) < 0){
+			
+			printf("%s:%d call sigprocmask failed\n", __FILE__, __LINE__);
+			return 1;
+		}	
+
+		/* 临界区代码 */
+		printf("%s:%d in critical region\n", __FILE__, __LINE__);
+		
+		/* 阻塞， 允许所有的信号 除了SIGUSR1 */
+		if (sigsuspend(&wait_mask) != -1){
+			
+			printf("%s:%d call sigsuspend failed\n", __FILE__, __LINE__);
+			return 1;
+		}
+		
+		if (sigprocmask(SIG_SETMASK, &old_mask, NULL) < 0){
+			
+			printf("%s:%d call sigprocmask failed\n", __FILE__, __LINE__);
+			return 1;
+		}
+		printf("%s:%d reset signal mask\n", __FILE__, __LINE__);
+	}
+	
+	return 0;
+}
+
+static void sig_sys(int signo)
+{
+	if (signo == SIGINT){
+		
+		printf("%s:%d catch SIGNIT\n", __FILE__, __LINE__);
+		return;
+	}else if (signo == SIGCHLD){
+		
+		printf("%s:%d catch SIGCHLD\n", __FILE__, __LINE__);
+		return;
+	}
+}
+
+/**
+ *\brief 测试system函数
+ *
+ *POSIX.1要求system忽略SIGINT和SIGQUIT，阻塞SIGCHLD。
+ *
+ *\retval 0 成功
+ *\retval !0 失败 
+ */
+int test_system()
+{
+	if (signal(SIGINT, sig_sys) == SIG_ERR){
+		
+		printf("%s:%d signal error\n", __FILE__, __LINE__);
+		return 1;
+	}
+	if (signal(SIGCHLD, sig_sys) == SIG_ERR){
+		
+		printf("%s:%d signal error\n", __FILE__, __LINE__);
+		return 1;
+	}
+	if (system("/usr/bin/vi") < 0){
+		
+		printf("%s:%d system error\n", __FILE__, __LINE__);
+		return 1;
+	}
+	if (system("/usr/bin/sleep 10") < 0){
+		
+		printf("%s:%d system error\n", __FILE__, __LINE__);
+		return 1;
+	}
+	
+/*
+# ./c10_signal system
+c10_signal.cc:735 catch SIGCHLD
+
+当vi编辑器终止时， 系统向父进程(c10_signal进程）发送SIGCHLD信号。父进程捕捉它，然后从信号处理程序返回。但是若父进程正在捕捉SIGCHLD信号（因为它创建了子进程，所以应当这样做以便了解它的子进程在何时终止），那么正在执行system函数时，应当阻塞对父进程递送SIGCHLD信号。实际上，这就是POSIX.1所说明的。否则，当system创建的子进程结束时， system的调用者可能错误地认为， 它自己的一个子进程结束了。于是，调用者将会调用一种wait函数以获取子进程的终止状态， 这样就阻止了system函数获得子进程的终止状态，并将其作为它的返回值。
+
+当用system运行另一个程序时，不应使父、子进程两者都捕捉中断产生的两个信号：中断(SIGINT)和退出(SIGQUIT)。这两个信号只应送给正在运行的程序：子进程。因为有system执行的命令可能是交互式命令，以及因为system调用者在执行时放弃了控制，等待该执行程序的结束，所以system调用者就不应该接收这两个终端产生的信号。这就是为什么POSIX.1规定system的调用者应当忽略这两个信号的原因。
+*/	
+	return 0;
+}
+	
 static void show_help()
 {
 	printf("signal, 测试signal函数\n\n"
@@ -650,7 +786,11 @@ static void show_help()
 			"alarm, 测试alarm函数\n\n"
 			"sigset, 测试sigset函数\n\n"
 			"sigprocmask, 测试sigprocmask函数\n\n"
-			"sigaction, 测试sigaction函数\n\n");
+			"sigaction, 测试sigaction函数\n\n"
+			"sigsuspend, 测试sigsuspend函数\n"
+			"    1 测试第一种不可靠的临界区构造\n"
+			"    2 测试第一种可靠的临界区构造\n\n"
+			"system, 测试system函数\n\n");
 }
 
 int main(int argc, char **argv)
@@ -674,6 +814,12 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp("sigaction", argv[1]) == 0){
 		
 		test_sigaction();
+	}else if (argc == 3 and strcmp("sigsuspend", argv[1]) == 0){
+		
+		test_sigsuspend(atoi(argv[2]));
+	}else if (argc == 2 and strcmp("system", argv[1]) == 0){
+		
+		test_system();
 	}else{
 		
 		show_help();
