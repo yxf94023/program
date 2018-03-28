@@ -654,6 +654,83 @@ int test_pthread_rwlock()
 	return 0;
 }
 
+static pthread_mutex_t s_cond_mutex;
+static pthread_cond_t s_cond_cond;
+static int s_cond_num;
+
+// 等待
+static void *cond_thr1(void *arg)
+{
+	int ret = 0;
+	
+	printf("%s:%d enter thr1\n", __FILE__, __LINE__);
+	ret = pthread_mutex_lock(&s_cond_mutex);
+	printf("%s:%d 1 lock mutex\n", __FILE__, __LINE__);
+	if (ret){
+		
+		printf("%s:%d mutex lock failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		return (void*)__LINE__;
+	}
+	while (!s_cond_num){
+		
+		printf("%s:%d waiting cond\n", __FILE__, __LINE__);
+		ret = pthread_cond_wait(&s_cond_cond, &s_cond_mutex);
+		if (ret){
+			
+			printf("%s:%d cond wait failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+			
+			return (void*)__LINE__;
+		}
+	}
+	printf("%s:%d cond status is ok\n", __FILE__, __LINE__);
+	s_cond_num -= 1;
+	ret = pthread_mutex_unlock(&s_cond_mutex);
+	printf("%s:%d unlock mutex\n", __FILE__, __LINE__);
+	if (ret){
+		
+		printf("%s:%d mutex unlock failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		return (void *)__LINE__;
+	}
+	
+	return (void *)1;
+}
+
+static void *cond_thr2(void *arg)
+{
+	int ret = 0;
+	
+	printf("%s:%d enter thr2 \n", __FILE__, __LINE__);
+	ret = pthread_mutex_lock(&s_cond_mutex);
+	printf("%s:%d lock mutex\n", __FILE__, __LINE__);
+	if (ret){
+		
+		printf("%s:%d mutex lock failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		return (void *)__LINE__;
+	}
+	if (s_cond_num == 0){
+		
+		printf("%s:%d send signal\n", __FILE__, __LINE__);
+		ret = pthread_cond_signal(&s_cond_cond);
+		if (ret){
+			
+			printf("%s:%d cond signal failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+			return (void *)__LINE__;
+		}
+	}
+	
+	sleep(3);
+	s_cond_num += 1;
+	ret = pthread_mutex_unlock(&s_cond_mutex);
+	printf("%s:%d unlock mutex \n", __FILE__, __LINE__);
+	if (ret){
+		
+		printf("%s:%d mutex unlock failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		return (void *)__LINE__;
+	}
+	
+	return (void *)2;
+}
+
 /**
  *\brief 测试线程同步cond函数
  *
@@ -694,7 +771,55 @@ int test_pthread_rwlock()
  */
 int test_pthread_cond()
 {
-	return 0;
+	pthread_t tid1, tid2;
+	void *tret;
+	int ret = 0;
+	
+	ret = pthread_mutex_init(&s_cond_mutex, NULL);
+	if (ret){
+		
+		printf("%s:%d mutex init failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		return 1;
+	}
+	ret = pthread_cond_init(&s_cond_cond, NULL);
+	if (ret){
+		
+		printf("%s:%d cond init failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		pthread_mutex_destroy(&s_cond_mutex);
+		return 2;
+	}
+	ret = pthread_create(&tid1, NULL, cond_thr1, NULL);
+	if (ret){
+		
+		printf("%s:%d creat thread failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		goto exit_label;
+	}
+	ret = pthread_create(&tid2, NULL, cond_thr2, NULL);
+	if (ret){
+		
+		printf("%s:%d creat thread failed(%s)\n", __FILE__, __LINE__, strerror(ret));
+		goto exit_label;
+	}
+	
+	pthread_join(tid1, &tret);
+	pthread_join(tid2, &tret);
+exit_label:	
+	pthread_mutex_destroy(&s_cond_mutex);
+	pthread_cond_destroy(&s_cond_cond);
+
+/*
+# ./c11_thread pthread_cond
+c11_thread.cc:666 enter thr1
+c11_thread.cc:668 1 lock mutex
+c11_thread.cc:676 waiting cond
+c11_thread.cc:702 enter thr2 
+c11_thread.cc:704 lock mutex
+c11_thread.cc:712 send signal
+c11_thread.cc:724 unlock mutex 
+c11_thread.cc:685 cond status is ok
+c11_thread.cc:688 unlock mutex
+*/	
+	return ret;
 }
 
 static void show_help()
@@ -733,6 +858,9 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp("pthread_mutex", argv[1]) == 0){
 		
 		test_pthread_mutex();
+	}else if (argc == 2 and strcmp("pthread_cond", argv[1]) == 0){
+		
+		test_pthread_cond();
 	}else{
 		
 		show_help();
