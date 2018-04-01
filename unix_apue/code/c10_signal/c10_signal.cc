@@ -102,7 +102,13 @@ static void deal_signal(int signo)
  *<tr><td>7</td><td>SIGEMT</td><td>硬件故障</td><td>终止+core</td></tr>
  *<tr><td>8</td><td>SIGFPE</td><td>算术异常<br/>例如除以0，浮点溢出等</td><td>终止+core</td></tr>
  *<tr><td>9</td><td>SIGFREEZE</td><td>检查点冻结<br/>此信号仅由Solaris定义，它用于通知进程在冻结系统状态之前需要采取特定动作</td><td>忽略</td></tr>
- *<tr><td>10</td><td>SIGHUP</td><td>连接断开<br/>如果中断接口检测到一个连接断开，则将此信号发送给与该终端相关的控制进程（会话首进程）</td><td>终止</td></tr>
+ *<tr><td>10</td><td>SIGHUP</td><td>连接断开<br/>如果中断接口检测到一个连接断开，则将此信号发送给与该终端相关的控制进程（会话首进程）<br/>
+ *SIGHUP会在以下3中情况下被发送给相应的进程
+ *<ol>
+ *<li>终端关闭时，该信号被发送到session首进程以及作为job提交的进程（即用&符号提交的进程）</li>
+ *<li>session首进程退出时，该信号被发送到该session中的前台进程组中的每一个进程</li>
+ *<li>若父进程退出导致进程组成为孤儿进程，且该进程组中有进程处于停止状态（收到SIGSTOP或者SIGTSTP信号），该信号会被发送到该进程组中的每一个进程。</li>
+ *</ol></td><td>终止</td></tr>
  *<tr><td>11</td><td>SIGILL</td><td>非法硬件指令<br/>此信号指示进程已执行一条非法硬件指令</td><td>终止+core</td></tr>
  *<tr><td>12</td><td>SIGINFO</td><td>键盘状态请求<br/>这是一种BSD信号，当用户按状态键（一般采用Ctrl+T）时，终端驱动程序产生此信号并送至前台进程组中的每一个进程， 此信号通常导致在终端上显示前台进程组中各进程的状态信息</td><td>终止</td></tr>
  *<tr><td>13</td><td>SIGINT</td><td>终端中断符<br/>当用户按中断键（一般采用DELETE或Ctrl+C）时，终端驱动程序产生此信号并送至前台进程组中的每一个进程， 当一个进程在运行时失控， 特别是它正在屏幕上产生大量不需要的输出时，常用此信号终止它</td><td>终止</td></tr>
