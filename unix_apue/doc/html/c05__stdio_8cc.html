@@ -53,6 +53,11 @@ $(function() {
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;wchar.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div>
 <p><a href="c05__stdio_8cc_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
@@ -85,6 +90,8 @@ $(function() {
 <tr class="memitem:ab47954629022abadb0e04329a09d3df7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c05__stdio_8cc.html#ab47954629022abadb0e04329a09d3df7">test_tmpfile_tmpname</a> ()</td></tr>
 <tr class="memdesc:ab47954629022abadb0e04329a09d3df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试tmpfile/tmpname函数  <a href="#ab47954629022abadb0e04329a09d3df7">更多...</a><br /></td></tr>
 <tr class="separator:ab47954629022abadb0e04329a09d3df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c05__stdio_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>练习标准I/O库 </p>
@@ -92,6 +99,36 @@ $(function() {
 
 <p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 中定义.</p>
 </div><h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00328">328</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a74976b12885ae9884c6ebfccf4ee1075"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74976b12885ae9884c6ebfccf4ee1075">&#9670;&nbsp;</a></span>test_fflush()</h2>
 
@@ -109,10 +146,9 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试fflush函数 </p>
-<p>int fflush(FILE *fp);<br />
- 返回值：若成功则返回0， 若出错则返回EOF<br />
- <br />
- 任何时候都可以强制冲洗一个流，函数使该流所有未写的数据都被传送到内核，作为一个特例，如若fp是NULL，则此函数将导致所有输出流被冲洗<br />
+<p><code> int fflush(FILE *fp);</code></p>
+<p><code>返回值：若成功则返回0， 若出错则返回EOF </code></p>
+<p>任何时候都可以强制冲洗一个流，函数使该流所有未写的数据都被传送到内核，作为一个特例，如若fp是NULL，则此函数将导致所有输出流被冲洗<br />
  </p><dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">fp</td><td>文件指针 </td></tr>
@@ -127,7 +163,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00078">78</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00137">137</a> 行定义.</p>
 
 </div>
 </div>
@@ -147,10 +183,9 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试fgetpos函数 </p>
-<p>int fgetpos(FILE *restrict fp, fpos_t *restrict pos);<br />
- itn fsetpos(FILE *fp, const fpos_t *pos);<br />
- 返回值：若成功则返回0， 若出错则返回非0值<br />
-</p>
+<p><code> int fgetpos(FILE *restrict fp, fpos_t *restrict pos);</code></p>
+<p><code>itn fsetpos(FILE *fp, const fpos_t *pos);</code></p>
+<p><code>返回值：若成功则返回0， 若出错则返回非0值 </code></p>
 <p>fgetspos将文件位置指示器的当前值存入由pos指向的对象中，在以后调用fsetpos时，可以使用此值将流重新定位到该位置。</p>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
@@ -160,7 +195,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00273">273</a> 行定义.</p>
 
 </div>
 </div>
@@ -180,11 +215,10 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试fread/fwrite函数 </p>
-<p>size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);<br />
- size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);<br />
- 两个函数的返回值：读或写的对象数 <br />
-<br />
- 使用场景 </p><ol>
+<p><code> size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</code></p>
+<p><code>size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);</code></p>
+<p><code>两个函数的返回值：读或写的对象数 </code></p>
+<p>使用场景 </p><ol>
 <li>
 读或写一个二进制数组 </li>
 <li>
@@ -204,7 +238,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00142">142</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00213">213</a> 行定义.</p>
 
 </div>
 </div>
@@ -224,8 +258,8 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试fseek函数 </p>
-<p>int fseek(FILE *fp, long offset, int whence);<br />
- 返回值：若成功则返回0， 若出错则返回非0值</p>
+<p><code> int fseek(FILE *fp, long offset, int whence);</code></p>
+<p><code>返回值：若成功则返回0， 若出错则返回非0值 </code></p>
 <p>whence的取值 1.SEEK_SET 表示从文件的起始位置开始<br />
  2.SEEK_CUR 表示从当前文件位置开始<br />
  3.SEEK_END 表示从文件的尾端开始<br />
@@ -238,7 +272,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00175">175</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00252">252</a> 行定义.</p>
 
 </div>
 </div>
@@ -258,8 +292,8 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试ftell函数 </p>
-<p>long ftell(FILE *fp);<br />
- 返回值：成功返回当前文件位置指示， 若出错则返回-1L</p>
+<p><code> long ftell(FILE *fp);</code></p>
+<p><code>返回值：成功返回当前文件位置指示， 若出错则返回-1L </code></p>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -268,7 +302,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00156">156</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00230">230</a> 行定义.</p>
 
 </div>
 </div>
@@ -288,11 +322,10 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试gets函数 </p>
-<p>char *fgets(char *restrict buf, int n, FILE *restrict fp);<br />
- char *gets(char *buf);<br />
- 两个函数返回值：若成功则返回buf，若已到达文件结尾出错则返回NULL<br />
- <br />
- 1.两个函数都是每次输入一行 2.gets从标准输入读，fgets则从指定的流读 3.fgets需指定缓冲区的长度n，函数一直读到下一个换行符为止，但是不超过n-1个字符，读入的字符被送入缓冲区，缓冲区总是以null字符结尾 4.gets是一个不推荐使用的函数，函数不能指定缓冲区的长度，可能造成缓冲区溢出 </p><dl class="retval"><dt>返回值</dt><dd>
+<p><code> char *fgets(char *restrict buf, int n, FILE *restrict fp);</code></p>
+<p><code>char *gets(char *buf);</code></p>
+<p><code>两个函数返回值：若成功则返回buf，若已到达文件结尾出错则返回NULL </code></p>
+<p>1.两个函数都是每次输入一行 2.gets从标准输入读，fgets则从指定的流读 3.fgets需指定缓冲区的长度n，函数一直读到下一个换行符为止，但是不超过n-1个字符，读入的字符被送入缓冲区，缓冲区总是以null字符结尾 4.gets是一个不推荐使用的函数，函数不能指定缓冲区的长度，可能造成缓冲区溢出 </p><dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
     <tr><td class="paramname">!0</td><td>失败 </td></tr>
@@ -300,7 +333,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00097">97</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00161">161</a> 行定义.</p>
 
 </div>
 </div>
@@ -320,11 +353,9 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试puts函数 </p>
-<p>int fputs(const char *restrict str, FILE *restrict fp);<br />
- int puts(const char *str);<br />
- 返回值：若成功则返回非负值， 若出错则返回EOF<br />
- <br />
-</p>
+<p><code> int fputs(const char *restrict str, FILE *restrict fp);</code></p>
+<p><code>int puts(const char *str);</code></p>
+<p><code>返回值：若成功则返回非负值， 若出错则返回EOF </code></p>
 <p>1.函数fputs将一个以null符种植的字符串写到指定流，尾端的终止符null不写出，函数并不一定是每次输出一行，因为它并不要求在null字符前一定是换行符。 2.puts将一个null符终止的字符串写到标准输出， 终止符不写出，但是， puts然后又将一个换行符写到标准输出</p>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
@@ -334,7 +365,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00183">183</a> 行定义.</p>
 
 </div>
 </div>
@@ -355,10 +386,9 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试setbuf函数 </p>
-<p>void setbuf(FILE *restrict fp, char *restrict buf);<br />
- void setvbuf(FILE *restrict fp, char *restrict buf, int mode, size_t size);<br />
- 返回值： 若成功则返回0， 若出错则返回非0值<br />
-</p>
+<p><code> void setbuf(FILE *restrict fp, char *restrict buf);</code></p>
+<p><code>void setvbuf(FILE *restrict fp, char *restrict buf, int mode, size_t size);</code></p>
+<p><code>返回值： 若成功则返回0， 若出错则返回非0值 </code></p>
 <p>对任何一个给定的流，如果我们并不喜欢这些系统默认的情况，则可调用上面2个函数进行缓冲类型修改<br />
  可以使用setbuf函数打开或关闭缓冲机制，为了带缓冲进行I/O，参数buf必须指向一个长度为BUFSIZ的缓冲区，通常在此之后该流就是全缓冲的，但是如果该流与一个终端设备相关，那么某些系统也可将其设置为行缓冲。为了关闭缓冲，将buf设置为NULL<br />
  使用setvbuf可以精确地指定所需的缓冲类型，这是用mode参数实现的， _IOFBF(全缓冲)，_IOLBF(行缓冲)，_IONBF(不带缓冲)。 如果指定一个不带缓冲的流， 则忽略buf和size参数。 如果指定全缓冲或行缓冲，则buf和size可选择地指定一个缓冲区及其长度。如果该流是带缓冲的，而buf是NULL，则标准I/O库将自动地为该流分配适当长度的缓冲区。适当长度指的是由常亮BUFSIZ所指定的值<br />
@@ -370,9 +400,9 @@ $(function() {
 <tr>
 <td rowspan="2">setbuf</td><td rowspan="2"></td><td>非空</td><td>长度为BUFSIZ的用户buf</td><td>全缓冲或行缓冲 </td></tr>
 <tr>
-<td>NULL</td><td>（五缓冲区）</td><td>不带缓冲 </td></tr>
+<td>NULL</td><td>（无缓冲区）</td><td>不带缓冲 </td></tr>
 <tr>
-<td rowspan="5">setbuf</td><td rowspan="2">_IOFBF</td><td>非空</td><td>长度为size的用户buf</td><td rowspan="2">全缓冲 </td></tr>
+<td rowspan="5">setvbuf</td><td rowspan="2">_IOFBF</td><td>非空</td><td>长度为size的用户buf</td><td rowspan="2">全缓冲 </td></tr>
 <tr>
 <td>NULL</td><td>合适长度的系统缓冲区 </td></tr>
 <tr>
@@ -430,7 +460,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00062">62</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00071">71</a> 行定义.</p>
 
 </div>
 </div>
@@ -450,13 +480,13 @@ $(function() {
 </div><div class="memdoc">
 
 <p>测试tmpfile/tmpname函数 </p>
-<p>char *tmpnam(char *ptr);<br />
- char *tempnam(const char *directory, const char *prefix);<br />
- 返回值: 指向唯一路径名的指针<br />
- FILE *tmpfile(void);<br />
- 返回值: 若成功则返回文件指针， 若出错则返回NULL<br />
- int mkstemp(char *tmplate);<br />
- 返回值：若成功则返回文件描述符， 若出错则返回-1</p>
+<p><code> char *tmpnam(char *ptr);</code></p>
+<p><code> char *tempnam(const char *directory, const char *prefix);</code></p>
+<p><code> 返回值: 指向唯一路径名的指针</code></p>
+<p><code> FILE *tmpfile(void);</code></p>
+<p><code> 返回值: 若成功则返回文件指针， 若出错则返回NULL</code></p>
+<p><code> int mkstemp(char *tmplate);</code></p>
+<p><code> 返回值：若成功则返回文件描述符， 若出错则返回-1 </code></p>
 <ol>
 <li>
 tmpname产生一个与现有文件名不同的一个有效路径名字符串， 每次调用它时，都会产生一个不同的路径名，最多调用次数是TMP_MAX </li>
@@ -493,7 +523,7 @@ tmpnam和tempnam的一个不足之处是，在返回唯一路径名和应用程�
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00228">228</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c05__stdio_8cc_source.html">c05_stdio.cc</a> 第 <a class="el" href="c05__stdio_8cc_source.html#l00317">317</a> 行定义.</p>
 
 </div>
 </div>

@@ -43,6 +43,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">宏定义</a> &#124;
 <a href="#func-members">函数</a>  </div>
   <div class="headertitle">
 <div class="title">c07_process_env.cc 文件参考</div>  </div>
@@ -54,35 +55,96 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/resource.h&gt;</code><br />
 </div>
 <p><a href="c07__process__env_8cc_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a5bdc3486130f13715ea74fd551adbeba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a5bdc3486130f13715ea74fd551adbeba">doit</a>(name)&#160;&#160;&#160;pr_limits(#name, name)</td></tr>
+<tr class="separator:a5bdc3486130f13715ea74fd551adbeba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:aa87bf18d3f22cf8c141fd67ed6adbf7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#aa87bf18d3f22cf8c141fd67ed6adbf7f">test_exit</a> ()</td></tr>
-<tr class="memdesc:aa87bf18d3f22cf8c141fd67ed6adbf7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试exit函数  <a href="#aa87bf18d3f22cf8c141fd67ed6adbf7f">更多...</a><br /></td></tr>
-<tr class="separator:aa87bf18d3f22cf8c141fd67ed6adbf7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78fe18cd6e9316cf78b2362518c6c43d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a78fe18cd6e9316cf78b2362518c6c43d">test_atexit</a> ()</td></tr>
-<tr class="memdesc:a78fe18cd6e9316cf78b2362518c6c43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试atexit函数  <a href="#a78fe18cd6e9316cf78b2362518c6c43d">更多...</a><br /></td></tr>
-<tr class="separator:a78fe18cd6e9316cf78b2362518c6c43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea474897aa2cd84c1754c998de8f0cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a3ea474897aa2cd84c1754c998de8f0cf">test_getenv</a> ()</td></tr>
-<tr class="memdesc:a3ea474897aa2cd84c1754c998de8f0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试环境变量  <a href="#a3ea474897aa2cd84c1754c998de8f0cf">更多...</a><br /></td></tr>
-<tr class="separator:a3ea474897aa2cd84c1754c998de8f0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5c51973c847cd34d0575931dabe0e32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#ab5c51973c847cd34d0575931dabe0e32">test_setenv</a> ()</td></tr>
-<tr class="memdesc:ab5c51973c847cd34d0575931dabe0e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试设置环境变量  <a href="#ab5c51973c847cd34d0575931dabe0e32">更多...</a><br /></td></tr>
-<tr class="separator:ab5c51973c847cd34d0575931dabe0e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ab9f9747a7ce05e02e4671fe083f02"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#ab2ab9f9747a7ce05e02e4671fe083f02">test_exit</a> (const char *exit_type, int exit_code)</td></tr>
+<tr class="memdesc:ab2ab9f9747a7ce05e02e4671fe083f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试exit函数  <a href="#ab2ab9f9747a7ce05e02e4671fe083f02">更多...</a><br /></td></tr>
+<tr class="separator:ab2ab9f9747a7ce05e02e4671fe083f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d825b6d99a933a6cb782cc236af1657"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a5d825b6d99a933a6cb782cc236af1657">test_atexit</a> (int size)</td></tr>
+<tr class="memdesc:a5d825b6d99a933a6cb782cc236af1657"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试atexit函数  <a href="#a5d825b6d99a933a6cb782cc236af1657">更多...</a><br /></td></tr>
+<tr class="separator:a5d825b6d99a933a6cb782cc236af1657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc0161320c746e26504cc2276b515b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a6fc0161320c746e26504cc2276b515b9">test_getenv</a> (const char *name)</td></tr>
+<tr class="memdesc:a6fc0161320c746e26504cc2276b515b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试环境变量  <a href="#a6fc0161320c746e26504cc2276b515b9">更多...</a><br /></td></tr>
+<tr class="separator:a6fc0161320c746e26504cc2276b515b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aced7ae03e420588967e5173d36036b4d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#aced7ae03e420588967e5173d36036b4d">test_setenv</a> (const char *type, const char *name, const char *value)</td></tr>
+<tr class="memdesc:aced7ae03e420588967e5173d36036b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试设置环境变量  <a href="#aced7ae03e420588967e5173d36036b4d">更多...</a><br /></td></tr>
+<tr class="separator:aced7ae03e420588967e5173d36036b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25abb71e0f683bdf3a3d0fb680299d00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a25abb71e0f683bdf3a3d0fb680299d00">test_getrlimit</a> ()</td></tr>
 <tr class="memdesc:a25abb71e0f683bdf3a3d0fb680299d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置资源  <a href="#a25abb71e0f683bdf3a3d0fb680299d00">更多...</a><br /></td></tr>
 <tr class="separator:a25abb71e0f683bdf3a3d0fb680299d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c07__process__env_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>练习进程环境 </p>
 <dl class="section date"><dt>日期</dt><dd>2017/10/01 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 中定义.</p>
-</div><h2 class="groupheader">函数说明</h2>
-<a id="a78fe18cd6e9316cf78b2362518c6c43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78fe18cd6e9316cf78b2362518c6c43d">&#9670;&nbsp;</a></span>test_atexit()</h2>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a5bdc3486130f13715ea74fd551adbeba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bdc3486130f13715ea74fd551adbeba">&#9670;&nbsp;</a></span>doit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define doit</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name</td><td>)</td>
+          <td>&#160;&#160;&#160;pr_limits(#name, name)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00249">249</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00376">376</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5d825b6d99a933a6cb782cc236af1657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d825b6d99a933a6cb782cc236af1657">&#9670;&nbsp;</a></span>test_atexit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -90,18 +152,24 @@ $(function() {
         <tr>
           <td class="memname">int test_atexit </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>测试atexit函数 </p>
-<p>int atexit(void (*func)(void));<br />
- 返回值: 若成功则返回0，若出错则返回非0值 <br />
-<br />
- 按照规定，一个进程可以登记多大32个函数，这些函数将由exit自动调用，称这些函数为终止处理程序（exit handler），并调用atexit函数来登记这些函数。 其中，atexit的参数是一个函数地址，当调用此函数时无需向它传送任何参数，也不期望它返回一个值。exit调用这些函数的顺序与它们登记时候的顺序相反，同一个函数如若登记多次，则也会调用多次。<br />
+<p><code> int atexit(void (*func)(void));</code></p>
+<p><code>返回值: 若成功则返回0，若出错则返回非0值</code></p>
+<p><code></code> 按照规定，一个进程可以登记多大32个函数，这些函数将由exit自动调用，称这些函数为终止处理程序（exit handler），并调用atexit函数来登记这些函数。 其中，atexit的参数是一个函数地址，当调用此函数时无需向它传送任何参数，也不期望它返回一个值。exit调用这些函数的顺序与它们登记时候的顺序相反，同一个函数如若登记多次，则也会调用多次。<br />
  内核使程序执行的唯一方法是调用一个exec函数，进程自愿终止的唯一方法是显示或隐式（通过调用exit）调用_exit或_Exit，进程也可非自愿地由一个信号使其终止</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>注册退出函数的数量 </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -110,12 +178,12 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00066">66</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>
-<a id="aa87bf18d3f22cf8c141fd67ed6adbf7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa87bf18d3f22cf8c141fd67ed6adbf7f">&#9670;&nbsp;</a></span>test_exit()</h2>
+<a id="ab2ab9f9747a7ce05e02e4671fe083f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2ab9f9747a7ce05e02e4671fe083f02">&#9670;&nbsp;</a></span>test_exit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,8 +191,19 @@ $(function() {
         <tr>
           <td class="memname">int test_exit </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>exit_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>exit_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -141,22 +220,47 @@ $(function() {
  7、接到一个信号并终止<br />
  8、最后一个线程对取消请求做出响应<br />
 </p>
-<p>void exit(int status);<br />
- void _Exit(int status);<br />
- void _exit(int status);<br />
- <br />
- _exit和_Exit立即进入内核，exit则先执行一些清理处理（包括调用执行各终止处理程序，关闭所有标准I/O流等），然后进入内核。由于历史原因， exit函数总是执行一个标准I/O库的清理关闭操作，为所有打开调用fclose函数，这会使得所有缓冲的输出数据都被冲洗写到文件上。<br />
+<p><code> void exit(int status);</code></p>
+<p><code> void _Exit(int status);</code></p>
+<p><code> void _exit(int status);</code></p>
+<p><code> </code> _exit和_Exit立即进入内核，exit则先执行一些清理处理（包括调用执行各终止处理程序，关闭所有标准I/O流等），然后进入内核。由于历史原因， exit函数总是执行一个标准I/O库的清理关闭操作，为所有打开调用fclose函数，这会使得所有缓冲的输出数据都被冲洗写到文件上。<br />
  三个exit函数都带一个整型参数，称之为终止状态。<br />
 </p>
-<p>环境表: 每个程序都会接收到一张环境表，与参数表一样，环境表也是一个字符指针数组，其中每个指针包含一个以null结束的C字符串的地址。全局变量environ则包含了该指针数组的地址： extern char **environ;<br />
- <br />
- 程序的存储空间布局： 正文段，这是由CPU执行的机器指令部分，通常，正文段是可共享的，所以即使是频繁执行的程序在存储器中也只需有一个副本，另外，正文段常常是只读的，以防止程序由于意外而修改其自身的指令<br />
- 初始化数据段，通常将此段称为数据段， 它包含了程序中需明确地赋值的变量<br />
- 非初始化数据段，通常将此段成为bss段， 在程序开始执行之前，内核将此段中的数据初始化为0或空指针<br />
- 栈，自动变量以及每次函数调用时所需保存的信息都存放在此段中，每次调用函数时， 其返回地址以及调用者的环境信息都存放在栈中<br />
- 堆，通常在堆中进行动态存储分配，由于历史上形成的惯例，堆位于非初始化数据段和栈之间<br />
- <br />
- 共享库： 共享库使得可执行文件中不再需要包含公用的库例程，而只需在所有进程都可引用的存储区中维护这种库例程的一个副本。程序第一次执行或者第一次调用某个库函数时，用动态链接方法将程序与共享库函数相链接，这减少了每个可执行文件的长度，但增加了一些运行时间开销，这种时间开销发生在该程序第一次被执行时，或者每个共享库函数第一次被调用时。共享库的另一个优点是可以用库函数的心版本代替老版本，而无需对使用该库的程序重新连接编辑。</p>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>执行程序划分</caption>
+<tr>
+<th width="40">序号</th><th width="140">名称</th><th width="300px" colspan="2">说明 </th></tr>
+<tr>
+<td>1</td><td>环境表</td><td colspan="2">每个程序都会接收到一张环境表，与参数表一样，环境表也是一个字符指针数组，其中每个指针包含一个以null结束的C字符串的地址。全局变量environ则包含了该指针数组的地址： extern char **environ; </td></tr>
+<tr>
+<td rowspan="6">2</td><td rowspan="6">程序的存储空间布局</td><td width="100">正文段</td><td>这是由CPU执行的机器指令部分，通常，正文段是可共享的，所以即使是频繁执行的程序在存储器中也只需有一个副本，另外，正文段常常是只读的，以防止程序由于意外而修改其自身的指令 </td></tr>
+<tr>
+<td>初始化数据段</td><td>通常将此段称为数据段， 它包含了程序中需明确地赋值的变量 </td></tr>
+<tr>
+<td>非初始化数据段</td><td>通常将此段成为bss段， 在程序开始执行之前，内核将此段中的数据初始化为0或空指针 </td></tr>
+<tr>
+<td>栈</td><td>自动变量以及每次函数调用时所需保存的信息都存放在此段中，每次调用函数时， 其返回地址以及调用者的环境信息都存放在栈中 </td></tr>
+<tr>
+<td>堆</td><td>通常在堆中进行动态存储分配，由于历史上形成的惯例，堆位于非初始化数据段和栈之间 </td></tr>
+<tr>
+<td colspan="2"><p class="starttd"><code> ~# size /usr/bin/cc /bin/sh</code></p>
+<p><code> text data bss dec hex filename</code></p>
+<p><code> 753709 8496 81856 844061 ce11d /usr/bin/cc</code></p>
+<p><code> 903117 35984 22920 962021 eade5 /bin/sh </code></p>
+<p class="endtd">size命令报告正文段、数据段和bss段的长度（单位：字节）， 第4列和第5列是分别以十进制和十六进制表示的三个段的总长度。<br />
+  </p>
+</td></tr>
+<tr>
+<td>3</td><td>共享库</td><td colspan="2">共享库使得可执行文件中不再需要包含公用的库例程，而只需在所有进程都可引用的存储区中维护这种库例程的一个副本。程序第一次执行或者第一次调用某个库函数时，用动态链接方法将程序与共享库函数相链接，这减少了每个可执行文件的长度，但增加了一些运行时间开销，这种时间开销发生在该程序第一次被执行时，或者每个共享库函数第一次被调用时。共享库的另一个优点是可以用库函数的心版本代替老版本，而无需对使用该库的程序重新连接编辑。 </td></tr>
+</table>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">exit_type</td><td>选择退出的方法 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exit_code</td><td>选择退出的终止状态 </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -165,12 +269,12 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00049">49</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00070">70</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a3ea474897aa2cd84c1754c998de8f0cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea474897aa2cd84c1754c998de8f0cf">&#9670;&nbsp;</a></span>test_getenv()</h2>
+<a id="a6fc0161320c746e26504cc2276b515b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fc0161320c746e26504cc2276b515b9">&#9670;&nbsp;</a></span>test_getenv()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,18 +282,25 @@ $(function() {
         <tr>
           <td class="memname">int test_getenv </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>测试环境变量 </p>
-<p>char *getenv(const char *name);<br />
- 返回值：指向与name关联的value的指针，若未找到则返回NULL<br />
- <br />
- 函数返回一个指针，它指向name=value字符串中的value，我们应当使用getenv从环境中取一个指定环境变量的值， 而不是直接访问environ<br />
+<p><code> char *getenv(const char *name);</code></p>
+<p><code>返回值：指向与name关联的value的指针，若未找到则返回NULL</code></p>
+<p><code></code> 函数返回一个指针，它指向name=value字符串中的value，我们应当使用getenv从环境中取一个指定环境变量的值， 而不是直接访问environ<br />
 </p>
+<dl class="section warning"><dt>警告</dt><dd>在操作环境变量environ的时候不要直接改变environ指针的值</dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>环境变量名 </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -198,7 +309,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00082">82</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00143">143</a> 行定义.</p>
 
 </div>
 </div>
@@ -218,15 +329,18 @@ $(function() {
 </div><div class="memdoc">
 
 <p>设置资源 </p>
-<p>int getrlimit(int resource, struct rlimit *rlptr);<br />
- int setrlimit(int resource, const struct rlimit *rlptr);<br />
- 返回值：若成功则返回0， 若出错则返回非0值<br />
- 每个进程都有一组资源限制，其中一些可以用getrlimit和setrlimit函数查询和更改。进程的资源限制通常是在系统初始化时由进程0建立的，然后由每个后续进程继承。每种实现都可以用自己的方法对各种限制做出调整。<br />
- struct rlimit{<br />
- rlim_t rlim_cur; ///&lt; 软限制<br />
- rlim_t rlim_max; ///&lt; 硬限制， maxinum value for rlim_cur<br />
- };<br />
- 在更改资源限制时， 须遵循下列三个规则：<br />
+<p><code> int getrlimit(int resource, struct rlimit *rlptr);</code></p>
+<p><code>int setrlimit(int resource, const struct rlimit *rlptr);</code></p>
+<p><code>返回值：若成功则返回0， 若出错则返回非0值</code></p>
+<p><code></code> 每个进程都有一组资源限制，其中一些可以用getrlimit和setrlimit函数查询和更改。进程的资源限制通常是在系统初始化时由进程0建立的，然后由每个后续进程继承。每种实现都可以用自己的方法对各种限制做出调整。<br />
+ <code></code></p>
+<p><code>struct rlimit{ </p><pre class="fragment">rlim_t  rlim_cur;   ///&lt; 软限制
+
+rlim_t  rlim_max;   ///&lt; 硬限制， maxinum value for rlim_cur
+</pre><p></code></p>
+<p><code>};</code></p>
+<p><code></code></p>
+<p>在更改资源限制时， 须遵循下列三个规则：<br />
  1、任何一个进程都可将一个软限制值更改为小于或等于其硬限制值<br />
  2、任何一个进程都可降低其硬限制值，但它必须大于或等于其软限制值，这种降低对普通用户而言是不可逆的<br />
  3、只有超级用户进程可以提高硬限制值<br />
@@ -262,7 +376,8 @@ $(function() {
 <tr>
 <td>13</td><td>RLIMIT_VMEM</td><td>这是RLIMIT_AS的同义词 </td></tr>
 </table>
-<p>资源限制影响到调用进程并由其子进程继承，这就意味着为了影响一个用户的所有后续进程，需将资源限制的设置构造在shell之中。</p>
+<p>资源限制影响到调用进程并由其子进程继承，这就意味着为了影响一个用户的所有后续进程，需将资源限制的设置构造在shell之中。 <br />
+ulimit -a可以查看默认进程的占用资源</p>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -271,12 +386,12 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00156">156</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00304">304</a> 行定义.</p>
 
 </div>
 </div>
-<a id="ab5c51973c847cd34d0575931dabe0e32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5c51973c847cd34d0575931dabe0e32">&#9670;&nbsp;</a></span>test_setenv()</h2>
+<a id="aced7ae03e420588967e5173d36036b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aced7ae03e420588967e5173d36036b4d">&#9670;&nbsp;</a></span>test_setenv()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,18 +399,35 @@ $(function() {
         <tr>
           <td class="memname">int test_setenv </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>测试设置环境变量 </p>
-<p>int putenv(char *str);<br />
- int setenv(const char *name, const char *value, int rewrite);<br />
- int unsetenv(const char *name);<br />
- 返回值：若成功则返回0， 若出错则返回非0值<br />
- 除了取环境变量的值，有时也需要设置环境变量，我们可能希望改变现有变量的值，或者增加新的环境变量 </p><ul>
+<p><code> int putenv(char *str);</code></p>
+<p><code> int setenv(const char *name, const char *value, int rewrite);</code></p>
+<p><code> int unsetenv(const char *name);</code></p>
+<p><code> 返回值：若成功则返回0， 若出错则返回非0值</code></p>
+<p><code> </code> 除了取环境变量的值，有时也需要设置环境变量，我们可能希望改变现有变量的值，或者增加新的环境变量 </p><ul>
 <li>
 putenv取形式为name=value的字符串，将其放到环境表中，如果name已经存在，则先删除其原来的定义 </li>
 <li>
@@ -314,6 +446,14 @@ unsetenv删除name的定义，即使不存在这种定义也不算出错 </li>
  (a)如果这是第一次增加 一个新的name，则必须调用malloc为新的指针表分配空间，接着，将原来的环境表复制到新分配区，并将指向新name=value字符串的指针存放在该指针表的表尾，然后又将一个空指针存放在其后。最后使environ指向新指针表。<br />
  (b)如果这不是第一次增加一个新name，则可知以前调用malloc在堆中为环境表分配了空间，所以只要调用realloc，以分配比原空间多存放一个指针的空间，然后，将指向新name=value字符串的指针存放在该表表尾，后面跟一个空指针 </li>
 </ol>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>类型 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>名字 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>值</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -322,7 +462,7 @@ unsetenv删除name的定义，即使不存在这种定义也不算出错 </li>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00114">114</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c07__process__env_8cc_source.html">c07_process_env.cc</a> 第 <a class="el" href="c07__process__env_8cc_source.html#l00202">202</a> 行定义.</p>
 
 </div>
 </div>

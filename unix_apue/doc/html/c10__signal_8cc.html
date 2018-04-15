@@ -43,6 +43,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">宏定义</a> &#124;
 <a href="#func-members">函数</a>  </div>
   <div class="headertitle">
 <div class="title">c10_signal.cc 文件参考</div>  </div>
@@ -52,9 +53,22 @@ $(function() {
 <p>练习信号  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;pwd.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 </div>
 <p><a href="c10__signal_8cc_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ae89f9a1282bd2d1b2a2b310c12ea16a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#ae89f9a1282bd2d1b2a2b310c12ea16a5">SIGRTMIN</a>&#160;&#160;&#160;(34)</td></tr>
+<tr class="separator:ae89f9a1282bd2d1b2a2b310c12ea16a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 函数</h2></td></tr>
 <tr class="memitem:ab5ec5e49091ce341c7e329c7ec9644a6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#ab5ec5e49091ce341c7e329c7ec9644a6">test_signal</a> ()</td></tr>
@@ -78,13 +92,66 @@ $(function() {
 <tr class="memitem:a656a292c7d39cfb115615c5e2254d67f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#a656a292c7d39cfb115615c5e2254d67f">test_sigaction</a> ()</td></tr>
 <tr class="memdesc:a656a292c7d39cfb115615c5e2254d67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigaction函数  <a href="#a656a292c7d39cfb115615c5e2254d67f">更多...</a><br /></td></tr>
 <tr class="separator:a656a292c7d39cfb115615c5e2254d67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc30fc41a5c40040ef22fabf248e131e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#abc30fc41a5c40040ef22fabf248e131e">test_sigsuspend</a> (int type)</td></tr>
+<tr class="memdesc:abc30fc41a5c40040ef22fabf248e131e"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试sigsuspend  <a href="#abc30fc41a5c40040ef22fabf248e131e">更多...</a><br /></td></tr>
+<tr class="separator:abc30fc41a5c40040ef22fabf248e131e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc1af0c530d9b0266258d41c2ecf695"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#a4fc1af0c530d9b0266258d41c2ecf695">test_system</a> ()</td></tr>
+<tr class="memdesc:a4fc1af0c530d9b0266258d41c2ecf695"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试system函数  <a href="#a4fc1af0c530d9b0266258d41c2ecf695">更多...</a><br /></td></tr>
+<tr class="separator:a4fc1af0c530d9b0266258d41c2ecf695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c10__signal_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>练习信号 </p>
 <dl class="section date"><dt>日期</dt><dd>2017/10/07 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 中定义.</p>
-</div><h2 class="groupheader">函数说明</h2>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="ae89f9a1282bd2d1b2a2b310c12ea16a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae89f9a1282bd2d1b2a2b310c12ea16a5">&#9670;&nbsp;</a></span>SIGRTMIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIGRTMIN&#160;&#160;&#160;(34)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00802">802</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a51053f0d403c9e6c95cbcb5926a749bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51053f0d403c9e6c95cbcb5926a749bb">&#9670;&nbsp;</a></span>test_alarm()</h2>
 
@@ -116,7 +183,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00109">109</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00295">295</a> 行定义.</p>
 
 </div>
 </div>
@@ -160,7 +227,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00090">90</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00238">238</a> 行定义.</p>
 
 </div>
 </div>
@@ -183,13 +250,175 @@ $(function() {
 <p>int sigaction(int signo, const struct sigaction *restrict act, struct sigaction *restrict oact);<br />
  返回值：若成功则返回0， 若出错则返回-1<br />
  <br />
- struct sigaction{<br />
- void (*sa_handler)(int); // 信号处理函数 sigset_t sa_mask; // 阻塞信号集 int sa_flags; // void (*sa_sigaction)(int, siginfo_t *, void *); // } </p><ul>
+</p>
+<p>struct sigaction{ </p><pre class="fragment">void   (*sa_handler)(int); // 信号处理函数    
+sigset_t sa_mask;  // 阻塞信号集
+int    sa_flags;   // 指定信号处理行为
+void   (*sa_sigaction)(int, siginfo_t *, void *);  // 另一个信号处理函数
+</pre><p> }</p>
+<ul>
 <li>
 sigacton函数的功能是检查或修改与指定信号相关联的处理动作 </li>
 <li>
+成员sa_handler，是一个函数指针，指向信号处理函数 </li>
+<li>
+成员sa_mask，是用来指定在信号处理函数执行期间需要被屏蔽的信号 </li>
+<li>
+成员sa_flags， 用于指定信号处理的行为， 可以使以下值的“按位或”组合 <table class="doxtable">
+<tr>
+<th width="60">序号</th><th width="200">值</th><th>说明 </th></tr>
+<tr>
+<td>1</td><td>SA_RESTART</td><td>使被信号打断的系统调用自动重新发起 </td></tr>
+<tr>
+<td>2</td><td>SA_NOCLDSTOP</td><td>使父进程在它的子进程暂停或继续运行时不会收到SIGCHLD信号 </td></tr>
+<tr>
+<td>3</td><td>SA_NOCLDWAIT</td><td>使父进程在它的子进程退出时不会收到SIGCHLD信号，这时子进程如果退出也不会成为僵尸进程 </td></tr>
+<tr>
+<td>4</td><td>SA_NODEFER</td><td>使对信号屏蔽无效，即在信号处理函数执行期间仍能发出这个信号 </td></tr>
+<tr>
+<td>5</td><td>SA_RESETHAND</td><td>信号处理之后重新设置为默认的处理方式 </td></tr>
+<tr>
+<td>6</td><td>SA_SIGINFO</td><td>使用sa_sigaction成员而不是sa_handler作为信号处理函数 </td></tr>
+</table>
 </li>
+<li>
+成员sa_sigaction，是另一个信号处理函数，有三个参数， 可以获得关于信号更为详细的信息。对于sa_sigaction字段和sa_handler字段这两者，其实现可能使用同一存储区， 所以应用程序只能一次使用这两个字段中的一个 </li>
 </ul>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>中断的系统调用 </caption>
+<tr>
+<th width="60">序号</th><th width="400">描述</th><th width="400">说明</th><th>实例 </th></tr>
+<tr>
+<td colspan="4"><p class="starttd">早期UNIX系统的一个特性是：如果进程在执行一个低速系统调用而阻塞期间捕捉到一个信号，则该系统调用就被中断不再继续执行。该系统调用返回出错，其errno被设置为EINTR。这样处理的理由是：因为一个信号发生了，进程捕捉到了它，这意味着已经发生了某种事情，所以是个应当唤醒阻塞的系统调用的好机会。</p>
+<p class="endtd">在这里，我们必须区分系统调用和函数。当捕捉到某个信号时，被中断的是内核中的执行的系统调用。 </p>
+</td></tr>
+<tr>
+<td></td><td>为了支持这种特性，将系统调用分成两类：低速系统调用和其他系统调用。低速系统调用是可能会使进程永远阻塞的一类系统调用，它们包括： <ol>
+<li>
+在读某些类型的文件（管道，终端设备以及网络设备）时，如果数据并不存在则可能会使调用者永远阻塞 </li>
+<li>
+在写这些类型的文件时，如果不能立即接受这些数据， 则也可能会使调用者永远阻塞。 </li>
+<li>
+打开某些类型文件，在某种条件发生之前也可能会使调用者阻塞（例如，打开终端设备） </li>
+<li>
+pause（按照定义，它使调用进程休眠直至捕捉到一个信号）和wait函数。 </li>
+<li>
+某些ioctl操作 </li>
+<li>
+某些进程间通信函数 </li>
+</ol>
+</td><td>在这些低速系统调用中，一个值得注意的例外是与磁盘I/O有关的系统调用。虽然读、写一个磁盘文件可能暂时阻塞调用者（在磁盘驱动器请求排入队列，然后再适当时间执行请求期间），但是除非发生硬件错误，I/O操作总会很快返回，并使调用者不再处于阻塞状态。</td><td></td></tr>
+<tr>
+<td colspan="4">对于中断了的系统调用，有三种处理方式： </td></tr>
+<tr>
+<td>1</td><td>人为重启被中断的系统调用</td><td><p class="starttd">人为当碰到EINTR错误的时候，有一些可以重启的系统调用要进行重启，而对于有一些系统调用时不能够重启的。例如：accpept、read、write、select和open之类的函数，是可以进行重启的。不过对于套接字编程中的connect函数我们是不能重启的，若connect函数返回一个EINTR错误的时候，我们不能再次调用它，否则将立即返回一个错误。针对connect不能重启的处理方法是，必须调用select来等待连接完成。</p>
+<p class="endtd">像一些IO系统调用执行时，如read等待输入期间，如果收到一个信号，系统将中断read，转而执行信号处理函数，当信号处理函数返回后，系统调用会遇到一个必须要考虑的问题：是重新开始这个系统调用，还是让系统调用失败？ 早期UNIX系统做法是，中断系统调用，并让系统调用失败，比如read返回-1，同时设置errno为EINTR，中断了的系统调用是没有完成的调用，它的失败是临时性的，如果再次调用则可能成功，这并不是真正的失败，所以要对这种情况进行处理。</p>
+</td><td><p class="starttd"><code></code></p>
+<p><code> again:</code></p>
+<p><code> if ((n = read(fd, buf, BUF_SIZE)) &lt; 0){ </p><pre class="fragment">if (errno == EINTR){ goto again;}
+
+.....
+</pre><p></code></p>
+<p class="endtd"><code> } </code> </p>
+</td></tr>
+<tr>
+<td>2</td><td>安装信号时设置SA_RESTART属性（该方法对有的系统调用无效）</td><td><p class="starttd">我们还可以从信号的角度来解决这个问题，安装信号的时候， 设置SA_RESTART属性， 那么当信号处理函数返回后， 不会让系统调用返回失败，而是将让被该信号中断的系统调用自动恢复。</p>
+<p class="endtd">但注意， 并不是所有的系统调用都可以自动恢复。 如msgsnd和msgrcv就是典型的例子，msgsnd/msgrcv以block方式发送/接受消息时，会因为进程收到了信号而中断。此时msgsnd/msgrcv将返回-1， errno被设置为EINTR。且即使在插入信号时设置了SA_RESTART，也无效。 所以在使用的时候为了保险起见还是需要查看下系统的man手册 和 测试覆盖。</p>
+</td><td><p class="starttd">struct sigaction action;</p>
+<p>action.sa_handler = handler_func;<br />
+ sigemptyset(&amp;action.sa_mask);<br />
+ action.sa_flags = 0;<br />
+ action.sa_flags |= SA_RESTART;<br />
+</p>
+<p class="endtd">sigaction(SIGALRM, &amp;action, NULL);  </p>
+</td></tr>
+<tr>
+<td>3</td><td>忽略信号（让系统不产生信号中断）</td><td>在安装信号时，明确告诉系统不会产生该信号的中断</td><td><p class="starttd">struct sigaction action;</p>
+<p>action.sa_handler = SIG_IGN;<br />
+ sigemptyset(&amp;action.sa_mask);<br />
+</p>
+<p class="endtd">sigaction(SIGALRM, &amp;action, NULL);  </p>
+</td></tr>
+</table>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>可重入函数 </caption>
+<tr>
+<th></th><th></th><th></th><th></th><th></th><th></th></tr>
+<tr>
+<td colspan="6"><p class="starttd">可重入函数是可以被中断的函数，可以在函数执行的任何时刻中断它，而一段时间之后又可以恢复运行，而相应的数据不会破坏或者丢失。</p>
+<p class="endtd">可重入函数使用的变量有两种情况： </p><ol>
+<li>
+使用局部变量，变量保存在CPU寄存器中或者堆栈中 </li>
+<li>
+使用全局变量，但是这时候要注意保护全局变量（防止任务中断后被其它任务改变变量） </li>
+</ol>
+<p>基本上下面的函数都是不可重入的： </p><ol>
+<li>
+函数内使用了静态的数据 </li>
+<li>
+函数内使用了malloc（）或者free（）函数的 </li>
+<li>
+函数内调用了标准的I/O函数的 </li>
+</ol>
+<p>常用的可重入函数的方法有： </p><ol>
+<li>
+不要使用全局变量，防止别的代码覆盖这些变量的值 </li>
+<li>
+调用这类函数之前先关掉中断，调用完之后马上打开中断。防止函数执行期间被中断进入别的任务执行 </li>
+<li>
+使用信号量（互斥条件） </li>
+</ol>
+<p>总之：要保证中断是安全的  </p>
+</td></tr>
+<tr>
+<td>1</td><td>accept</td><td>fchmod</td><td>lseek</td><td>sendto</td><td>stat </td></tr>
+<tr>
+<td>2</td><td>access</td><td>fchown</td><td>lstat</td><td>setgid</td><td>symlink </td></tr>
+<tr>
+<td>3</td><td>aio_error</td><td>fcntl</td><td>mkdir</td><td>setpgid</td><td>sysconf </td></tr>
+<tr>
+<td>4</td><td>aio_return</td><td>fdatasync</td><td>mkfifo</td><td>setsid</td><td>tcdrain </td></tr>
+<tr>
+<td>5</td><td>aio_suspend</td><td>fork</td><td>open</td><td>setsockopt</td><td>tcflow </td></tr>
+<tr>
+<td>6</td><td>alarm</td><td>fpathconf</td><td>pathconf</td><td>setuid</td><td>tcflush </td></tr>
+<tr>
+<td>7</td><td>bind</td><td>fstat</td><td>pause</td><td>shutdown</td><td>tcgetattr </td></tr>
+<tr>
+<td>8</td><td>cfgetispeed</td><td>fsync</td><td>pipe</td><td>sigaction</td><td>tcgetpgrp </td></tr>
+<tr>
+<td>9</td><td>cfgetospeed</td><td>ftruncate</td><td>poll</td><td>sigaddset</td><td>tcsendbreak </td></tr>
+<tr>
+<td>10</td><td>cfsetispeed</td><td>getegid</td><td>posix_trace_event</td><td>sigdelset</td><td>tcsetattr </td></tr>
+<tr>
+<td>11</td><td>cfsetospeed</td><td>geteuid</td><td>pselect</td><td>sigemptyset</td><td>tcsetpgrp </td></tr>
+<tr>
+<td>12</td><td>chdir</td><td>getgid</td><td>raise</td><td>sigfillset</td><td>time </td></tr>
+<tr>
+<td>13</td><td>chmod</td><td>getgroups</td><td>read</td><td>sigismember</td><td>timer_getoverrun </td></tr>
+<tr>
+<td>14</td><td>chown</td><td>getpeername</td><td>readlink</td><td>signal</td><td>timer_gettime </td></tr>
+<tr>
+<td>15</td><td>clock_gettime</td><td>getpgrp</td><td>recv</td><td>sigpause</td><td>timer_settime </td></tr>
+<tr>
+<td>16</td><td>close</td><td>getpid</td><td>recvfrom</td><td>sigpending</td><td>times </td></tr>
+<tr>
+<td>17</td><td>connect</td><td>getppid</td><td>recvmsg</td><td>sigprocmask</td><td>umask </td></tr>
+<tr>
+<td>18</td><td>creat</td><td>getsockname</td><td>rename</td><td>sigqueue</td><td>uname </td></tr>
+<tr>
+<td>19</td><td>dup</td><td>getsockopt</td><td>rmdir</td><td>sigset</td><td>unlink </td></tr>
+<tr>
+<td>20</td><td>dup2</td><td>getuid</td><td>select</td><td>sigsuspend</td><td>utime </td></tr>
+<tr>
+<td>21</td><td>execle</td><td>kill</td><td>sem_post</td><td>sleep</td><td>wait </td></tr>
+<tr>
+<td>22</td><td>execve</td><td>link</td><td>send</td><td>socket</td><td>waitpid </td></tr>
+<tr>
+<td>23</td><td>_Exit&amp;_exit</td><td>listen</td><td>sendmsg</td><td>socketpair</td><td>write </td></tr>
+</table>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -198,7 +427,7 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00208">208</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00624">624</a> 行定义.</p>
 
 </div>
 </div>
@@ -218,6 +447,21 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
 </div><div class="memdoc">
 
 <p>测试signal函数 </p>
+<p><code> void (*signal)(int signo, void (*func)(int)))(int);</code></p>
+<p><code>返回值：若成功则返回信号以前的处理配置， 若出错则返回SIG_ERR </code></p>
+<p>signo是下面列出的信号列表名。</p>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>signal中func的分类</caption>
+<tr>
+<th width="40">序号</th><th width="60">分类</th><th>说明 </th></tr>
+<tr>
+<td>1</td><td>SIG_IGN</td><td>则向内核表示忽略此信号（记住有两个信号SIGKILL和SIGSTOP不能忽略） </td></tr>
+<tr>
+<td>2</td><td>SIG_DFL</td><td>则表示接到此信号后的动作时系统默认动作 </td></tr>
+<tr>
+<td>3</td><td>函数地址</td><td>则在信号发生时，调用该函数。我们称这种处理为“捕捉”该信号。称此函数为信号处理程序或信号扑捉函数 </td></tr>
+</table>
 <ul>
 <li>
 信号是软件中断 </li>
@@ -263,7 +507,16 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
 此信号仅由Solaris定义，它用于通知进程在冻结系统状态之前需要采取特定动作</td><td>忽略 </td></tr>
 <tr>
 <td>10</td><td>SIGHUP</td><td>连接断开<br />
-如果中断接口检测到一个连接断开，则将此信号发送给与该终端相关的控制进程（会话首进程）</td><td>终止 </td></tr>
+如果中断接口检测到一个连接断开，则将此信号发送给与该终端相关的控制进程（会话首进程）<br />
+ SIGHUP会在以下3中情况下被发送给相应的进程 <ol>
+<li>
+终端关闭时，该信号被发送到session首进程以及作为job提交的进程（即用&amp;符号提交的进程） </li>
+<li>
+session首进程退出时，该信号被发送到该session中的前台进程组中的每一个进程 </li>
+<li>
+若父进程退出导致进程组成为孤儿进程，且该进程组中有进程处于停止状态（收到SIGSTOP或者SIGTSTP信号），该信号会被发送到该进程组中的每一个进程。 </li>
+</ol>
+</td><td>终止 </td></tr>
 <tr>
 <td>11</td><td>SIGILL</td><td>非法硬件指令<br />
 此信号指示进程已执行一条非法硬件指令</td><td>终止+core </td></tr>
@@ -347,7 +600,15 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
 <tr>
 <td>41</td><td>SIGXRES</td><td>超过资源控制</td><td>忽略 </td></tr>
 </table>
-<dl class="retval"><dt>返回值</dt><dd>
+<ul>
+<li>
+<b>程序启动：</b>当执行一个程序时，所有信号的状态都是系统默认或忽略。通常所有信号都被设置为他们的默认动作，除非调用exec的进程忽略该信号。确切地讲， exec函数将原先设置为要捕捉的信号都更改为它们的默认动作，其他信号的状态则不变（对于一个进程原先要捕捉的信号，当其执行一个新程序后，就自然不能再捕捉它了，因为信号捕捉函数的地址很可能在所执行的新程序中已无意义） </li>
+<li>
+<b>进程创建：</b>当一个进程调用fork时，其子进程继承父进程的信号处理方式。因为子进程在开始时复制了父进程的存储印象，所以信号捕捉函数的地址在子进程中是有意义的 </li>
+</ul>
+<p>在早期的UNIX中信号是不可靠的，<b>不可靠</b>是指信号可能丢失（在执行自定义函数期间会丢失同类信号），现在Linux在SIGRTMIN实时信号之前的都叫不可靠信号（可以通过<b>kill -l</b>命令显示所有信号），这里的不可靠主要是不支持信号队列，就是当多个信号发生在进程中的时候（收到信号的速度超过进程处理的速度的时候），这些没来的及处理的信号就会被丢掉，仅仅留下一个信号。<br />
+ <b>可靠信号</b>是多个信号发送到进程的时候（收到信号的速度超过进程处理信号的速度的时候），这些没来得及处理的信号就会排入进程的队列，等待进程有机会处理的时候，依次再处理，信号不丢失<br />
+ </p><dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
     <tr><td class="paramname">!0</td><td>失败 </td></tr>
@@ -355,7 +616,7 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00068">68</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00156">156</a> 行定义.</p>
 
 </div>
 </div>
@@ -386,7 +647,7 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00465">465</a> 行定义.</p>
 
 </div>
 </div>
@@ -406,7 +667,7 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
 </div><div class="memdoc">
 
 <p>测试sigprocmask函数 </p>
-<p>一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br />
+<p>在linux中，进程可以接收到各种信号，如果不对信号进行处理，系统会采用默认的处理方法。 但是，我们也可以在进程中屏蔽掉某些信号，使得进程不去处理这些信号（SIGKILL和SIGSTOP例外），这就是信号屏蔽字。一个进程的信号屏蔽字规定了当前阻塞而不能递送给该进程的信号集。<br />
  调用函数sigprocmask可以检测或更改其信号屏蔽字，或者在一个步骤中同时执行这两个操作。<br />
 </p>
 <p>int sigprocmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);<br />
@@ -439,7 +700,7 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00170">170</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00404">404</a> 行定义.</p>
 
 </div>
 </div>
@@ -465,16 +726,14 @@ sigacton函数的功能是检查或修改与指定信号相关联的处理动作
 <li>
 根据前面介绍，系统中的信号种类数量可能超过一个整型量所包含的位数，所以一般不能用整型中的一位代表一种信号 </li>
 </ul>
-<p>int sigemptyset(sigset_t *set);<br />
- int sigfillset(sigset_t *set);<br />
- int sigaddset(sigset_t *set, int signo);<br />
- int sigdelset(sigset_t *set, int signo);<br />
- 返回值：若成功则返回0，若出错则返回-1<br />
-<br />
- int sigismember(const sigset_t *set, int signo);<br />
- 返回值：若真则返回1，若假则返回0，若出错则返回-1<br />
-</p>
-<ol>
+<p><code> int sigemptyset(sigset_t *set);</code></p>
+<p><code>int sigfillset(sigset_t *set);</code></p>
+<p><code>int sigaddset(sigset_t *set, int signo);</code></p>
+<p><code>int sigdelset(sigset_t *set, int signo);</code></p>
+<p><code>返回值：若成功则返回0，若出错则返回-1</code></p>
+<p><code>int sigismember(const sigset_t *set, int signo);</code></p>
+<p><code>返回值：若真则返回1，若假则返回0，若出错则返回-1<br />
+ </code> </p><ol>
 <li>
 sigemptyset初始化由set指向的信号集，清除其中所有信号 </li>
 <li>
@@ -492,7 +751,69 @@ sigdelset则从信号集中删除一个信号 </li>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00140">140</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00340">340</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abc30fc41a5c40040ef22fabf248e131e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc30fc41a5c40040ef22fabf248e131e">&#9670;&nbsp;</a></span>test_sigsuspend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_sigsuspend </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试sigsuspend </p>
+<p><code> int sigsuspend(const sigset_t *sigmask);</code></p>
+<p><code>返回值：-1，并将errno设置为EINTR </code></p>
+<p>将进程中的信号屏蔽字设置为有sigmask指向的值。 在捕捉到一个信号或发生了一个会终止该进程的信号之前，该进程被挂起。如果捕捉到一个信号而且从该信号处理程序返回，则sigsuspend返回，并且将该进程的信号屏蔽字设置为调用sigsuspend之前的值。</p>
+<p>更改进程的信号屏蔽字可以阻塞所选择的信号，或解除对它们的阻塞， 使用这种技术可以保护不希望由信号中断的代码临界区。</p>
+<p>*param[in] type 为1表示传统不可靠方式 </p><dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00670">670</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4fc1af0c530d9b0266258d41c2ecf695"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc1af0c530d9b0266258d41c2ecf695">&#9670;&nbsp;</a></span>test_system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_system </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试system函数 </p>
+<p>POSIX.1要求system忽略SIGINT和SIGQUIT，阻塞SIGCHLD。</p>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c10__signal_8cc_source.html">c10_signal.cc</a> 第 <a class="el" href="c10__signal_8cc_source.html#l00754">754</a> 行定义.</p>
 
 </div>
 </div>

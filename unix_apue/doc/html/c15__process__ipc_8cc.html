@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>unix_apue: E:/git_thub/program/unix_apue/code/c15_process_ipc/c15_process_ipc.cc 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">unix_apue
+   &#160;<span id="projectnumber">1.0.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','搜索');
+});
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li><li class="navelem"><a class="el" href="dir_de359cc15a10a4aaa7a9cc50886d6547.html">c15_process_ipc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">c15_process_ipc.cc 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>练习进程间通信  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;sys/resource.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+</div>
+<p><a href="c15__process__ipc_8cc_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a194789efff726353c4feb3928f925e04"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a194789efff726353c4feb3928f925e04">test_pipe</a> ()</td></tr>
+<tr class="memdesc:a194789efff726353c4feb3928f925e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试pipe管道  <a href="#a194789efff726353c4feb3928f925e04">更多...</a><br /></td></tr>
+<tr class="separator:a194789efff726353c4feb3928f925e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8265c87c9e9b40f1d6af85a506f417"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417">test_popen</a> ()</td></tr>
+<tr class="memdesc:a7d8265c87c9e9b40f1d6af85a506f417"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试popen管道  <a href="#a7d8265c87c9e9b40f1d6af85a506f417">更多...</a><br /></td></tr>
+<tr class="separator:a7d8265c87c9e9b40f1d6af85a506f417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>练习进程间通信 </p>
+<dl class="section date"><dt>日期</dt><dd>2018/04/15 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 中定义.</p>
+</div><h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00168">168</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a194789efff726353c4feb3928f925e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a194789efff726353c4feb3928f925e04">&#9670;&nbsp;</a></span>test_pipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_pipe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试pipe管道 </p>
+<p><code> #include &lt;unistd.h&gt;</code></p>
+<p><code>int pipe(int filedes[2]);</code></p>
+<p><code>返回值：若成功则返回0， 若出错则返回-1 </code></p>
+<p>管道是由调用pipe函数而创建的， 经由参数filedes返回两个文件描述符：filedes[0]为读而打开，filedes[1]为写而打开，filedes[1]的输出时fildes[0]的输入。<br />
+ fstat函数对管道的每一端都返回一个FIFI类型的文件描述符，可以用S_ISFIFO宏来测试管道。<br />
+ </p><ol>
+<li>
+管道是UNIX系统IPC的最古老形式，并且所有UNIX系统都提供此种通信机制。历史上它是半双工的。现在，某些系统提供全双工管道，但是为了最佳的可移植性，我们绝不应预先假定系统使用此特性 </li>
+<li>
+管道只能在具有公共祖先的进程之间使用。通常，一个管道由一个进程创建，然后该进程调用fork，此后父、子进程之间就可应用该管道 </li>
+</ol>
+<p>尽管有上面2种局限性，半双工管道仍是最常用的IPC形式。每当你在管道线中键入一个由shell执行的命令序列时，shell为每一条命令单独创建一进程，然后将前一条命令进程的标准输出用管道与后一条命令的标准输入相连接。<br />
+</p>
+<p>单个进程中的管道几乎没有任何用处。通常，调用pipe的进程接着调用fork，这样就创建了从父进程到子进程（或反向）的IPC通道。调用fork后做什么取决于我们想要有的数据流的方向。对于父进程到子进程的管道，父进程关闭管道的读端（fd[0]），子进程关闭写端（fd[1]）；为了构造从子进程到父进程的管道，父进程关闭fd[1]，子进程关闭fd[0]。<br />
+ 当管道的一端被关闭后， 下列两条规则起作用： </p><ol>
+<li>
+当读一个写端已被关闭的管道时，在所有数据都被读取后，read返回0，以指示达到了文件结束处。 </li>
+<li>
+如果写一个读端已经关闭的管道，则产生信号SIGPIPE。如果忽略该信号或者捕捉该信号并从其处理程序返回，则write返回-1，errno设置为EPIPE。 </li>
+</ol>
+<dl class="section warning"><dt>警告</dt><dd>在写管道（或FIFO）时，常量PIPE_BUF规定了内核中管道缓冲区的大小。如果对管道调用write，而且要求写的字节数小于等于PIPE_BUF，则此操作不会与其他进程对同一管道（或FIFO）的write操作穿插进行。但是，若有多个进程同时写一个管道（或FIFO），而且有进程要求写的字节数超过PIPE_BUF字节数时，则写操作的数据可能相互穿插。用pathconf或fpathconf函数可以确定PIPE_BUF的值。</dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00052">52</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7d8265c87c9e9b40f1d6af85a506f417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8265c87c9e9b40f1d6af85a506f417">&#9670;&nbsp;</a></span>test_popen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_popen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试popen管道 </p>
+<p><code> #include &lt;stdio.h&gt;</code></p>
+<p><code>FILE *popen(const char *cmdstring, const char *type);</code></p>
+<p><code>返回值：若成功则返回文件指针，若出错则返回NULL</code></p>
+<p><code>int pclose(FILE *fp);</code></p>
+<p><code>返回值：cmdstring的终止状态，若出错则返回-1 </code></p>
+<p>标准I/O库提供了popen和pclose，这两个函数实现的操作是：创建一个管道，调用fork产生一个子进程， 关闭管道的不使用端，调用exec执行一个shell以运行命令，然后等待命令终止，并且返回一个标准I/O文件指针。 如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w”，则文件指针连接到cmdstring的标准输入。<br />
+ pclose函数关闭标准I/O流，等待命令执行结束，然后返回shell的终止状态。如果shell不能被执行，则pclose返回的终止状态与shell已执行exit(127)一样。</p>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00127">127</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

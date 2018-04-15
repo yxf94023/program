@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>unix_apue: E:/git_thub/program/unix_apue/code/c13_daemon/c13_daemon.cc 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">unix_apue
+   &#160;<span id="projectnumber">1.0.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','搜索');
+});
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_050edd66366d13764f98250ef6db77f6.html">code</a></li><li class="navelem"><a class="el" href="dir_2321905219bbf11ef4b4efb46aa54729.html">c13_daemon</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">c13_daemon.cc 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>练习守护进程  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/resource.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+</div>
+<p><a href="c13__daemon_8cc_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a7131c2f657eaf547025c8bd5d49307ac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c13__daemon_8cc.html#a7131c2f657eaf547025c8bd5d49307ac">test_daemon</a> ()</td></tr>
+<tr class="memdesc:a7131c2f657eaf547025c8bd5d49307ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试守护进程  <a href="#a7131c2f657eaf547025c8bd5d49307ac">更多...</a><br /></td></tr>
+<tr class="separator:a7131c2f657eaf547025c8bd5d49307ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628c4c520b813ce5a04b0c2a708da54f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c13__daemon_8cc.html#a628c4c520b813ce5a04b0c2a708da54f">test_single_daemon</a> ()</td></tr>
+<tr class="memdesc:a628c4c520b813ce5a04b0c2a708da54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试单实例守护进程  <a href="#a628c4c520b813ce5a04b0c2a708da54f">更多...</a><br /></td></tr>
+<tr class="separator:a628c4c520b813ce5a04b0c2a708da54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c13__daemon_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>练习守护进程 </p>
+<dl class="section date"><dt>日期</dt><dd>2018/04/01 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="c13__daemon_8cc_source.html">c13_daemon.cc</a> 中定义.</p>
+</div><h2 class="groupheader">函数说明</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="c13__daemon_8cc_source.html">c13_daemon.cc</a> 第 <a class="el" href="c13__daemon_8cc_source.html#l00219">219</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7131c2f657eaf547025c8bd5d49307ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7131c2f657eaf547025c8bd5d49307ac">&#9670;&nbsp;</a></span>test_daemon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_daemon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试守护进程 </p>
+<p>守护进程也称作精灵进程是生存期较长的一种进程。它们常常在系统自举时启动，仅在系统关闭时才终止。 因为它们没有控制终端， 所以说它们是在后台运行的。</p>
+<p>系统进程依赖于操作系统实现。父进程ID为0的各进程通常是内核进程，它们作为系统自举过程的一部分而启动。内核进程是特殊的，通常存在于系统的整个生命期中。它们以超级用户特权运行，无控制终端，无命令行。</p>
+<p>大多数守护进程都以超级用户（用户ID为0）特权运行。 没有一个守护进程具有控制终端，其终端名设置为问号（？），终端前台进程组ID设置为-1。 内核守护进程以无控制终端方式启动。 用户层守护进程缺少控制终端可能是守护进程调用了setsid的结构。 所有用户层守护进程都是进程组的组长进程以及会话的首进程，而且是这些进程组和会话中的唯一进程。最后，应当引起注意的是大多数守护进程的父进程是init进程。</p>
+<ol>
+<li>
+init，通常经常ID为1，它是一个系统守护进程，负责启动各运行层次特定的系统服务。这些服务通常是在它们自己拥有的守护进程的帮助下实现的。 </li>
+<li>
+keventd，守护进程为在内核中运行计划执行的函数提供进程上下文。 </li>
+<li>
+kapmd，守护进程对很多计算机系统中具有的高级电源管理提供支持。 </li>
+<li>
+kswapd，守护进程也称为页面调出守护进程，它通过将脏页面以低速写到磁盘上从而使这些页面在需要时仍可回收使用，这种方式支持虚存子系统。 </li>
+<li>
+bdflush，守护进程将高速缓存中的数据冲洗到磁盘上，当可用内存达到下线时，守护进程将脏缓冲区从缓冲池（buffer cache）中冲洗到磁盘上。 </li>
+<li>
+kupdated，守护进程将高速缓存中的数据冲洗到磁盘上， 每隔一定时间间隔，守护进程将脏页面冲洗到磁盘上，以便在系统失效时减少丢失的数据。 </li>
+<li>
+portmap，守护进程为端口映射守护进程，它提供将RPC（Remote Procedure Call，远程过程调用）系统号映射为网络端口号的服务。 </li>
+<li>
+syslogd，守护进程可由操作人员把系统消息记入日志的任何程序使用。 </li>
+<li>
+inetd，守护进程侦听系统网络接口，以便取得来自网络的对各种网络服务进程的请求。 </li>
+<li>
+nfsd,lockd和rpciod，守护进程提供对网络文件系统（Network File System, NFS）的支持。 </li>
+<li>
+crond，守护进程在指定的日期和时间执行指定的命令。 </li>
+<li>
+cupsd，守护进程是打印假脱机进程，它处理对系统提出的所有打印请求。 </li>
+</ol>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>编程规则 </caption>
+<tr>
+<th width="40">序号</th><th width="300">描述</th><th>说明 </th></tr>
+<tr>
+<td>1</td><td>重新设置文件模式创建屏蔽字</td><td>调用umask将文件模式创建屏蔽字设置为0。由继承得来的文件模式创建屏蔽字可能会拒绝设置某些权限。例如，若守护进程要创建一个组可读、写的文件，而继承的文件模式创建屏蔽字可能屏蔽了这两种权限，于是所要求的组可读、写就不能起作用。 </td></tr>
+<tr>
+<td>2</td><td>创建子进程并终止父进程</td><td>调用fork，然后使父进程退出（exit）。这样做实现了下面几点： <ol>
+<li>
+如果该守护进程是作为一条简单shell命令启动的，那么父进程终止使得shell认为这条命令已经执行完毕 </li>
+<li>
+子进程继承了父进程的进程组ID，但具有一个新的进程ID，这就保证了子进程不是一个进程组的组长进程。 </li>
+</ol>
+</td></tr>
+<tr>
+<td>3</td><td>创建一个新会话</td><td>调用setsid以创建一个新会话。使调用进程称为新会话的首进程，成为一个新进程组的组长进程，没有控制终端 </td></tr>
+<tr>
+<td>4</td><td>更改工作目录</td><td>将当前工作目录更改为根目录。从父进程继承过来的当前工作目录可能在一个装配文件系统中。因为守护进程通常在系统再引导之前是一直存在的，所以如果守护进程的当前工作目录在一个装配文件系统中，那么该文件系统就不能被卸载。这与装配文件系统的原意不符。 </td></tr>
+<tr>
+<td>5</td><td>关闭不需要的文件描述符</td><td>关闭不再需要的文件描述符，这使守护进程不再持有从父进程继承来的某些文件描述符。可以使用getrlimit函数来获取最大支持的描述符，然后统一关掉这些描述符。 </td></tr>
+<tr>
+<td>6</td><td>标准输入、输出和出错关联/dev/null设备</td><td>某些守护进程打开/dev/null使其具有文件描述符0、1和2，这样，任何一个试图读标准输入、写标准输出或标准出错的库例程都不会产生任何效果。因为守护进程并不与终端设备关联，所以不能在终端设备上显示其输出，也无处从交互式用户那里接收输入。即使守护进程是从交互式会话启动的，但因为守护进程是在后台运行的，所以登录会话的终止并不影响守护进程。如果其他用户在同一个终端设备上登录，我们也不会在该终端上见到守护进程的输出，用户也不可期望他们在终端上的输入会由守护进程读取。 </td></tr>
+</table>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c13__daemon_8cc_source.html">c13_daemon.cc</a> 第 <a class="el" href="c13__daemon_8cc_source.html#l00064">64</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a628c4c520b813ce5a04b0c2a708da54f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a628c4c520b813ce5a04b0c2a708da54f">&#9670;&nbsp;</a></span>test_single_daemon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_single_daemon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试单实例守护进程 </p>
+<p>为了正常运作， 某些守护进程实现为单实例的，也就是在任一时刻只运行该守护进程的一个副本。</p>
+<p>文件锁和记录锁机制是一种方法的基础，该方法用来保证一个守护进程只有一个副本在运行。如果每一个守护进程创建一个文件，并且在整个文件上加上一把写锁，那么只允许创建一把这样的写锁，所以在此之后如试图再创建一把这样的写锁就将失败，以此想后续守护进程副本知名已有一个副本正在运行。</p>
+<p>文件和记录锁提供了一种方便的互斥机制，如果守护进程在整个文件上得到一把写锁，那么在该守护进程终止时， 这把锁将被自动删除。这就简化了复原所需的处理，去除了对以前的守护进程实例需要进行清理的有关操作。</p>
+<a class="anchor" id=""></a>
+<table class="doxtable">
+<caption>守护进程的惯例</caption>
+<tr>
+<th width="40">序号</th><th width="100">描述</th><th>说明 </th></tr>
+<tr>
+<td>1</td><td>单实例文件锁</td><td>若守护进程使用锁文件，那么该文件通常存放在/var/run目录中。守护进程可能需要具有超级用户权限才能在此目录下创建文件。锁文件的名字通常是name.pid，其中name是该守护进程或服务的名字。例如，cron守护进程锁文件的名字是/var/run/crond.pid </td></tr>
+<tr>
+<td>2</td><td>配置文件路径</td><td>若守护进程支持配置选项，那么配置文件通常存放在/etc目录中。配置文件的名字通常是name.conf，其中，name是该守护进程或服务的名字。例如syslogd守护进程的配置文件是/etc/syslog.conf。 </td></tr>
+<tr>
+<td>3</td><td>启动方式</td><td>守护进程可用命令行启动，但通常它们是由系统初始化脚本启动的。如果在守护进程终止时， 应当自动地重新启动它，我们可在/etc/inittab中为该守护进程包括_respawn记录项，这样，init就将重启动该守护进程。 </td></tr>
+<tr>
+<td>4</td><td>配置文件更新</td><td>若守护进程有配置文件， 那么当该守护进程启动时， 它加载配置文件， 但在此后一般就不会再查看它。若管理员更改了配置文件， 那么该守护进程可能需要被停止， 然后再启动， 以使配置文件的更改生效。为避免这种麻烦，某些守护进程将捕捉SIGHUP信号，当它们接受到该信号时，重读配置文件。因为守护进程并不与终端相结合，它们或者是无控制终端的会话首进程，或者是孤儿进程组的成员， 所以守护进程并不期望接受SIGHUP。于是，它们可以安全地重复使用它。 </td></tr>
+</table>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c13__daemon_8cc_source.html">c13_daemon.cc</a> 第 <a class="el" href="c13__daemon_8cc_source.html#l00177">177</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
