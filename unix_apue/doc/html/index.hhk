@@ -125,6 +125,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html"><param name="Name" value="c15_process_ipc.cc"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="main"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d"><param name="Name" value="test_echo"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a194789efff726353c4feb3928f925e04"><param name="Name" value="test_pipe"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417"><param name="Name" value="test_popen"></OBJECT>
   </UL>
@@ -176,6 +177,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a18b6fabc944ca0c7cec322d947efa866"><param name="Name" value="c03_file.cc"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8h.html#a18b6fabc944ca0c7cec322d947efa866"><param name="Name" value="c03_file.h"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d"><param name="Name" value="test_echo"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c08__process__ctrl_8cc.html#a6d305113852a4cc97a7a77b3071564bb"><param name="Name" value="test_exec"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c07__process__env_8cc.html#ab2ab9f9747a7ce05e02e4671fe083f02"><param name="Name" value="test_exit"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#aafa6878247ceef0ad1e038f234b35aa9"><param name="Name" value="test_fcntl"></OBJECT>

@@ -61,6 +61,7 @@ $(function() {
 <code>#include &lt;sys/wait.h&gt;</code><br />
 <code>#include &lt;sys/resource.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
 </div>
 <p><a href="c15__process__ipc_8cc_source.html">浏览源代码.</a></p>
 <table class="memberdecls">
@@ -72,6 +73,9 @@ $(function() {
 <tr class="memitem:a7d8265c87c9e9b40f1d6af85a506f417"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417">test_popen</a> ()</td></tr>
 <tr class="memdesc:a7d8265c87c9e9b40f1d6af85a506f417"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试popen管道  <a href="#a7d8265c87c9e9b40f1d6af85a506f417">更多...</a><br /></td></tr>
 <tr class="separator:a7d8265c87c9e9b40f1d6af85a506f417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb9b8301cf8670f5f8611c39f27d85d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d">test_echo</a> ()</td></tr>
+<tr class="memdesc:a1fb9b8301cf8670f5f8611c39f27d85d"><td class="mdescLeft">&#160;</td><td class="mdescRight">测试利用管道尽心回显功能  <a href="#a1fb9b8301cf8670f5f8611c39f27d85d">更多...</a><br /></td></tr>
+<tr class="separator:a1fb9b8301cf8670f5f8611c39f27d85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -107,7 +111,35 @@ $(function() {
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00168">168</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00236">236</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1fb9b8301cf8670f5f8611c39f27d85d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb9b8301cf8670f5f8611c39f27d85d">&#9670;&nbsp;</a></span>test_echo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int test_echo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>测试利用管道尽心回显功能 </p>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>成功 </td></tr>
+    <tr><td class="paramname">!0</td><td>失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00195">195</a> 行定义.</p>
 
 </div>
 </div>
@@ -156,7 +188,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00052">52</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00053">53</a> 行定义.</p>
 
 </div>
 </div>
@@ -183,6 +215,7 @@ $(function() {
 <p><code>返回值：cmdstring的终止状态，若出错则返回-1 </code></p>
 <p>标准I/O库提供了popen和pclose，这两个函数实现的操作是：创建一个管道，调用fork产生一个子进程， 关闭管道的不使用端，调用exec执行一个shell以运行命令，然后等待命令终止，并且返回一个标准I/O文件指针。 如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w”，则文件指针连接到cmdstring的标准输入。<br />
  pclose函数关闭标准I/O流，等待命令执行结束，然后返回shell的终止状态。如果shell不能被执行，则pclose返回的终止状态与shell已执行exit(127)一样。</p>
+<dl class="section warning"><dt>警告</dt><dd>注意，popen绝不应由设置用户ID或设置组ID程序调用。当它执行命令时，popen等同于：execl("/bin/sh", "sh", "-c", command, NULL); 它在从调用者继承的环境中执行shell，并由shell解释执行command。一个心怀不轨的用户可以操纵这种环境，使得shell能以设置ID文件模式所授予的提升了的权限以及非预期的方式执行命令。 </dd></dl>
 <dl class="retval"><dt>返回值</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>成功 </td></tr>
@@ -191,7 +224,7 @@ $(function() {
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00127">127</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="c15__process__ipc_8cc_source.html">c15_process_ipc.cc</a> 第 <a class="el" href="c15__process__ipc_8cc_source.html#l00129">129</a> 行定义.</p>
 
 </div>
 </div>

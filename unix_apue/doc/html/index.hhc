@@ -192,6 +192,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="c15_process_ipc.cc"><param name="Local" value="c15__process__ipc_8cc.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_echo"><param name="Local" value="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_pipe"><param name="Local" value="c15__process__ipc_8cc.html#a194789efff726353c4feb3928f925e04"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_popen"><param name="Local" value="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417"><param name="ImageNumber" value="11"></OBJECT>
           </UL>

@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <sys/resource.h>
 #include <signal.h>
+#include <ctype.h>
 
 
 /**
@@ -121,6 +122,7 @@ helloworled\n
  *标准I/O库提供了popen和pclose，这两个函数实现的操作是：创建一个管道，调用fork产生一个子进程， 关闭管道的不使用端，调用exec执行一个shell以运行命令，然后等待命令终止，并且返回一个标准I/O文件指针。 如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w”，则文件指针连接到cmdstring的标准输入。<br/>
  *pclose函数关闭标准I/O流，等待命令执行结束，然后返回shell的终止状态。如果shell不能被执行，则pclose返回的终止状态与shell已执行exit(127)一样。
  *
+ *\warning 注意，popen绝不应由设置用户ID或设置组ID程序调用。当它执行命令时，popen等同于：execl("/bin/sh", "sh", "-c", command, NULL); 它在从调用者继承的环境中执行shell，并由shell解释执行command。一个心怀不轨的用户可以操纵这种环境，使得shell能以设置ID文件模式所授予的提升了的权限以及非预期的方式执行命令。
  *\retval 0 成功
  *\retval !0 失败 
  */
@@ -159,10 +161,76 @@ int test_popen()
 	return 0;
 }
 
+static int test_echo2()
+{
+	int c;
+	
+	while ((c = getchar()) != EOF){
+		
+		if (isupper(c)){
+			
+			c = tolower(c);
+		}
+		
+		if (putchar(c) == EOF){
+			
+			printf("%s:%d putchar failed\n", __FILE__, __LINE__);
+		}
+		
+		if (c == '\n'){
+			
+			fflush(stdout);
+		}
+	}
+	
+	exit(0);
+}
+
+/**
+ *\brief 测试利用管道进行回显功能
+ *
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_echo()
+{
+	char line[80] = {0};
+	FILE *fp = NULL;
+	
+	if ((fp = popen("./c15_process_ipc test_echo", "r")) == NULL){
+		
+		printf("%s:%d popen failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return 1;
+	}
+	
+	while (1){
+		
+		fputs("prompt> ", stdout);
+		fflush(stdout);
+		if (fgets(line, sizeof(line), fp) == NULL){
+			
+			break;
+		}
+		if (fputs(line, stdout) == EOF){
+			
+			printf("%s:%d fputs failed(%s)\n", __FILE__, __LINE__, strerror(errno));
+			pclose(fp);
+			return 1;
+		}
+	}
+	if (pclose(fp) == -1){
+		
+		printf("%s:%d pclose failed\n", __FILE__, __LINE__);
+	}
+	putchar('\n');
+	exit(0);
+}
+
 static void show_help()
 {
 	printf("pipe, 测试pipe管道\n\n"
-			"popen, 测试popen管道\n\n");
+			"popen, 测试popen管道\n\n"
+			"echo, 测试提示回显功能\n\n");
 }
 
 int main(int argc, char **argv)
@@ -173,6 +241,12 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp(argv[1], "popen") == 0){
 		
 		test_popen();
+	}else if (argc == 2 and strcmp(argv[1], "echo") == 0){
+		
+		test_echo();
+	}else if (argc == 2 and strcmp(argv[1], "test_echo") == 0){
+		
+		test_echo2();
 	}else{
 		
 		show_help();
