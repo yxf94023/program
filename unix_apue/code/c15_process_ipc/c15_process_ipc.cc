@@ -30,7 +30,7 @@
  *</code>
  *
  *管道是由调用pipe函数而创建的， 经由参数filedes返回两个文件描述符：filedes[0]为读而打开，filedes[1]为写而打开，filedes[1]的输出时fildes[0]的输入。<br/>
- *fstat函数对管道的每一端都返回一个FIFI类型的文件描述符，可以用S_ISFIFO宏来测试管道。<br/>
+ *fstat函数对管道的每一端都返回一个FIFO类型的文件描述符，可以用S_ISFIFO宏来测试管道。<br/>
  *<ol>
  *<li>管道是UNIX系统IPC的最古老形式，并且所有UNIX系统都提供此种通信机制。历史上它是半双工的。现在，某些系统提供全双工管道，但是为了最佳的可移植性，我们绝不应预先假定系统使用此特性</li>
  *<li>管道只能在具有公共祖先的进程之间使用。通常，一个管道由一个进程创建，然后该进程调用fork，此后父、子进程之间就可应用该管道</li>
@@ -226,11 +226,268 @@ int test_echo()
 	exit(0);
 }
 
+static void sig_pipe(int signo)
+{
+	printf("%s:%d SIGPIPE caught\n", __FILE__, __LINE__);
+	exit(1);
+}
+
+/**
+ *\brief 测试协同进程
+ *
+ * UNIX系统过滤程序从标准输入读取数据，对其进行适当处理后写到标准输出。几个过滤程序通常在shell管道命令行中线性地连接。当一个程序产生某个过滤程序的输入， 同时又读取该过滤程序的输出时，则该过滤程序就成为协同进程。
+ *
+ *popen只提供连接到另一个进程的标准输入或标准输出的一个单向管道，而对于协同进程，则它有连接到另一个进程的两个单向管道------一个连到其标准输入，另一个则来自其标准输出。我们先要将数据写到其标准输入， 经其处理后， 再从其标准输出读取数据。
+ *
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_ipc_add()
+{
+	// 先创建2个管道
+	int n, fd1[2], fd2[2];
+	pid_t pid;
+	char line[80];
+	
+	if (signal(SIGPIPE, sig_pipe) == SIG_ERR){
+		
+		printf("%s:%d signal error\n", __FILE__, __LINE__);
+		return 1;
+	}
+	
+	if (pipe(fd1) < 0 || pipe(fd2) < 0){
+		
+		printf("%s:%d pipe error\n", __FILE__, __LINE__);
+		return 2;
+	}
+	
+	if ((pid = fork()) < 0){
+		
+		printf("%s:%d fork error\n", __FILE__, __LINE__);
+		return 3;
+	}else if (pid > 0){// 父进程
+	
+		close(fd1[0]); // 关掉读
+		close(fd2[1]); // 关掉写
+		while (fgets(line, 80, stdin) != NULL){
+			
+			n = strlen(line);
+			if (write(fd1[1], line, n) != n){
+				
+				printf("%s:%d write error to pipe\n", __FILE__, __LINE__);
+			}
+			if ((n = read(fd2[0], line, 80)) < 0){
+				
+				printf("%s:%d read error from pipe\n", __FILE__, __LINE__);
+			}
+			if (n == 0){
+				
+				printf("%s:%d child closed pipe\n", __FILE__, __LINE__);
+				break;
+			}
+			line[n] = 0;
+			
+			if (fputs(line, stdout) == EOF){
+				
+				printf("%s:%d fputs error\n", __FILE__, __LINE__);
+			}
+		}
+		
+		if (ferror(stdin)){
+			
+			printf("%s:%d fgets error on stdin\n", __FILE__, __LINE__);
+		}
+		exit(0);
+	} else {
+		
+		close(fd1[1]);
+		close(fd2[0]);
+		if (fd1[0] != STDIN_FILENO){
+			
+			if (dup2(fd1[0], STDIN_FILENO) != STDIN_FILENO){}
+			close(fd1[0]);
+		}
+		
+		if (fd2[1] != STDOUT_FILENO){
+			
+			if (dup2(fd2[1], STDOUT_FILENO) != STDOUT_FILENO){}
+			close(fd2[1]);
+		}
+		
+		if (execl("./c15_process_ipc", "c15_process_ipc", "ipc_add2", (char*)0)< 0){
+			
+			printf("%s:%d execl error\n", __FILE__, __LINE__);
+		}
+	}
+	exit(0);
+	
+	return 0;
+// 调用过程
+/* 
+root      3036  0.0  0.3 105476  3188 ?        Ss   Apr22   0:00 /usr/sbin/sshd -D
+root       338  0.0  0.5 148880  5664 ?        Ss   00:42   0:00  \_ sshd: root@pts/1,pts/3
+root       344  0.0  0.2 115380  2100 pts/1    Ss   00:42   0:00      \_ -bash
+root       998  0.0  0.0  14648   844 pts/1    S+   00:58   0:00      |   \_ ./c15_process_ipc ipc_add1
+root       999  0.0  0.0  14640   844 pts/1    S+   00:58   0:00      |       \_ c15_process_ipc ipc_add2	
+
+[root@iZwz9899g8tgius3aqueaqZ admin]# ./c15_process_ipc ipc_add1
+7 8
+15
+100 1000
+1100
+^C
+
+*/
+}
+static int add2()
+{
+	int n, int1, int2;
+	char line[80] = {0};
+	
+	while ((n = read(STDIN_FILENO, line, 80)) > 0){
+		
+		line[n] = 0;
+		if (sscanf(line, "%d%d", &int1, &int2) == 2){
+			
+			sprintf(line, "%d\n", int1 + int2);
+			n = strlen(line);
+			if (write(STDOUT_FILENO, line, n) != n){
+				
+				printf("%s:%d write error\n", __FILE__, __LINE__);
+			}
+		}else{
+			
+			if (write(STDOUT_FILENO, "invalid args\n", 13) != 13){
+				
+				printf("%s:%d write error\n", __FILE__, __LINE__);
+			}
+		}
+	}
+	
+	return 0;
+}
+
+/**
+ *\brief 测试FIFO
+ *
+ *FIFO有时称为命名管道。管道只能由相关进程使用， 这些相关进程的共同的祖先进程创建了管道。 但是， 通过FIFO，不相关的进程也能交换数据。
+ *
+ *因为FIFO是一种文件类型， 所以， 创建FIFO类似于创建文件。
+ *
+ *<code>
+ *#include <sys/stat.h>
+ *
+ *int mkfifo(const char *pathname, mode_t mode);
+ *
+ *</code>
+ *
+ *一旦已经用mkfifo创建了一个FIFO， 就可用open打开它。 其实， 一般的文件I/O函数（close，read，write，unlink等）都可用于FIFO
+ *
+ *当打开一个FIFO时， 非阻塞标志（O_NONBLOCK）产生下列影响：
+ *<ol>
+ *<li>在一般情况中（没有指定O_NONBLOCK）， 只读open要阻塞到某个其他进程为写而打开此FIFO。类似地， 只写open要阻塞到某个其他进程为读而打开它</li>
+ *<li>如果指定了O_NONBLOCK，则只读open立即返回。 但是， 如果没有进程已经为读而打开一个FIFO， 那么只写open将出错返回-1， 其errno是ENXIO</li>
+ *</ol>
+ *
+ *类似于管道， 若用write写一个尚无进程为读而打开的FIFO， 则产生信号SIGPIPE。
+ *
+ *一个给定的FIFO有多个写进程是很常见的。这意味着如果不希望多个进程所写的数据互相穿插， 则需考虑原子写操作。正如对于管道一样，常量PIPE_BUF说明了可被原子地写到FIFO的最大数据量。
+ *
+ *FIFO有下面2种用途：
+ *<ol>
+ *<li>FIFO由shell命令使用以便将数据从一条管道线传送到另一条， 为此无需创建中间临时文件</li>
+ *<li>FIFO用于客户进程-服务器进程应用程序中， 以在客户进程和服务器进程之间传递数据。</li>
+ *</ol>
+ *
+ *\param[in] path fifo文件名
+ *
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_read_fifo(const char *path)
+{// 读fifo
+
+	char buf[80] = {0};
+	int fd = -1, res = 0;
+	
+	// 如果文件不存在  则创建
+	if (access(path, F_OK) != 0){
+		
+		printf("%s:%d create fifo[%s]\n", __FILE__, __LINE__, path);
+		if (mkfifo(path, 0777)){
+			
+			printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+			return -1;
+		}
+	}
+	
+	fd = open(path, O_RDONLY);
+	if (fd < 0){
+		
+		printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	res = read(fd, buf, sizeof(buf));
+	if (res <= 0){
+		
+		printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	
+	printf("%s\n", buf);
+	
+	return 0;
+}
+
+int test_write_fifo(const char *path)
+{// 写fifo
+
+	char buf[80] = {0};
+	int fd = -1, res = 0;
+	
+	// 如果文件不存在  则创建
+	if (access(path, F_OK) != 0){
+		
+		printf("%s:%d create fifo[%s]\n", __FILE__, __LINE__, path);
+		if (mkfifo(path, 0777)){
+			
+			printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+			return -1;
+		}
+	}
+	
+	fd = open(path, O_WRONLY);
+	if (fd < 0){
+		
+		printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;
+	}
+	
+	printf("Enter string:");
+	scanf("%s", buf);
+	
+	res = write(fd, buf, strlen(buf));
+	if (res <= 0){
+		
+		printf("%s:%d error(%s)\n", __FILE__, __LINE__, strerror(errno));
+		return -1;		
+	}
+	
+	printf("%s\n", buf);
+	
+	return 0;	
+}
+
 static void show_help()
 {
 	printf("pipe, 测试pipe管道\n\n"
 			"popen, 测试popen管道\n\n"
-			"echo, 测试提示回显功能\n\n");
+			"echo, 测试提示回显功能\n\n"
+			"ipc_add1, 测试协同进程\n\n"
+			"ipc_add2, 测试协同进程\n\n"
+			"fifo_write path, 测试命令管道 写\n\n"
+			"fifo_read path, 测试命令管道 读\n\n");
 }
 
 int main(int argc, char **argv)
@@ -247,6 +504,18 @@ int main(int argc, char **argv)
 	}else if (argc == 2 and strcmp(argv[1], "test_echo") == 0){
 		
 		test_echo2();
+	}else if (argc == 2 and strcmp(argv[1], "ipc_add1") == 0){
+		
+		test_ipc_add();
+	}else if (argc == 2 and strcmp(argv[1], "ipc_add2") == 0){
+		
+		add2();
+	}else if (argc == 3 and strcmp(argv[1], "fifo_write") == 0){
+		
+		test_write_fifo(argv[2]);
+	}else if (argc == 3 and strcmp(argv[1], "fifo_read") == 0){
+		
+		test_read_fifo(argv[2]);	
 	}else{
 		
 		show_help();
@@ -254,3 +523,4 @@ int main(int argc, char **argv)
 	
 	return 0;
 }
+
