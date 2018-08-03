@@ -479,6 +479,44 @@ int test_write_fifo(const char *path)
 	return 0;	
 }
 
+/**
+ *\brief XSI IPC
+ *
+ *有三种IPC我们称作XSI IPC， 即消息队列、信号量以及共享存储器，它们之间有很多相似之处。
+ *
+ *#include <sys/ipc.h>
+ *
+ *key_t ftok(const char *path, int id);
+ *
+ *若成功则返回键， 若出错则返回(key_t)-1;
+ *
+ *path参数必须引用一个现存文件。 当产生键时， 只使用id参数的低8位。
+ *<table>
+ *<caption>XSI IPC基本概念</caption>
+ *<tr><th width="40">序号</th><th width="80">名字</th><th width="400">描述</th><th>对比</th></tr>
+ *<tr><td rowspan="3">01</td><td rowspan="3">标识符和键</td><td>每个内核中的IPC的结构（消息队列、信号量或共享存储段）都用一个非负整数的标识符加以引用。</td><td>当一个IPC结构被创建， 以后又被删除时， 与这种结构相关的标识符连续加1，直至达到一个整数的最大正值，然后又回转到0。</td></tr>
+ *<tr><td>标识符是IPC对象的内部名，为了使多个合作进程能够在同一IPC对象上会合，需要提供一个外部名方案。为此使用了键，每个IPC对象都与一个键相关联，于是键就用作为该对象的外部名</td><td>有多种方法使客户进程和服务器进程在同一IPC结构上会合：
+ <ol>
+ <li>服务器进程可以指定键IPC_PRIVATE创建一个新IPC结构，将返回的标识符存放在某处（例如一个文件）以便客户进程取用。键IPC_PRIVATE保证服务器进程创建一个新IPC结构。这种技术的缺点是：服务器进程要将整型标识符写到文件中，此后客户进程又要读文件取得此标识符。</li>
+ <li>在一个公用头文件中定义一个客户进程和服务器进程都认可的键。然后服务器进程指定此键创建一个新的IPC结构。这种方法的问题是该键可能已与一个IPC结构相结合，在此情况下， get函数（msgget、semget或shmget）出错返回。服务器进程必须处理这一错误，删除已存在的IPC结构，然后试着再创建它。</li>
+ <li>客户进程和服务器进程认同一个路径名和项目ID（项目ID是0~255之间的字符值），接着调用函数ftok将这两个值变换为一个键。然后在方法（2）中使用此键。ftok提供的唯一服务就是有一个路径名和项目ID产生一个键。</li>
+ </ol></td></tr>
+ *<tr><td>三个get函数（msgget、semget和shmget）都有两个类似的参数：一个key和一个整型flag。若满足下列两个条件之一，则创建一个新的IPC结构（通常由服务器进程创建）
+ <ol>
+ <li>key是IPC_PRIVATE</li>
+ <li>key当前未与特定类型的IPC结构相结合，并且flag中指定了IPC_CREAT位</li>
+ </ol></td><td>为访问现存的队列（通常由客户进程进行），key必须等于创建该队列时所指定的键， 并且不应指定IPC_CREAT<br/><br/>
+ 为了访问一个现存队列， 决不能指定IPC_PRIVATE作为键。因为这是一个特殊的键值，它总是用于创建一个新队列。为了访问一个用IPC_PRIVATE键创建的现存队列，一定要知道与该队列相结合的标识符，然后在其他IPC调用中使用该标识符。<br/><br/>
+ 如果希望创建一个新的IPC结构， 而且要确保不是引用具有同一标识符的一个现行IPC结构，那么必须在flag中同时制定IPC_CREAT和IPC_EXCL位。这样做了以后 如果IPC结构已存在就会造成出错， 返回EEXIST（这与制定O_CREAT和O_EXCL标志的open相类似）</td></tr>
+ *</table>
+ *\retval 0 成功
+ *\retval !0 失败
+ */
+int test_xsi_ipc()
+{
+	return 0;
+}
+
 static void show_help()
 {
 	printf("pipe, 测试pipe管道\n\n"
