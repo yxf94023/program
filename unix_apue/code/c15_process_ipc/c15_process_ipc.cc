@@ -484,12 +484,14 @@ int test_write_fifo(const char *path)
  *
  *有三种IPC我们称作XSI IPC， 即消息队列、信号量以及共享存储器，它们之间有很多相似之处。
  *
+ *<code>
  *#include <sys/ipc.h>
  *
  *key_t ftok(const char *path, int id);
  *
  *若成功则返回键， 若出错则返回(key_t)-1;
  *
+ *</code>
  *path参数必须引用一个现存文件。 当产生键时， 只使用id参数的低8位。
  *<table>
  *<caption>XSI IPC基本概念</caption>
@@ -508,6 +510,9 @@ int test_write_fifo(const char *path)
  </ol></td><td>为访问现存的队列（通常由客户进程进行），key必须等于创建该队列时所指定的键， 并且不应指定IPC_CREAT<br/><br/>
  为了访问一个现存队列， 决不能指定IPC_PRIVATE作为键。因为这是一个特殊的键值，它总是用于创建一个新队列。为了访问一个用IPC_PRIVATE键创建的现存队列，一定要知道与该队列相结合的标识符，然后在其他IPC调用中使用该标识符。<br/><br/>
  如果希望创建一个新的IPC结构， 而且要确保不是引用具有同一标识符的一个现行IPC结构，那么必须在flag中同时制定IPC_CREAT和IPC_EXCL位。这样做了以后 如果IPC结构已存在就会造成出错， 返回EEXIST（这与制定O_CREAT和O_EXCL标志的open相类似）</td></tr>
+ <tr><td rowspan="3">02</td><td rowspan="3">优点和缺点</td><td>IPC结构是在系统范围内起作用的，没有访问计数</td><td>如果进程创建了一个消息队列， 在该队列中放入了几则消息， 然后终止， 但是该消息队列及其内容并不会被删除。它们余留哎系统中直至出现下述情况：<br/>1. 由某个进程调用msgrcv或msgctl读消息或删除消息队列；<br/> 2. 或某个进程执行ipcrm命令删除消息队列；<Br/> 3. 或由正在再启动的系统删除消息队列。<br/><br/>与管道相比， 当最后一个访问管道的进程终止时， 管道就被完全删除了。与FIFO相比， 虽然当最后一个引用FIFO的继承终止时其名字仍保留在系统中， 直至显式地删除它， 但是留在FIFO中的数据却在此时全部被删除， 于是也就徒有其名了。</td></tr>
+ <tr><td>IPC结构在文件系统中没有名字</td><td>我们不能像操作其他文件一样操作它们。 为了支持它们不得不增加十几条全新的系统调用；我们不能用ls命令查看IPC对象， 不能用rm命令删除它们， 也不能用chmod命令更改它们的访问权限。 于是， 就不得不增加新的命令ipcs和ipcrm。</td></tr>
+ <tr><td>IPC不使用文件描述符， 所以不能对它们使用多路转接I/O函数：select和poll</td><td>这就使得难于一次使用多个IPOC结构， 以及在文件或设备I/O中使用IPC结构。</td></tr>
  *</table>
  *\retval 0 成功
  *\retval !0 失败
