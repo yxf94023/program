@@ -126,8 +126,12 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="Name" value="main"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d"><param name="Name" value="test_echo"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a97c37794a3f45d1b970ca8a3081e388a"><param name="Name" value="test_ipc_add"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a194789efff726353c4feb3928f925e04"><param name="Name" value="test_pipe"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417"><param name="Name" value="test_popen"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#aaefed642406e32a5afb6c94bb55c5a7f"><param name="Name" value="test_read_fifo"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a9ecea6db06cba13d53f4190c048a1d15"><param name="Name" value="test_write_fifo"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#aaac66f3f6b31b64f76978bddad3c5eba"><param name="Name" value="test_xsi_ipc"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="structcounter__st.html"><param name="Name" value="counter_st"></OBJECT>
   <UL>
@@ -198,6 +202,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c05__stdio_8cc.html#ac1ba4910c362dd1d19b7da23ec58593c"><param name="Name" value="test_gets"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c09__process__relt_8cc.html#adeacfc1c381cdfe6840236a6ce8423b1"><param name="Name" value="test_getsid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c08__process__ctrl_8cc.html#ac7d808308a607f9f88daefa8550f1fa1"><param name="Name" value="test_id"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a97c37794a3f45d1b970ca8a3081e388a"><param name="Name" value="test_ipc_add"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c10__signal_8cc.html#a327a3311d7486ef1c22064371837dbc8"><param name="Name" value="test_kill"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#a9d75b8db9f2aeae95663fdf3a1821ce4"><param name="Name" value="test_link"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a523c497d9d52c8de83b6f7b1089d67c0"><param name="Name" value="test_lseek"></OBJECT>
@@ -228,6 +233,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#a9c776a60c67353956a33f86ee246ae87"><param name="Name" value="c03_file.cc"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8h.html#a9c776a60c67353956a33f86ee246ae87"><param name="Name" value="c03_file.h"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#aaefed642406e32a5afb6c94bb55c5a7f"><param name="Name" value="test_read_fifo"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#acbf5ad8ae912c67319ffe6b9318e80fc"><param name="Name" value="test_readdir"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c04__dir_8cc.html#af894cac310b20079184aaec7c83ccb3e"><param name="Name" value="test_rename"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="c05__stdio_8cc.html#a63a33b96b2397ea3ec19d61fa3ffc1e8"><param name="Name" value="test_setbuf"></OBJECT>
@@ -261,6 +267,8 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8cc.html#ace36d46d52032ec17bfc64e0e79c5a61"><param name="Name" value="c03_file.cc"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="c03__file_8h.html#ace36d46d52032ec17bfc64e0e79c5a61"><param name="Name" value="c03_file.h"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#a9ecea6db06cba13d53f4190c048a1d15"><param name="Name" value="test_write_fifo"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="c15__process__ipc_8cc.html#aaac66f3f6b31b64f76978bddad3c5eba"><param name="Name" value="test_xsi_ipc"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="structcounter__st.html#af9031f7978e957b9979e78873830ce46"><param name="Name" value="total"></OBJECT>
 </UL>
 </BODY>

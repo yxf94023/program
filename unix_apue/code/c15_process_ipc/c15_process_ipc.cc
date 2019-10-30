@@ -514,6 +514,46 @@ int test_write_fifo(const char *path)
  <tr><td>IPC结构在文件系统中没有名字</td><td>我们不能像操作其他文件一样操作它们。 为了支持它们不得不增加十几条全新的系统调用；我们不能用ls命令查看IPC对象， 不能用rm命令删除它们， 也不能用chmod命令更改它们的访问权限。 于是， 就不得不增加新的命令ipcs和ipcrm。</td></tr>
  <tr><td>IPC不使用文件描述符， 所以不能对它们使用多路转接I/O函数：select和poll</td><td>这就使得难于一次使用多个IPOC结构， 以及在文件或设备I/O中使用IPC结构。</td></tr>
  *</table>
+ *
+ 信号量， 它是一个计数器， 用于多进程对共享数据对象的访问。
+ *为了获得共享资源， 进程需要执行下列操作。
+ *测试控制该资源的信号量
+ *若此信号量的值为正， 则进程可以使用该资源。 进程将型号量值减1， 表示它使用了一个资源单位。
+ *若此信号量的值为0， 则进程进入休眠状态， 直至信号量值大于0. 进程被唤醒后， 返回至第一步。
+ 
+ *当进程不再使用由一个信号量控制的共享资源时， 该信号量值增1。如果有进程正在休眠等待此信号， 则唤醒它们。 为了正确地实现信号量， 信号量的测试及减1操作应当是原子操作。为此， 信号量通常是在内核中实现的。
+ 
+ *要获得一个信号量ID， 要调用的第一个函数是semget。
+ #include<sys/sem.h>
+ int semget(key_t key, int nsems, int flag);
+ 返回值：若成功则返回信号量ID， 若出错则返回-1；
+ *
+ semctl函数包含了多种信号量操作
+ *int semctl(int semid, int semnum, int cmd, .../ *union semun arg* /);
+ 依赖于所请求的命令， 第四个参数是可选的， 如果使用该参数， 则其类型是semun， 它是多个特定命令参数的联合（union）；
+ union semnu{
+	 int 	val;	/ * for SETVAL * /
+	 struct semid_ds;	/ * for IPC_STAT and IPC_SET * /
+	 unsigned short *array; / * fot GETALL and SETALL * /
+ };
+ IPC_STAT	对此集合取semid_ds结构， 并存放在由arg.buf指向的结构中
+ IPC_SET	按由arg.buf指向结构中的值设置与此集合相关结构中的下列三个字段值：sem_perm.uid、sem_perm.gid和sem_perm.mode。此命令只能由下列两种进程执行： 一种是其有效用户ID等于sem_perm.cuid或sem_perm.uid的进程； 另一种是具有超级用户特权的进程。
+ IPC_RMID	从系统中删除该信号量集合。 这种删除是立即发生的。 仍在使用此信号量集合的其他进程在它们下次试图对此信号量集合进行操作时， 将出错返回EIDRM。此命令只能由下列两种进程执行： 一种是其有效用户ID等于sem_perm.cuid或sem_perm.uid的进程； 另一种是具有超级用户特权的进程。
+ GETVAL		返回成员semnum的semval值。
+ SETVAL		设置成员semnum的semval值。该值由arg.val指定。
+ GETPID		返回成员semnum的sempid值。
+ GETNCNT	返回成员semnum的semncnt值。
+ GETZCNT	返回成员semnum的semncnt值。
+ GETALL		取该集合中所有信号量的值， 并将它们存放在由arg.array指向的数组中。
+ SETALL 	按arg.array指向的数组中的值， 设置该集合中所有信号量的值。
+ 
+ 对于GETALL以外的所有GET命令， semctl函数都返回相应的值。 其他命令的返回值0. 函数semop自动执行信号量集合上的操作数组， 这是个原子操作。
+ 
+ 
+ *#include<sys/sem.h>
+ int semop(int semid, struct sembuf semoparray[], size_t nops);
+ 返回值： 若成功则返回0， 若出错则返回-1；
+ 
  *\retval 0 成功
  *\retval !0 失败
  */

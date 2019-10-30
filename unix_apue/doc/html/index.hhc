@@ -193,8 +193,12 @@
           <UL>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="c15__process__ipc_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_echo"><param name="Local" value="c15__process__ipc_8cc.html#a1fb9b8301cf8670f5f8611c39f27d85d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_ipc_add"><param name="Local" value="c15__process__ipc_8cc.html#a97c37794a3f45d1b970ca8a3081e388a"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_pipe"><param name="Local" value="c15__process__ipc_8cc.html#a194789efff726353c4feb3928f925e04"><param name="ImageNumber" value="11"></OBJECT>
           <LI><OBJECT type="text/sitemap"><param name="Name" value="test_popen"><param name="Local" value="c15__process__ipc_8cc.html#a7d8265c87c9e9b40f1d6af85a506f417"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_read_fifo"><param name="Local" value="c15__process__ipc_8cc.html#aaefed642406e32a5afb6c94bb55c5a7f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_write_fifo"><param name="Local" value="c15__process__ipc_8cc.html#a9ecea6db06cba13d53f4190c048a1d15"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="test_xsi_ipc"><param name="Local" value="c15__process__ipc_8cc.html#aaac66f3f6b31b64f76978bddad3c5eba"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
         </UL>
       </UL>
